@@ -52,10 +52,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->paginate(5);
+        $users = User::statusFilter(request('status'))
+                        ->search(request('search-item'))
+                        ->cityFilter(request('city'))
+                        ->roleFilter(request('role'))
+                        ->deletedItemFilter(request('deleted-items'))
+                        ->latest()
+                        ->paginate(config('product.table_paginate'));
 
+        $cities = City::select('name')->get();
+        $roles = Role::select('name', 'display_name')->get();
                         
-        return view('backend.user.index', compact('users'));
+        return view('backend.user.index', compact('users', 'cities', 'roles'));
     }
 
     /**

@@ -6,6 +6,9 @@
 
 @section('content')
   <div class="container-fluid">
+    <div class="alert alert-success" id="status-change-alert">
+      Status Changed Sucessfully.
+    </div>
     <div class="row">
       <div class="col-md-11">
         <div class="box">
@@ -16,13 +19,20 @@
             <div class="table-responsive">
               <table class="table table-bordered table-striped">
                 <thead>
+                  @can('add_users')
                     <div class="add-item">
-                      <a class="btn btn-default add-button" href="#"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                      <a class="btn btn-default add-button" href="{{route('users.create')}}"><i class="fa fa-plus" aria-hidden="true"></i></a>
                     </div>
+                  @endcan
                   <div class="filter">
                     <label>&nbsp Filters: </label>
                     <div class="dropdown inline">
                       <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                      @if(request('status') != null)
+                        {{ request('status') }}
+                      @else
+                        Filter by Status
+                      @endif
                       <span class="caret"></span></button>
                       <ul class="dropdown-menu">
                           <li>
@@ -40,6 +50,83 @@
                               Inactive
                             </a>
                           </li>
+                      </ul>
+                    </div>
+
+                    <div class="dropdown inline">
+                      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                      @if(request('deleted-items') != null)
+                        {{ request('deleted-items') }}
+                      @else
+                        Filter by Deleted Items
+                      @endif
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a href="{{ route('users.index') }}">
+                                Without Deleted
+                              </a>
+                          </li>
+                          <li>
+                            <a href="{{ route('users.index', ['filter_by' => 'deleted-items', 'deleted-items' => 'Only Deleted']) }}">
+                              Only Deleted
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{ route('users.index', ['filter_by' => 'deleted-items', 'deleted-items' => 'All']) }}">
+                              All
+                            </a>
+                          </li>
+                      </ul>
+                    </div>
+
+                    <div class="dropdown inline">
+                      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                        @if(request('city') != null)
+                          {{ request('city') }}
+                        @else
+                          Filter by Cities
+                        @endif
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu scrollable-menu">
+                          <li>
+                              <a href="{{ route('users.index') }}">
+                               All
+                              </a>
+                          </li>
+                          @foreach($cities as $city)
+                            <li>
+                              <a href="{{ route('users.index', ['filter_by' => 'city', 'city' => $city->name ]) }}">
+                                {{ $city->name }}
+                              </a>
+                            </li>
+                          @endforeach
+                      </ul>
+                    </div>
+
+                    <div class="dropdown inline">
+                      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                        @if(request('role') != null)
+                          {{ request('role') }}
+                        @else
+                          Filter by Roles
+                        @endif
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu scrollable-menu">
+                          <li>
+                              <a href="{{ route('users.index') }}">
+                               All
+                              </a>
+                          </li>
+                          @foreach($roles as $role)
+                            <li>
+                              <a href="{{ route('users.index', ['filter_by' => 'role', 'role' => $role->name ]) }}">
+                                {{ $role->display_name }}
+                              </a>
+                            </li>
+                          @endforeach
                       </ul>
                     </div>
 
@@ -76,6 +163,11 @@
                       <td>
                         @isset($user->profile)
                           {{$user->profile->city->name}}
+                        @endisset
+                      </td>
+                      <td>
+                        @isset($user->role)
+                          {{$user->role->display_name}}
                         @endisset
                       </td>
                       @if(auth()->user()->can('edit_users'))
@@ -130,5 +222,58 @@
         </div>
       </div>
     </div>
+    @foreach($users as $user)
+      <form action="{{ route('users.destroy', $user->id) }}" class="pull-xs-right5 card-link" method="POST">
+        {{ csrf_field() }}
+        {{method_field('DELETE')}}
+        <div class="modal fade" id="delete-modal{{$user->id}}" role="dialog">
+          @include('backend.partials.delete-modal')
+        </div>
+      </form>
+
+      <form action="{{ route('users.restore', $user->id) }}" class="pull-xs-right5 card-link" method="POST">
+        {{ csrf_field() }}
+        <div class="modal fade" id="restore-modal{{$user->id}}" role="dialog">
+          @include('backend.partials.restore-modal')
+        </div>
+      </form>
+
+      <form action="{{ route('users.forceDestroy', $user->id) }}" class="pull-xs-right5 card-link" method="POST">
+        {{ csrf_field() }}
+        {{method_field('DELETE')}}
+        <div class="modal fade" id="force-delete-modal{{$user->id}}" role="dialog">
+          @include('backend.partials.force-delete-modal')
+        </div>
+      </form>
+    @endforeach
   </div>
+@endsection
+
+@section('backend-script')
+  <script type="text/javascript">
+    $(document).ready(function(){
+      @foreach($users as $user)
+        $('.changeStatus'+'{{$user->id}}').click(function () {
+          var userId = {{$user->id}};
+          var val = $(this).prop('checked') == false ? 0 : 1;
+          $.ajax({
+            type     : "POST",
+            headers  : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url      : "{{route('users.changeStatus', '')}}/"+userId,
+            data     : {status: val},
+            success: function(response){
+              if (response.success) {
+                $("#status-change-alert").show();
+                $('#status-change-alert').delay(3000).fadeOut(1000);
+              }
+            },
+            error: function(response){
+              alert("There was some internal error while updating the status.");
+              window.location.reload(); 
+            },
+          });
+        });
+      @endforeach
+    });
+  </script>
 @endsection

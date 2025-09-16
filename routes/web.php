@@ -14,5 +14,7 @@ Route::group([
     'prefix' => 'admin',
     'middleware' => ['auth']
 ], function(){
-    Route::resource('/users', 'App\Http\Controllers\Backend\UserController');
+    Route::resource('/users', 'App\Http\Controllers\Backend\UserController');    
+    Route::resource('/cities', 'App\Http\Controllers\Backend\CityController');
+    Route::resource('/countries', 'App\Http\Controllers\Backend\CountryController');
 });

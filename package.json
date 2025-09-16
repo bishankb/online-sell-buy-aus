@@ -19,6 +19,10 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^7.0.1",
-        "admin-lte": "^4.0.0-rc4"
+        "admin-lte": "^4.0.0-rc4",
+        "boostrap": "^2.0.0",
+        "jquery": "^3.7.1",
+        "jquery-validation": "^1.21.0",
+        "select2": "^4.1.0-rc.0"
     }
 }

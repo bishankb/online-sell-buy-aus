@@ -49,6 +49,7 @@
         <!--begin::App Content-->
         <div class="app-content">
           <!--begin::Container-->
+          @include('flash::message')
           @yield('content')
           <!--end::Container-->
         </div>
@@ -68,7 +69,15 @@
       <!--end::Footer-->
     </div>
     <!--end::App Wrapper-->
-   
+   @yield('backend-script')
+  <script type="text/javascript">
+    if($("#custom-textarea").length > 0){
+        CKEDITOR.replace( 'custom-textarea', {
+            removePlugins: 'sourcearea, forms, image, format, yyyy, anchor',
+            extraPlugins : 'justify'
+        });
+    }
+    </script>
   </body>
   <!--end::Body-->
 </html>

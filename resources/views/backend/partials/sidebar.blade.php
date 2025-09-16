@@ -39,14 +39,28 @@
           </a>
         </li>
         
-
-        <li class="nav-item {Request::is('admin/users*') ? 'active' : ''}}">
-          <a href="{{route('users.index')}}" class="nav-link">
-            <i class="nav-icon bi bi-palette"></i>
-            <p>Users</p>
-          </a>
-        </li>
-        
+        @can('view_users')
+          <li class="nav-item {Request::is('admin/users*') ? 'active' : ''}}">
+            <a href="{{route('users.index')}}" class="nav-link">
+              <i class="nav-icon bi bi-palette"></i>
+              <p>Users</p>
+            </a>
+          </li>
+        @endcan
+        @can('view_cities')
+          <li class="{{Request::is('admin/cities*') ? 'active' : ''}}">
+              <a href="{{route('cities.index')}}" class="nav-link">
+                <i class="fa fa-map-marker"></i><span>City</span>
+              </a>
+          </li>
+        @endcan
+        @can('view_countries')
+          <li class="{{Request::is('admin/countries*') ? 'active' : ''}}">
+            <a href="{{route('countries.index')}}" class="nav-link">
+              <i class="fa fa-globe"></i><span>Country</span>
+            </a>
+          </li>
+        @endcan
       </ul>
       <!--end::Sidebar Menu-->
     </nav>
