@@ -5,6 +5,14 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Auth;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -16,6 +24,10 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission:view_users', ['only' => ['index', 'show']]);
+        $this->middleware('permission:add_users', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit_users', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete_users', ['only' => 'destroy']);
     }
 
     /**
