@@ -196,11 +196,11 @@
                           @endcan
                           @can('delete_users')
                             @if($user->deleted_at == null)
-                              <button class="btn btn-danger btn-sm action-button" data-toggle="modal" data-target="#delete-modal{{$user->id}}"><i class="fa fa-trash"></i></button>
+                              <button class="btn btn-danger btn-sm action-button" data-bs-toggle="modal" data-bs-target="#delete-modal{{$user->id}}"><i class="fa fa-trash"></i></button>
                             @else
-                              <button class="btn btn-primary btn-sm action-button" data-toggle="modal" data-target="#restore-modal{{$user->id}}"><i class="fa fa-recycle"></i></button>
+                              <button class="btn btn-primary btn-sm action-button" data-bs-toggle="modal" data-bs-target="#restore-modal{{$user->id}}"><i class="fa fa-recycle"></i></button>
                               
-                              <button class="btn btn-danger btn-sm action-button" data-toggle="modal" data-target="#force-delete-modal{{$user->id}}"><i class="fa fa-trash" style="color: red"></i></button>
+                              <button class="btn btn-danger btn-sm action-button" data-bs-toggle="modal" data-bs-target="#force-delete-modal{{$user->id}}"><i class="fa fa-trash" style="color: red"></i></button>
                             @endif
                           @endcan
                         </td>
@@ -226,14 +226,14 @@
       <form action="{{ route('users.destroy', $user->id) }}" class="pull-xs-right5 card-link" method="POST">
         {{ csrf_field() }}
         {{method_field('DELETE')}}
-        <div class="modal fade" id="delete-modal{{$user->id}}" role="dialog">
+        <div class="modal fade" id="delete-modal{{$user->id}}" tabindex="-1" aria-hidden="true">
           @include('backend.partials.delete-modal')
         </div>
       </form>
 
       <form action="{{ route('users.restore', $user->id) }}" class="pull-xs-right5 card-link" method="POST">
         {{ csrf_field() }}
-        <div class="modal fade" id="restore-modal{{$user->id}}" role="dialog">
+        <div class="modal fade" id="restore-modal{{$user->id}}" tabindex="-1" aria-hidden="true">
           @include('backend.partials.restore-modal')
         </div>
       </form>
@@ -241,7 +241,7 @@
       <form action="{{ route('users.forceDestroy', $user->id) }}" class="pull-xs-right5 card-link" method="POST">
         {{ csrf_field() }}
         {{method_field('DELETE')}}
-        <div class="modal fade" id="force-delete-modal{{$user->id}}" role="dialog">
+        <div class="modal fade" id="force-delete-modal{{$user->id}}" tabindex="-1" aria-hidden="true">
           @include('backend.partials.force-delete-modal')
         </div>
       </form>

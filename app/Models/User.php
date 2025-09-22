@@ -153,17 +153,13 @@ class User extends Authenticatable
         static::deleting(function($user) {
             if ($user->isForceDeleting()) {
                 $user->profile()->withTrashed()->forceDelete();
-                $user->products()->withTrashed()->forceDelete();
             } else {
                 $user->profile()->delete();
-                $user->products()->delete();
-                $user->notifications()->delete();
             }
         });
 
         static::restoring(function ($user) {
             $user->profile()->withTrashed()->restore();
-            $user->products()->withTrashed()->restore();
         });
     }
 }

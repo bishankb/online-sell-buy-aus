@@ -1,20 +1,15 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">&times;
-      </button>
-      <h4 class="modal-title" style="text-align: left;">Confirm Restore?</h4>
+      <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Restore?</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-      <p style="text-align: left;">Are you sure you want to restore this
-      item?</p>
+      Are you sure you want to restore this item?
     </div>
     <div class="modal-footer">
-      <button class="btn btn-default pull-left" data-dismiss="modal"
-      type="button">
-      Cancel
-      </button>
-      <button class="btn btn-sm btn-danger" type="submit">Restore</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Restore</button>
     </div>
   </div>
 </div>
