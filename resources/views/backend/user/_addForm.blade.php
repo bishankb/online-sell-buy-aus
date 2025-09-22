@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group required {{ $errors->has('name') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
+            <label for="name" class="form-label">Name</label>
 
-            {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required' ]) !!}
+            <input type="text" required name="name" value="{{ old('name', $user->name ?? '') }}" class="form-control">
 
             @if ($errors->has('name'))
                 <span class="help-block">
@@ -15,9 +15,9 @@
 
     <div class="col-md-6">
         <div class="form-group required {{ $errors->has('email') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('email', 'Email', ['class' => 'control-label']) !!}
+            <label for="email" class="form-label">Email</label>
 
-            {!! Form::text('email', null, ['class' => 'form-control', 'required' => 'required' ]) !!}
+            <input type="email" required name="email" value="{{ old('email', $user->email ?? '') }}" class="form-control">
 
             @if ($errors->has('email'))
                 <span class="help-block">
@@ -31,9 +31,9 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group required {{ $errors->has('password') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('password', 'Password', ['class' => 'control-label']) !!}
+            <label for="password" class="form-label">Password</label>
 
-            {!! Form::password('password', ['class' => 'form-control', 'required' => 'required' ]) !!}
+            <input type="password" required name="password" value="" class="form-control">
 
             @if ($errors->has('password'))
                 <span class="help-block">
@@ -45,9 +45,9 @@
 
     <div class="col-md-6">
         <div class="form-group required {{ $errors->has('password_confirmation') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('password_confirmation', 'Confirm Password', ['class' => 'control-label']) !!}
+            <label for="password_confirmation" class="form-label">Confirm Password</label>
 
-            {!! Form::password('password_confirmation', ['class' => 'form-control', 'required' => 'required' ]) !!}
+            <input type="password" name="password_confirmation" class="form-control" required="required">
 
             @if ($errors->has('password_confirmation'))
                 <span class="help-block">

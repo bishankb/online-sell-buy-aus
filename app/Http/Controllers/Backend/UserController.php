@@ -16,7 +16,7 @@ use Auth;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
-
+ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -444,7 +444,7 @@ class UserController extends Controller
      */
     private function setSlugAttribute($slug)
     {
-        $slug = str_slug($slug);
+        $slug = Str::slug($slug);
         $slugs = User::whereRaw("slug RLIKE '^{$slug}(-[0-9]*)?$'")
                     ->orderBy('id')
                     ->pluck('slug');

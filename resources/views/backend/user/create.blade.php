@@ -6,26 +6,30 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-11">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Create User</h3>
-                        <div class="pull-right">
-                            <a href="{{ route('users.index') }}" class="btn btn-success">Back to Listing</a>
-                        </div>
+        <!--begin::Col-->
+        <div class="col-md-11">
+            <!--begin::Quick Example-->
+            <div class="card card-primary card-outline mb-4">
+              <!--begin::Header-->
+                <div class="card-header">
+                    <div class="card-title">Create User</div>
+                    <div class="pull-right">
+                        <a href="{{ route('users.index') }}" class="btn btn-success">Back to Listing</a>
                     </div>
-                    {!! Form::model(null, ['method' => 'post', 'route' => ['users.store']]) !!}
-                        <div class="box-body">
-                        
-                            @include('backend.user._addForm')
-                            
-                        </div>
-                        <div class="box-footer">
-                            {!! Form::submit('Save', ['class' => 'btn btn-success save']) !!}
-                        </div>
-                    {!! Form::close() !!}
                 </div>
+                <!--end::Header-->
+                <!--begin::Form-->
+                <form method="POST" action="{{ route('users.store') }}">
+                    @csrf
+                    <!--begin::Body-->
+                    <div class="card-body">
+                        @include('backend.user._addForm')
+                    </div>
+                    <!--begin::Footer-->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success save">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
