@@ -49,10 +49,10 @@
                     @if(auth()->user()->can('edit_cities') || auth()->user()->can('delete_cities'))
                       <td class="text-center">
                         @can('edit_cities')
-                          <a class="btn btn-default btn-sm action-button" href="{{ route('cities.edit', $city->id) }}" data-tooltip="Edit"><i class="fa fa fa-edit"></i></a>
+                          <a class="btn btn-primary btn-sm action-button" href="{{ route('cities.edit', $city->id) }}" data-tooltip="Edit"><i class="fa fa fa-edit"></i></a>
                         @endcan
-                        @can('delete_cities')
-                          <button class="btn btn-default btn-sm action-button" data-toggle="modal" data-target="#delete-modal{{$city->id}}"><i class="fa fa-trash"></i></button>
+                        @can('delete_cities')                       
+                          <button type="button" class="btn btn-danger btn-sm action-button" data-bs-toggle="modal" data-bs-target="#delete-modal{{$city->id}}"><i class="fa fa-trash"></i></button>
                         @endcan
                       </td>
                     @endif
@@ -73,6 +73,15 @@
       </div>
     <!--end::Row-->
     </div>
+    @foreach($cities as $city)
+      <form action="{{ route('cities.destroy', $city->id) }}" class="pull-xs-right5 card-link" method="POST">
+        @csrf
+         @method('DELETE')
+        <div class="modal fade" id="delete-modal{{$city->id}}" tabindex="-1" aria-hidden="true">
+          @include('backend.partials.delete-modal')
+        </div>
+      </form>
+    @endforeach
     <!--end::Container-->
   </div>
 @endsection
