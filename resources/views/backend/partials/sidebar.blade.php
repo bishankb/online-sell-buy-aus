@@ -42,22 +42,22 @@
         @can('view_users')
           <li class="nav-item {Request::is('admin/users*') ? 'active' : ''}}">
             <a href="{{route('users.index')}}" class="nav-link">
-              <i class="nav-icon bi bi-palette"></i>
+              <i class="fa fa-user" style="margin: 5px;"></i>
               <p>Users</p>
             </a>
           </li>
         @endcan
         @can('view_cities')
-          <li class="{{Request::is('admin/cities*') ? 'active' : ''}}">
+          <li class="nav-item {{Request::is('admin/cities*') ? 'active' : ''}}">
               <a href="{{route('cities.index')}}" class="nav-link">
-                <i class="fa fa-map-marker"></i><span>City</span>
+                <i class="fa fa-map-marker" style="margin: 5px;"></i><span>City</span>
               </a>
           </li>
         @endcan
         @can('view_countries')
-          <li class="{{Request::is('admin/countries*') ? 'active' : ''}}">
+          <li class="nav-item {{Request::is('admin/countries*') ? 'active' : ''}}">
             <a href="{{route('countries.index')}}" class="nav-link">
-              <i class="fa fa-globe"></i><span>Country</span>
+              <i class="fa fa-globe" style="margin: 5px;"></i><span>Country</span>
             </a>
           </li>
         @endcan
