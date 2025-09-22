@@ -38,8 +38,8 @@
 @section('backend-script')
     <script>
         document.addEventListener("DOMContentLoaded", function() {            
-            var removeCities = $('#remove-btn');
-            if (removeCities.length == 1) {
+            var removeButton = $('#remove-btn');
+            if (removeButton.length == 1) {
                 $('#remove-btn').hide();
             }
         });
