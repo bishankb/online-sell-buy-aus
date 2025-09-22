@@ -26,5 +26,18 @@ class UserTableSeeder extends Seeder
                 'active'            => true,
             ]
         );
+
+        User::create(
+            [
+                'name'              => 'Admin',
+                'slug'              => Str::slug('Admin'),
+                'email'             => 'admin@admin.com',
+                'email_verified_at' => '2025-09-14 14:33:40',                
+                'password'          => bcrypt('secret'),
+                'remember_token'    => Str::random(10),
+                'role_id'           => 1, 
+                'active'            => false,
+            ]
+        );
     }
 }

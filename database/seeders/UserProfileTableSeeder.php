@@ -22,5 +22,15 @@ class UserProfileTableSeeder extends Seeder
                 'country_id'    => 1
             ]
         );
+
+        UserProfile::create(
+            [
+                'user_id'       => 2,
+                'phone1'        => '9806543559',
+                'address'       => 'Mohariya Tole',
+                'city_id'       => 1,
+                'country_id'    => 1
+            ]
+        );
     }
 }

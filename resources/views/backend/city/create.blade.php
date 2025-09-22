@@ -37,7 +37,7 @@
 
 @section('backend-script')
     <script>
-        document.addEventListener("DOMContentLoaded", function() {            
+        document.addEventListener("DOMContentLoaded", function() {
             var removeButton = $('#remove-btn');
             if (removeButton.length == 1) {
                 $('#remove-btn').hide();

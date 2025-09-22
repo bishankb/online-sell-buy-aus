@@ -172,7 +172,7 @@
                       @if(auth()->user()->can('edit_users'))
                         <td class="text-center">
                           <label class="switch">
-                            <input type="checkbox" class="changeStatus{{$user->id}}" @if($user->active == 1) checked @endif>
+                           <input type="checkbox" class="change-status" data-user-id="{{ $user->id }}" {{ $user->active ? 'checked' : '' }}>
                             <span class="slider round"></span>
                           </label>
                         </td>
@@ -252,29 +252,37 @@
 
 @section('backend-script')
   <script type="text/javascript">
-    $(document).ready(function(){
-      @foreach($users as $user)
-        $('.changeStatus'+'{{$user->id}}').click(function () {
-          var userId = {{$user->id}};
-          var val = $(this).prop('checked') == false ? 0 : 1;
-          $.ajax({
-            type     : "POST",
-            headers  : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            url      : route('users.changeStatus', ['id' => $userId]),
-            data     : {status: val},
-            success: function(response){
-              if (response.success) {
-                $("#status-change-alert").show();
-                $('#status-change-alert').delay(3000).fadeOut(1000);
-              }
-            },
-            error: function(response){
-              alert("There was some internal error while updating the status.");
-              window.location.reload(); 
-            },
-          });
+    document.addEventListener("DOMContentLoaded", function() {
+        // Set CSRF token for all AJAX requests
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
-      @endforeach
+
+        // On checkbox change
+        $('.change-status').on('change', function () {
+            let userId = $(this).data('user-id');
+            let status = $(this).is(':checked') ? 1 : 0;
+
+            $.ajax({
+                url: `users/change-status/${userId}`,
+                method: 'POST',
+                data: {
+                    status: status
+                },
+                success: function (response) {
+                    if (response.success) {
+                        $('#status-change-alert').fadeIn().delay(2000).fadeOut();
+                    } else {
+                        alert('Update failed.');
+                    }
+                },
+                error: function (xhr) {
+                    alert('Error: ' + xhr.status + ' - ' + xhr.responseText);
+                }
+            });
+        });
     });
   </script>
 @endsection
