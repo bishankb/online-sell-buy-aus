@@ -5,15 +5,16 @@
 @endsection
 
 @section('content')
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-11">
-        <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">Cities Table</h3>
-          </div>
-          <div class="box-body">
-            <div class="table-responsive">
+  <div class="app-content">
+    <!--begin::Container-->
+    <div class="container-fluid">
+      <!--begin::Row-->
+      <div class="row">
+        <div class="col-md-11">
+          <div class="card mb-4">
+            <div class="card-header"><h3 class="card-title">Cities Table</h3></div>
+            <!-- /.card-header -->
+            <div class="card-body">
               <table class="table table-bordered table-striped">
                 <thead>
                   @can('add_cities')
@@ -65,21 +66,15 @@
                 </tbody>
               </table>
             </div>
-          </div>
-          <div class="box-footer text-center">
-            {{ $cities->appends(request()->input())->links() }}
+            <!-- /.card-body -->
+            <div class="card-footer clearfix d-flex justify-content-center">
+                {{ $cities->links('vendor.pagination.bootstrap-4') }}
+            </div>
           </div>
         </div>
+      <!--end::Row-->
       </div>
+      <!--end::Container-->
     </div>
-    @foreach($cities as $city)
-      <form action="{{ route('cities.destroy', $city->id) }}" class="pull-xs-right5 card-link" method="POST">
-        {{ csrf_field() }}
-        {{method_field('DELETE')}}
-        <div class="modal fade" id="delete-modal{{$city->id}}" role="dialog">
-          @include('backend.partials.delete-modal')
-        </div>
-      </form>
-    @endforeach
   </div>
 @endsection
