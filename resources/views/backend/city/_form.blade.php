@@ -3,7 +3,7 @@
         <label for="name" class="col-md-4 control-label">Name</label>
 
         <div class="col-md-6">
-            <input type="text" name="name[]" value="{{ old('name', $city->name ?? '') }}" class="form-control name">
+            <input type="text" name="name[]" value="{{ old('name[0]', $city->name ?? '') }}" class="form-control name">
 
             @if ($errors->has('name.*'))
                 <span class="help-block">
@@ -18,7 +18,7 @@
         <label for="name" class="col-md-4 control-label">Order</label>
 
         <div class="col-md-6">
-            <input type="number" name="order[]" value="{{ old('order', $city->order ?? '') }}" class="form-control order">
+            <input type="number" name="order[]" value="{{ old('order[0]', $city->order ?? '') }}" class="form-control order">
 
             @if ($errors->has('order.*'))
                 <span class="help-block">
