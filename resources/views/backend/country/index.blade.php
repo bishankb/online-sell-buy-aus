@@ -18,7 +18,7 @@
               <thead>
                 @can('add_countries')
                   <div class="add-item">
-                    <a class="btn btn-default add-button" href="{{route('countries.create')}}"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    <a class="btn btn-light add-button" href="{{route('countries.create')}}"><i class="fa fa-plus" aria-hidden="true"></i></a>
                   </div>
                 @endcan
                 <div class="search">
@@ -26,7 +26,7 @@
                     <div class="input-group input-group-sm">
                       <input type="text" name="search-item" value="{{ request('search-item') }}" class="form-control pull-right" placeholder="Search">
                       <div class="input-group-btn">
-                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        <button type="submit" class="btn btn-light"><i class="fa fa-search"></i></button>
                       </div>
                     </div>
                   </form>
