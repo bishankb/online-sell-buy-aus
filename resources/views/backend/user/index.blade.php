@@ -266,7 +266,7 @@
             let status = $(this).is(':checked') ? 1 : 0;
 
             $.ajax({
-                url: `users/change-status/${userId}`,
+                url: `users/${userId}/change-status/`,
                 method: 'POST',
                 data: {
                     status: status
