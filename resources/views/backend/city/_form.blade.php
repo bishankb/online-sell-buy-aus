@@ -11,7 +11,7 @@
                 </span>
             @endif
         </div>
-        <button class="btn btn-danger mt-2" onclick="remove_field()" id="remove-btn">Remove</button>
+        <button style="display: none;" class="btn btn-danger mt-2" onclick="remove_field()" id="remove-btn">Remove</button>
     </div>
 
     <div class="form-group{{ $errors->has('order.*') ? ' has-error' : '' }} clearfix ">

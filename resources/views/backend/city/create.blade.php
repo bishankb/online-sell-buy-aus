@@ -37,13 +37,9 @@
 
 @section('backend-script')
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            $('.save').click(function () {
-                var city = $('.city');
-            });
-            
-            var bulksms = $('#remove-btn');
-            if (bulksms.length == 1) {
+        document.addEventListener("DOMContentLoaded", function() {            
+            var removeCities = $('#remove-btn');
+            if (removeCities.length == 1) {
                 $('#remove-btn').hide();
             }
         });
