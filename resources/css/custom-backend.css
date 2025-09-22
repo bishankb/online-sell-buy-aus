@@ -1,3 +1,7 @@
+.inline{
+ display: inline;
+}
+
 .icheckbox_square-blue,
 .iradio_square-blue {
     background: url(/images/blue.png) no-repeat;
