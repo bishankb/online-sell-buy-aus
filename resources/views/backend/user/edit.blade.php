@@ -87,21 +87,23 @@
             }
         }
         
-        // Set CSRF token for all AJAX requests
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        
 
         function deleteImage(userId)
         {
+            // Set CSRF token for all AJAX requests
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        
             this.selectedImage = $('.selected-img').attr('src');
             if (confirm('Are you sure you want to delete the image?')) {
                 if(window.savedImage == this.selectedImage) {
                      $.ajax({
                         type     : "POST",
-                        url      : `users/${userId}/delete-image/`,
+                        url      : `/admin/users/${userId}/delete-image/`,
                         success: function(response){
                             if (response.success) {
                                 $('#input_image').val('');

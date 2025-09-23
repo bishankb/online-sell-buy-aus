@@ -97,7 +97,7 @@
 }
 
 .btn-delete-image {
-	position: absolute;
+	position: relative;
 	background: none !important;
 	border: 0 !important;
 	color: #bababa;

@@ -1,61 +1,61 @@
 <?php
 
-use App\Modles\Media;
+use App\Models\Media;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver; 
 
 // Save the file
 function saveFile($fileData, $fileName, $fileId) {
     try {
-        $storeFile = $fileData->store('public/media/'.$fileName.'/'.$fileId);
-        $storeThumbnailFile = $fileData->store('public/media/'.$fileName.'/'.$fileId.'/thumbnail');
+        $manager = new ImageManager(new Driver());
 
-        $newFile = Image::make($fileData)->orientate();
-        $newThumbnailFile = Image::make($fileData)->orientate();
-        $height =  $newFile->height();
-        $width =  $newFile->width();
-        $newThumbnailFile = Image::make($fileData)->orientate();
+        $storeFilePath = "media/{$fileName}/{$fileId}/" . $fileData->hashName();
+        $storeThumbnailPath = "media/{$fileName}/{$fileId}/thumbnail/" . $fileData->hashName();
 
-        if($height > $width) {
-            $newFile->resize(720, 960, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+        // Read once, clone for thumbnail
+        $newFile = $manager->read($fileData)->orient();
+        $newThumbnailFile = clone $newFile;
+
+        $height = $newFile->height();
+        $width = $newFile->width();
+
+        // Resize main file
+        if ($height > $width) {
+            $newFile->resize(720, 960, fn($constraint) => $constraint->aspectRatio());
         } else {
-            $newFile->resize(960, 720, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+            $newFile->resize(960, 720, fn($constraint) => $constraint->aspectRatio());
         }
-        $newThumbnailFile->resize(130, 190, function ($constraint) {
-            $constraint->aspectRatio();
-        });
 
-        $newFile->stream();
-        $newThumbnailFile->stream();
+        $newThumbnailFile->resize(130, 190, fn($constraint) => $constraint->aspectRatio());
 
-        Storage::put($storeFile, $newFile);
-        Storage::put($storeThumbnailFile, $newThumbnailFile);
+        Storage::disk('public')->put($storeFilePath, (string) $newFile->encode());
+        Storage::disk('public')->put($storeThumbnailPath, (string) $newThumbnailFile->encode());
 
-        $filename = explode('/', $storeFile);
+        // File type detection
         $fileType = explode('/', $fileData->getMimeType());
         $checkFileType = [
-            'image' => 'image',
-            'application' => 'document',
-            'text' => 'document'
+            'image'        => 'image',
+            'application'  => 'document',
+            'text'         => 'document',
         ];
 
         $media = Media::create(
             [
-                'filename'           => $filename[4],
+                'filename'           => basename($storeFilePath),
                 'original_filename'  => $fileData->getClientOriginalName(),
                 'extension'          => $fileData->getClientOriginalExtension(),
                 'mime'               => $fileData->getMimeType(),
-                'type'               => $checkFileType[$fileType[0]],
-                'file_size'          => $fileData->getClientSize()
+                'type'               => $checkFileType[$fileType[0]] ?? 'other',
+                'file_size'          => $fileData->getSize(),
             ]
         );
 
         return $media;
 
-    } catch (\Exception $exception) {
-        logger()->error($exception->getMessage());
+    } catch (\Throwable $exception) {
+        logger()->error("File save failed: " . $exception->getMessage());
+        return null;
     }
 }
 
