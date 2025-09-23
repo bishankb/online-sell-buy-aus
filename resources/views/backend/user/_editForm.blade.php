@@ -68,6 +68,7 @@
         </div>
     @endhasrole
 @endif
+<br>
 <div class="card-footer">
     <button type="submit" class="btn btn-success save">Update</button>
 </div>
