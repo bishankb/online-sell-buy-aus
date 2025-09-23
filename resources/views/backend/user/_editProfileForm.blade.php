@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group {{ $errors->has('phone1') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('phone1', 'Phone Number', ['class' => 'control-label']) !!}
+            <label for="phone1" class="form-label">Phone Number</label>
 
-            {!! Form::text('phone1', null, ['class' => 'form-control' ]) !!}
+            <input type="text" name="phone1" value="{{ old('phone1', $userProfile->phone1 ?? '') }}" class="form-control">
 
             @if ($errors->has('phone1'))
                 <span class="help-block">
@@ -15,9 +15,9 @@
 
     <div class="col-md-6">
         <div class="form-group {{ $errors->has('phone2') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('phone2', 'Secondary Phone Number', ['class' => 'control-label']) !!}
+            <label for="phone2" class="form-label">Secondary Phone Number</label>
 
-            {!! Form::text('phone2', null, ['class' => 'form-control' ]) !!}
+            <input type="text" name="phone2" value="{{ old('phone2', $userProfile->phone2 ?? '') }}" class="form-control">
 
             @if ($errors->has('phone2'))
                 <span class="help-block">
@@ -31,9 +31,9 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('address', 'Address', ['class' => 'control-label']) !!}
+            <label for="address" class="form-label">Address</label>
 
-            {!! Form::text('address', null, ['class' => 'form-control' ]) !!}
+            <input type="text" name="address" value="{{ old('address', $userProfile->address ?? '') }}" class="form-control">
 
             @if ($errors->has('address'))
                 <span class="help-block">
@@ -46,9 +46,9 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }} clearfix">
-            {!! Form::label('city', 'Select City', ['class' => 'control-label']) !!}
+            <label for="city" class="form-label">City</label>
 
-            <select name = "city" class="form-control">
+            <select name = "city" class="form-control form-select">
                 <option disabled selected>Please select an option</option>
                 @foreach($cities as $city)
                     @if(isset($userProfile->city_id))
@@ -77,9 +77,9 @@
 
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }} clearfix">
-            {!! Form::label('country', 'Select Country', ['class' => 'control-label']) !!}
+            <label for="country" class="form-label">Country</label>
 
-            <select name = "country" class="form-control">
+            <select name = "country" class="form-control form-select">
                 <option disabled selected>Please select an option</option>
                 @foreach($countries as $country)
                     @if(isset($userProfile->country_id))
@@ -108,7 +108,8 @@
 </div>
 
 <div class="form-group{{ $errors->has('user_image') ? ' has-error' : '' }} clearfix">
-    {!! Form::label('user_image', 'Image', ['class' => 'control-label']) !!}
+    <label for="user_image" class="form-label">Image</label>
+
     @if(isset($userProfile->image))
         <div class="show-image">
             <img class="custom-thumbnail selected-img" src="@if(isset($userProfile->image)) /storage/media/user/{{$user->id}}/{{$userProfile->image->filename}} @endif" class="custom-thumbnail">
@@ -126,7 +127,7 @@
             </button>
         </div>
     @endif
-    {!! Form::file('user_image', ['class' => 'form-control', 'id' => 'input_image', 'accept' => 'image/*']) !!}
+    <input type="file" name="user_image" class="form-control" id="input_image"  accept="image/*" />
 
     @if ($errors->has('user_image'))
         <span class="help-block">
@@ -135,6 +136,6 @@
     @endif
 </div>
 
- <div class="box-footer">
-    {!! Form::submit('Update', ['class' => 'btn btn-success save']) !!}
+<div class="card-footer">
+    <button type="submit" class="btn btn-success save">Update Profile</button>
 </div>

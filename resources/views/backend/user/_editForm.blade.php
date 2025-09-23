@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group required {{ $errors->has('name') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
+            <label for="name" class="form-label">Name</label>
 
-            {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required' ]) !!}
+             <input type="text" required name="name" value="{{ old('name', $user->name ?? '') }}" class="form-control">
 
             @if ($errors->has('name'))
                 <span class="help-block">
@@ -15,12 +15,12 @@
 
     <div class="col-md-6">
         <div class="form-group required {{ $errors->has('email') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('email', 'Email', ['class' => 'control-label']) !!}
+            <label for="email" class="form-label">Email</label>
 
             @if(Auth::user()->id == $user->id || Auth::user()->hasRole('admin'))
-                {!! Form::text('email', null, ['class' => 'form-control', 'required' => 'required' ]) !!}
+                <input type="email" required name="email" value="{{ old('email', $user->email ?? '') }}" class="form-control">
             @else
-                {!! Form::text('email', null, ['class' => 'form-control', 'required' => 'required', 'disabled' => 'disabled' ]) !!}
+                <input type="email" required name="email" value="{{ old('email', $user->email ?? '') }}" class="form-control" disabled>
             @endif
 
             @if ($errors->has('email'))
@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group required {{ $errors->has('role') ? ' has-error' : '' }} clearfix ">
-                    {!! Form::label('role', 'Role', ['class' => 'control-label']) !!}
+                   <label for="role" class="form-label">Role</label>
 
                     <select name = "role" class="form-control">
                         <option disabled selected>Please select an option</option>
@@ -68,6 +68,6 @@
         </div>
     @endhasrole
 @endif
-<div class="box-footer">
-    {!! Form::submit('Update', ['class' => 'btn btn-success save']) !!}
+<div class="card-footer">
+    <button type="submit" class="btn btn-success save">Update</button>
 </div>

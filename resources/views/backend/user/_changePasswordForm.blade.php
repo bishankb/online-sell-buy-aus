@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group required {{ $errors->has('password') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('password', 'New Password', ['class' => 'control-label']) !!}
+            <label for="password" class="form-label">New Password</label>
 
-            {!! Form::password('password', ['class' => 'form-control', 'required' => 'required' ]) !!}
+            <input type="password" required name="password" value="" class="form-control">
 
             @if ($errors->has('password'))
                 <span class="help-block">
@@ -15,9 +15,9 @@
 
     <div class="col-md-6">
         <div class="form-group required {{ $errors->has('password_confirmation') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('password_confirmation', 'Confirm Password', ['class' => 'control-label']) !!}
+            <label for="password_confirmation" class="form-label">Confirm Password</label>
 
-            {!! Form::password('password_confirmation', ['class' => 'form-control', 'required' => 'required' ]) !!}
+            <input type="password" name="password_confirmation" class="form-control" required="required">
 
             @if ($errors->has('password_confirmation'))
                 <span class="help-block">
@@ -27,6 +27,6 @@
         </div>
     </div>
 </div>
- <div class="box-footer">
-    {!! Form::submit('Change', ['class' => 'btn btn-success save']) !!}
+ <div class="card-footer">
+    <button type="submit" class="btn btn-success save">Change</button>
 </div>

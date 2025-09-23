@@ -178,7 +178,7 @@ class UserController extends Controller
                         'role_id' => request('role'),
                     ]
                 );
-                $role = request('role');
+                $role = (int)request('role');
                 $user->syncRoles($role);
             } elseif (Auth::user()->id == $user->id) {
                 if($user->name != request('name')) {
@@ -208,7 +208,7 @@ class UserController extends Controller
             flash('There was some intenal error while adding the user.')->error();
         }
 
-        return redirect(route('users.index'));
+        return redirect(route('users.edit', [$user->id]). '#basic-info');
     }
 
     /**
@@ -373,7 +373,7 @@ class UserController extends Controller
             flash('There was some intenal error while updating the profile.')->error();
         }
 
-        return redirect(route('users.index'));
+        return redirect(route('users.edit', [$user->id]). '#profile');
     }
 
     /**
@@ -413,7 +413,7 @@ class UserController extends Controller
             flash('There was some intenal error while changing the password.')->error();
         }        
 
-        return redirect(route('users.index'));
+        return redirect(route('users.edit', [$user->id]). '#change-password');
     }
 
     /**

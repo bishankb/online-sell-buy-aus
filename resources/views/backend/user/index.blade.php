@@ -160,8 +160,8 @@
                       <td>{{$user->name}}</td>
                       <td>{{$user->email}}</td>
                       <td>
-                        @isset($user->profile)
-                          {{$user->profile->city->name}}
+                        @isset($user->profile->city)
+                          {{ $user->profile->city->name }}
                         @endisset
                       </td>
                       <td>

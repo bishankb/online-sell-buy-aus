@@ -6,52 +6,56 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-11">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Edit User</h3>
-                        <div class="pull-right">
-                            <a href="{{ route('users.index') }}" class="btn btn-success">Back to Listing</a>
-                        </div>
+        <!--begin::Col-->
+        <div class="col-md-11">
+            <!--begin::Quick Example-->
+            <div class="card card-primary card-outline mb-4">
+              <!--begin::Header-->
+                <div class="card-header">
+                    <div class="card-title">Edit User</div>
+                    <div class="pull-right">
+                        <a href="{{ route('users.index') }}" class="btn btn-success">Back to Listing</a>
                     </div>
-
-                    <div class="box-body" style="padding-top: 0px;">
-                    
-                        <ul class="nav nav-tabs" id="myTab">
-                            <li class="active" id="basic-info-li"><a data-toggle="tab" href="#basic-info">Basic Information</a></li>
-                            <li id="profile-li"><a id="profile-tab" data-toggle="tab" href="#profile">Profile</a></li>
-                            @if(Auth::user()->id == $user->id || Auth::user()->hasRole('admin'))
-                                <li id="change-password-li"><a id="change-password-tab" data-toggle="tab" href="#change-password">Change Password</a></li>
-                            @endif
-                        </ul>
-
-                        <div class="tab-content" style="margin-top: 10px;">
-                            <div id="basic-info" class="tab-pane fade in active">
-                                {!! Form::model($user, ['method' => 'patch', 'route' => ['users.update', $user->id]]) !!}
-                                     @include('backend.user._editForm')
-                               {!! Form::close() !!}
-                            </div>
-
-                            <div id="profile" class="tab-pane fade">
-                                @if(isset($userProfile))
-                                    {!! Form::model($userProfile, ['method' => 'post', 'route' => ['users.editProfile', $user->id], 'files' => 'true']) !!}
-                                @else
-                                    {!! Form::model(null, ['method' => 'post', 'route' => ['users.editProfile', $user->id], 'files' => 'true']) !!}
-                                @endif
-                                     @include('backend.user._editProfileForm')
-                               {!! Form::close() !!}
-                            </div>
-                            @if(Auth::user()->id == $user->id || Auth::user()->hasRole('admin'))
-                                <div id="change-password" class="tab-pane fade">
-                                    {!! Form::model($user, ['method' => 'post', 'route' => ['users.changePassword', $user->id]]) !!}
-                                         @include('backend.user._changePasswordForm')
-                                   {!! Form::close() !!}
-                                </div>
-                            @endif
+                </div>
+                <!--end::Header-->
+                <div class="card-body">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" id="basic-info-li">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#basic-info">Basic Information</a>
+                        </li>
+                        <li class="nav-item" id="profile-li">
+                            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile">Profile</a>
+                        </li>
+                        @if(Auth::user()->id == $user->id || Auth::user()->hasRole('admin'))
+                            <li class="nav-item" id="change-password-li">
+                                <a class="nav-link" id="change-password-tab" data-bs-toggle="tab" href="#change-password">Change Password</a>
+                            </li>
+                        @endif
+                    </ul>
+                    <div class="tab-content" style="margin-top: 10px;">
+                        <div id="basic-info" class="container tab-pane active">
+                            <form method="POST" action="{{ route('users.update', $user->id) }}">
+                            @csrf
+                            @method('PATCH')
+                                @include('backend.user._editForm')
+                            </form>
                         </div>
+
+                        <div id="profile" class="container tab-pane fade">
+                            <form method="POST" action="{{ route('users.editProfile', $user->id) }}" enctype="multipart/form-data">
+                            @csrf
+                                 @include('backend.user._editProfileForm')
+                            </form>
+                        </div>
+                        @if(Auth::user()->id == $user->id || Auth::user()->hasRole('admin'))
+                            <div id="change-password" class="container tab-pane fade">
+                                <form method="POST" action="{{ route('users.changePassword', $user->id) }}">
+                                @csrf
+                                     @include('backend.user._changePasswordForm')
+                               </form>
+                            </div>
+                        @endif
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -60,8 +64,25 @@
 
 @section('backend-script')
     <script type="text/javascript">
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            var tabLinks = document.querySelectorAll('.nav-link[data-bs-toggle="tab"]');
+
+            tabLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    var tabId = this.getAttribute('href'); // e.g., "#home-tab-pane"
+                    window.location.hash = tabId; // Updates the URL with the tab's ID
+                });
+            });
+        });
+        
+        document.addEventListener("DOMContentLoaded", function() {
             window.savedImage = $('.selected-img').attr('src');
+        });
+        // Set CSRF token for all AJAX requests
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
 
         function deleteImage(userId)
@@ -71,8 +92,7 @@
                 if(window.savedImage == this.selectedImage) {
                      $.ajax({
                         type     : "POST",
-                        headers  : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                        url      : "{{route('users.destroyImage', '')}}/"+userId,
+                        url      : `users/${userId}/delete-image/`,
                         success: function(response){
                             if (response.success) {
                                 $('#input_image').val('');
@@ -89,5 +109,5 @@
                 }
             }
         }
-    </script>
+    </script> 
 @endsection
