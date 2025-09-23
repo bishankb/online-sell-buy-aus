@@ -78,6 +78,15 @@
         document.addEventListener("DOMContentLoaded", function() {
             window.savedImage = $('.selected-img').attr('src');
         });
+
+        function removeImage()
+        {
+            if (confirm('Are you sure you want to delete the image?')) {
+                $('#input_image').val('');
+                $('.image-margin').hide();
+            }
+        }
+        
         // Set CSRF token for all AJAX requests
         $.ajaxSetup({
             headers: {
