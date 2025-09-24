@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use Auth;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class SubCategoryController extends Controller
 {
@@ -67,7 +68,25 @@ class SubCategoryController extends Controller
     {
         $this->validate($request, [
             'category_id.*' => 'required',
-            'title.*'       => 'min:2|required|max:255|unique:sub_categories,title,NULL,id,category_id,'.$request->category_id[0],
+            'title.*' => [
+                'required',
+                'string',
+                'min:2',
+                'max:255',
+                'unique:sub_categories,title,NULL,id,category_id,'.$request->category_id[0],
+                function ($attribute, $value, $fail) use ($request) {
+                    // get the index of the current title
+                    $index = explode('.', $attribute)[1];
+                    $category = $request->category_id[$index] ?? null;
+
+                    // check for duplicates in the request array within the same category
+                    foreach ($request->title as $i => $t) {
+                        if ($i != $index && $t === $value && $request->category_id[$i] == $category) {
+                            $fail("The title '{$value}' is duplicated in the same category.");
+                        }
+                    }
+                }
+            ],
             'status.*'      => 'nullable',
         ]);
         $titles = request('title');
