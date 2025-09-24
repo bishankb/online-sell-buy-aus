@@ -62,6 +62,13 @@
             </a>
           </li>
         @endcan
+        @can('view_faqs')
+            <li class="nav-item {{ Request::is('admin/faqs*') ? 'active' : '' }}">
+                <a href="{{ route('faqs.index') }}" class="nav-link">
+                    <i class="fa fa-question-circle" style="margin: 5px;"></i><span>FAQ</span>
+                </a>
+            </li>
+        @endcan
         @can('view_cities')
           <li class="nav-item {{Request::is('admin/cities*') ? 'active' : ''}}">
               <a href="{{route('cities.index')}}" class="nav-link">

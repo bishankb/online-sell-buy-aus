@@ -71,13 +71,11 @@
     </div>
     <!--end::App Wrapper-->
    @yield('backend-script')
-  <script type="text/javascript">
-    if($("#custom-textarea").length > 0){
-        CKEDITOR.replace( 'custom-textarea', {
-            removePlugins: 'sourcearea, forms, image, format, yyyy, anchor',
-            extraPlugins : 'justify'
-        });
-    }
+   <script src="https://cdn.ckeditor.com/4.25.1/full/ckeditor.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.ckeditor').forEach(el => CKEDITOR.replace(el));
+    });
     </script>
   </body>
   <!--end::Body-->

@@ -19,7 +19,7 @@
                 </div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                    <form method="POST" action="{{ route('categories.update', $category->id) }}">
+                <form method="POST" action="{{ route('categories.update', $category->id) }}">
                     @csrf
                     @method('PATCH')
                     <!--begin::Body-->

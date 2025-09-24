@@ -38,5 +38,10 @@ Route::group([
 
     Route::resource('roles', 'App\Http\Controllers\Backend\RoleController');
 
+    Route::resource('/faqs', 'App\Http\Controllers\Backend\FaqController');
+    Route::post('/faqs/change-status/{id}', 'App\Http\Controllers\Backend\FaqController@changeStatus')->name('faqs.changeStatus');
+    Route::post('/faqs/restore/{id}', 'App\Http\Controllers\Backend\FaqController@restore')->name('faqs.restore');
+    Route::delete('/faqs/force-delete/{id}', 'App\Http\Controllers\Backend\FaqController@forceDestroy')->name('faqs.forceDestroy');
+
 
 });

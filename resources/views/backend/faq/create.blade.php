@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('title')
-    Sub-Category
+    Faq
 @endsection
 
 @section('content')
@@ -12,28 +12,28 @@
             <div class="card card-primary card-outline mb-4">
               <!--begin::Header-->
                 <div class="card-header">
-                    <div class="card-title">Edit Sub Category</div>
+                    <div class="card-title">Create Faq</div>
                     <div class="pull-right">
-                        <a href="{{ route('sub-categories.index') }}" class="btn btn-success">Back to Listing</a>
+                        <a href="{{ route('faqs.index') }}" class="btn btn-success">Back to Listing</a>
                     </div>
                 </div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                <form method="POST" action="{{ route('sub-categories.update', $sub_category->id) }}">
+                <form method="POST" action="{{ route('faqs.store') }}">
                     @csrf
-                    @method('PATCH')
                     <!--begin::Body-->
                     <div class="card-body">
-                        @include('backend.sub-category._form')
+                        @include('backend.faq._form')
                     </div>
                     <!--begin::Footer-->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-success save">Save</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 @endsection
+
 
 

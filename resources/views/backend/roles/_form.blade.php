@@ -38,7 +38,7 @@
         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }} clearfix">
             <label for="description" class="form-label">Description</label>
 
-            <textarea name="description" class="form-control" rows="3"></textarea>
+            <textarea name="description" class="form-control" rows="3">{{ old('description', $role->description ?? '') }}</textarea>
 
             @if ($errors->has('description'))
                 <span class="help-block">

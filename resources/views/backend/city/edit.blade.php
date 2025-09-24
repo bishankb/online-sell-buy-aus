@@ -19,7 +19,7 @@
                 </div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                    <form method="POST" action="{{ route('cities.update', $city->id) }}">
+                <form method="POST" action="{{ route('cities.update', $city->id) }}">
                     @csrf
                     @method('PATCH')
                     <!--begin::Body-->

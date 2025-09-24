@@ -1,3 +1,4 @@
+
 import '../../node_modules/jquery/dist/jquery.js';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../node_modules/bootstrap/dist/js/bootstrap.bundle.js';
@@ -10,4 +11,18 @@ import "../../node_modules/font-awesome/css/font-awesome.css";
 import "../toggleSwitch/toggle-switch.css";
 import "../css/custom-backend.css";
 import "../js/custom-backend.js";
+
+//CK Editor
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.ckeditor').forEach(textarea => {
+        ClassicEditor
+            .create(textarea)
+            .catch(error => {
+                console.error(error);
+            });
+    });
+});
+
 
