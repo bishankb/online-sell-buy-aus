@@ -59,7 +59,7 @@ class FaqController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'faq'    => 'required|min:2|max:500',
+            'faq'    => 'required|min:2|max:500|unique:faqs,faq,NULL,id',
             'answer' => 'required|min:2|max:65535',
             'status' => 'nullable',
         ]);
@@ -120,7 +120,7 @@ class FaqController extends Controller
         $faq = Faq::withTrashed()->find($id);
 
         $this->validate($request, [
-            'faq'    => 'required|min:2|max:500',
+            'faq'    => 'required|min:2|max:500|unique:faqs,faq,'.$faq->id.',id',
             'answer' => 'nullable|min:2|max:65535',
             'status' => 'nullable',
         ]);
