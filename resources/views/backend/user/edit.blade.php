@@ -73,12 +73,9 @@
                     window.location.hash = tabId; // Updates the URL with the tab's ID
                 });
             });
-        });
-        
-        document.addEventListener("DOMContentLoaded", function() {
             window.savedImage = $('.selected-img').attr('src');
         });
-
+        
         function removeImage()
         {
             if (confirm('Are you sure you want to delete the image?')) {
