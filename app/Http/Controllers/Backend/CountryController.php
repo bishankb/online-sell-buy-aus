@@ -48,7 +48,7 @@ class CountryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name.*' => 'min:2|required|max:255|unique:countries,name',
+            'name.*' => 'min:2|required|max:255|unique:countries,name|distinct',
             'order.*' => 'required|numeric|unique:countries,order',
         ]);
         $names = request('name');

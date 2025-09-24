@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('title')
-    Country
+    Category
 @endsection
 
 @section('content')
@@ -12,18 +12,18 @@
             <div class="card card-primary card-outline mb-4">
               <!--begin::Header-->
                 <div class="card-header">
-                    <div class="card-title">Create Country</div>
+                    <div class="card-title">Create Category</div>
                     <div class="pull-right">
-                        <a href="{{ route('countries.index') }}" class="btn btn-success">Back to Listing</a>
+                        <a href="{{ route('categories.index') }}" class="btn btn-success">Back to Listing</a>
                     </div>
                 </div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                <form method="POST" action="{{ route('countries.store') }}">
+                <form method="POST" action="{{ route('categories.store') }}">
                     @csrf
                     <!--begin::Body-->
                     <div class="card-body">
-                        @include('backend.country._form')
+                        @include('backend.category._form')
                     </div>
                     <!--begin::Footer-->
                     <div class="card-footer">
@@ -37,29 +37,39 @@
 
 @section('backend-script')
     <script>
-        document.addEventListener("DOMContentLoaded", function() {            
+        document.addEventListener("DOMContentLoaded", function() {
+            $('.save').click(function () {
+                var category = $('.category');
+                category.each(function () {
+                    if ($(this).find('.status').prop('checked') == false) {
+                        $(this).find('.stat').val(0)
+                    } else {
+                        $(this).find('.stat').val(1)
+                    }
+                })
+            });
+            
             var bulksms = $('#remove-btn');
             if (bulksms.length == 1) {
                 $('#remove-btn').hide();
             }
-        });
-
+        })
         function add_field() {
             event.preventDefault()
             $('#remove-btn').show();
-            var totalCountry = $('.country')
-            var country = totalCountry.last();
-            var countryClone = country.clone(false);
-            country[0].after(countryClone[0]);
-            countryClone.find('.name').val(null);
-            countryClone.find('.order').val(null);
+            var totalCategory = $('.category')
+            var category = totalCategory.last();
+            var categoryClone = category.clone(false);
+            category[0].after(categoryClone[0]);
+            categoryClone.find('.title').val(null);
+            categoryClone.find('.status').val(1).prop('checked', true);
         }
 
         function remove_field(){
             event.preventDefault();
             $(event.target).parent().parent().remove();
-            var country = $('.country')
-            if (country.length==1) {
+            var category = $('.category')
+            if (category.length==1) {
                 $('#remove-btn').hide();
             }
         }

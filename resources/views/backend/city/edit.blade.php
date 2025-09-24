@@ -28,7 +28,7 @@
                     </div>
                     <!--begin::Footer-->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="submit" class="btn btn-success">Save</button>
                     </div>
                 </form>
             </div>

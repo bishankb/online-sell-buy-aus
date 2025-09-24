@@ -100,7 +100,7 @@
                 if(window.savedImage == this.selectedImage) {
                      $.ajax({
                         type     : "POST",
-                        url      : `/admin/users/${userId}/delete-image/`,
+                        url      : `/admin/users/delete-image/${userId}`,
                         success: function(response){
                             if (response.success) {
                                 $('#input_image').val('');

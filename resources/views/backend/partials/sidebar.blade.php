@@ -38,6 +38,21 @@
             </p>
           </a>
         </li>
+
+        @can('view_categories')
+            <li class="nav-item {{Request::is('admin/categories*') ? 'active' : ''}}">
+                <a href="{{route('categories.index')}}" class="nav-link">
+                  <i class="fa fa-list" style="margin: 5px;"></i><span>Category</span>
+                </a>
+            </li>
+        @endcan
+        @can('view_sub_categories')
+            <li class="nav-item {{Request::is('admin/sub-categories*') ? 'active' : ''}}">
+                <a href="{{route('sub-categories.index')}}" class="nav-link">
+                  <i class="fa fa-list-alt" style="margin: 5px;"></i><span>SubCategory</span>
+                </a>
+            </li>
+        @endcan
         
         @can('view_users')
           <li class="nav-item {Request::is('admin/users*') ? 'active' : ''}}">

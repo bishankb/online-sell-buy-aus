@@ -56,7 +56,7 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name.*' => 'min:2|required|max:255|unique:cities,name',
+            'name.*' => 'min:2|required|max:255|unique:cities,name|distinct',
             'order.*' => 'required|numeric|unique:cities,order',
         ]);
         $names = request('name');

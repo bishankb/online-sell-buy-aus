@@ -27,7 +27,7 @@
                     </div>
                     <!--begin::Footer-->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success save">Submit</button>
+                        <button type="submit" class="btn btn-success save">Save</button>
                     </div>
                 </form>
             </div>
@@ -38,8 +38,8 @@
 @section('backend-script')
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var removeButton = $('#remove-btn');
-            if (removeButton.length == 1) {
+            var bulksms = $('#remove-btn');
+            if (bulksms.length == 1) {
                 $('#remove-btn').hide();
             }
         });
