@@ -76,6 +76,13 @@
             </a>
           </li>
         @endcan
+        @can('view_roles')
+            <li class="nav-item {{ Request::is('admin/roles*') ? 'active' : '' }}">
+                <a href="{{ route('roles.index') }}" class="nav-link">
+                    <i class="fa fa-adn" style="margin: 5px;"></i><span>Roles</span>
+                </a>
+            </li>
+        @endcan
       </ul>
       <!--end::Sidebar Menu-->
     </nav>

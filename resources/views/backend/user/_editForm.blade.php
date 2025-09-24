@@ -39,7 +39,7 @@
                 <div class="form-group required {{ $errors->has('role') ? ' has-error' : '' }} clearfix ">
                    <label for="role" class="form-label">Role</label>
 
-                    <select name = "role" class="form-control">
+                    <select name = "role" class="form-control form-select">
                         <option disabled selected>Please select an option</option>
                         @foreach($roles as $role)
                             @if(isset($user->role_id))

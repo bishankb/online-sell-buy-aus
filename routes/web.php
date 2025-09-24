@@ -36,4 +36,7 @@ Route::group([
     Route::post('/sub-categories/restore/{id}', 'App\Http\Controllers\Backend\SubCategoryController@restore')->name('sub-categories.restore');
     Route::delete('/sub-categories/force-delete/{id}', 'App\Http\Controllers\Backend\SubCategoryController@forceDestroy')->name('sub-categories.forceDestroy');
 
+    Route::resource('roles', 'App\Http\Controllers\Backend\RoleController');
+
+
 });
