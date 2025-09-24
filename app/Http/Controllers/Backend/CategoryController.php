@@ -127,12 +127,8 @@ class CategoryController extends Controller
             'status.*' => 'nullable',
         ]);
 
-        $status = request('status')[0];
-        if ($status == null) {
-            $stat = 0;
-        } else {
-            $stat = 1;
-        }
+        $statusArray = request('status');
+        $stat = isset($statusArray[0]) ? 1 : 0;
 
         try {
             if($category->title != request('title')) {

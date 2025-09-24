@@ -67,7 +67,7 @@
 
         function remove_field(){
             event.preventDefault();
-            $(event.target).parent().parent().remove();
+            $(event.target).closest('.category').remove();
             var category = $('.category')
             if (category.length==1) {
                 $('#remove-btn').hide();

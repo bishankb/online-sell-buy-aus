@@ -25,7 +25,7 @@
             <div class="col-md-6">
                 <input type="hidden" name="stat[]" value="0" class="stat">
 
-                <input type="checkbox" name="status[]" value="0" class="status" checked="checked">
+                <input type="checkbox" name="status[]" class="status" @if(!isset($category) || $category->status == 1) checked @endif>
 
                 @if ($errors->has('status.*'))
                     <span class="help-block">

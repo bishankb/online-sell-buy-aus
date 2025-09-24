@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('title')
-  Category
+  Sub-Category
 @endsection
 
 @section('content')
@@ -119,6 +119,7 @@
                 </div>
                 <tr>
                   <th>#</th>
+                    <th>Category</th>
                     <th>Title</th>
                     <th>Created By</th>
                     <th>Updated By</th>
@@ -133,6 +134,7 @@
                 @forelse($sub_categories as $sub_category)
                     <tr>
                       <td>{{ reversePagination($sub_categories, $loop) }}</td>                      
+                      <td>{{$sub_category->category->title}}</td>
                       <td>{{$sub_category->title}}</td>
                       <td>{{$sub_category->createdBy['name']}}</td>
                       <td>{{$sub_category->updatedBy['name']}}</td>

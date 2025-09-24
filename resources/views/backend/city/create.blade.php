@@ -57,7 +57,7 @@
 
         function remove_field(){
             event.preventDefault();
-            $(event.target).parent().parent().remove();
+            $(event.target).closest('.city').remove();
             var city = $('.city')
             if (city.length==1) {
                 $('#remove-btn').hide();

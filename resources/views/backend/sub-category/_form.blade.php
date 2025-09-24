@@ -1,54 +1,79 @@
 <div class="sub-category">
-    <div class="form-group{{ $errors->has('category_id.*') ? ' has-error' : '' }} clearfix">
-        {!! Form::label('category_id', 'Select Category', ['class' => 'col-md-4 control-label']) !!}
+        <div class="form-group{{ $errors->has('category_id.*') ? ' has-error' : '' }} clearfix">
+            <div class="row">
+                <label for="category_id" class="col-md-4 form-label">Select Category</label>
 
-        <div class="col-md-6">
-            {!! Form::select('category_id[]', $categories, null,['id'=>'category_id', 'class' => 'form-control', 'placeholder' => 'Select the category']) !!}
+                <div class="col-md-6">
+                    <select name = "category_id[]" class="form-control form-select" id="category_id">
+                        <option value="">Select the category</option>
+                        @foreach($categories as $category)
+                            @if(isset($sub_category->category_id))
+                                <option value = "{{ $category->id }}" @if($sub_category->category_id == $category->id) selected @endif>
+                                    {{$category->title}}
+                                </option>
+                            @elseif(old('category_id') != null)
+                                <option value = "{{ $category->id }}" @if($category->id == old('category_id')) selected @endif>
+                                    {{$category->title}}
+                                </option>
+                            @else
+                                <option value = "{{ $category->id }}">
+                                    {{$category->title}}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
 
-            @if ($errors->has('category_id.*'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('category_id.*') }}</strong>
-                </span>
-            @endif
+                    @if ($errors->has('category_id.*'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('category_id.*') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
         </div>
-    </div>
 
     <div class="form-group{{ $errors->has('title.*') ? ' has-error' : '' }} clearfix ">
-        {!! Form::label('title', 'Title', ['class' => 'col-md-4 control-label']) !!}
+        <div class="row">
+            <label for="title" class="col-md-4 form-label">Title</label>
 
-        <div class="col-md-6">
-            {!! Form::text('title[]', null, ['class' => 'form-control title' ]) !!}
+            <div class="col-md-6">
+                <input type="text" name="title[]" value="{{ old('title[0]', $sub_category->title ?? '') }}" class="form-control title">
 
-            @if ($errors->has('title.*'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('title.*') }}</strong>
-                </span>
-            @endif
+                @if ($errors->has('title.*'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('title.*') }}</strong>
+                    </span>
+                @endif
+            </div>
+            <div class="col-md-2">
+                 <button style="display: none;" class="btn btn-danger mt-2" onclick="remove_field()" id="remove-btn">Remove</button>
+            </div>
         </div>
-        <button class="btn btn-default" onclick="remove_field()" id="remove-btn">Remove</button>
     </div>
 
     <div class="form-group{{ $errors->has('status.*') ? ' has-error' : '' }} clearfix">
-        {!! Form::label('status', 'Status', ['class' => 'col-md-4 control-label ']) !!}
+        <div class="row">
+            <label for="status" class="col-md-4 form-label">Status</label>
 
-        <div class="col-md-6">
-            {!! Form::hidden('stat[]', 0, ['class'=>'stat']) !!}
-            {!! Form::checkbox('status[]', 0, 1, ['class' => 'status']) !!}
+            <div class="col-md-6">
+                <input type="hidden" name="stat[]" value="0" class="stat">
 
-            @if ($errors->has('status.*'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('status.*') }}</strong>
-                </span>
-            @endif
+                <input type="checkbox" name="status[]" value="0" class="status" checked="checked">
+
+                @if ($errors->has('status.*'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('status.*') }}</strong>
+                    </span>
+                @endif
+            </div>
         </div>
     </div>
-</div>    
+
+</div>   
+<br>
 @if(\Route::current()->getName() != 'sub-categories.edit')
-    <div>
-        <div class="col-md-4"></div>
-        <div class="col-md-6">
-            <button onclick="javascript:add_field()" class="btn btn-default">Add</button>
-        </div>
-        <br>
+    <div class="col-md-6">
+        <button onclick="javascript:add_field()" class="btn btn-primary">Add</button>
     </div>
-@endif    
+    <br>
+@endif   

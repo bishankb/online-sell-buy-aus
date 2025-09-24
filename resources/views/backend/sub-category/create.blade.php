@@ -6,26 +6,30 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-11">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Create Sub Category</h3>
-                        <div class="pull-right">
-                            <a href="{{ route('sub-categories.index') }}" class="btn btn-success">Back to Listing</a>
-                        </div>
+        <!--begin::Col-->
+        <div class="col-md-11">
+            <!--begin::Quick Example-->
+            <div class="card card-primary card-outline mb-4">
+              <!--begin::Header-->
+                <div class="card-header">
+                    <div class="card-title">Create Sub Category</div>
+                    <div class="pull-right">
+                        <a href="{{ route('sub-categories.index') }}" class="btn btn-success">Back to Listing</a>
                     </div>
-                    {!! Form::model(null, ['method' => 'post', 'route' => ['sub-categories.store']]) !!}
-                        <div class="box-body">
-                        
-                            @include('backend.sub-category._form')
-                            
-                        </div>
-                        <div class="box-footer">
-                            {!! Form::submit('Save', ['class' => 'btn btn-success save']) !!}
-                        </div>
-                    {!! Form::close() !!}
                 </div>
+                <!--end::Header-->
+                <!--begin::Form-->
+                <form method="POST" action="{{ route('sub-categories.store') }}">
+                    @csrf
+                    <!--begin::Body-->
+                    <div class="card-body">
+                        @include('backend.sub-category._form')
+                    </div>
+                    <!--begin::Footer-->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success save">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -33,7 +37,7 @@
 
 @section('backend-script')
     <script>
-        $(document).ready(function () {
+        document.addEventListener("DOMContentLoaded", function() {
             $('.save').click(function () {
                 var subCategory = $('.sub-category');
                 subCategory.each(function () {
@@ -45,8 +49,8 @@
                 })
             });
             
-            var subCategory = $('#remove-btn');
-            if (subCategory.length == 1) {
+            var bulksms = $('#remove-btn');
+            if (bulksms.length == 1) {
                 $('#remove-btn').hide();
             }
         })
@@ -63,11 +67,11 @@
 
         function remove_field(){
             event.preventDefault();
-            $(event.target).parent().parent().remove();
+            $(event.target).closest('.sub-category').remove();
             var subCategory = $('.sub-category')
             if (subCategory.length==1) {
                 $('#remove-btn').hide();
             }
         }
     </script>
-@endsection
+@endsections

@@ -52,7 +52,7 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::get()->pluck('title', 'id');
+        $categories = Category::select('title', 'id')->get();
 
         return view('backend.sub-category.create', compact('categories'));
     }
@@ -67,7 +67,7 @@ class SubCategoryController extends Controller
     {
         $this->validate($request, [
             'category_id.*' => 'required',
-            'title.*'       => 'min:2|required|max:255|distinct|unique:sub_categories,title,NULL,id,category_id,'.$request->category_id[0],
+            'title.*'       => 'min:2|required|max:255|unique:sub_categories,title,NULL,id,category_id,'.$request->category_id[0],
             'status.*'      => 'nullable',
         ]);
         $titles = request('title');
@@ -116,7 +116,7 @@ class SubCategoryController extends Controller
     public function edit($id)
     {
         $sub_category = SubCategory::withTrashed()->find($id);
-        $categories = Category::get()->pluck('title', 'id');
+        $categories = Category::select('title', 'id')->get();
 
         return view('backend.sub-category.edit', compact('sub_category', 'categories'));
     }
@@ -129,20 +129,16 @@ class SubCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {        
         $sub_category = SubCategory::withTrashed()->find($id);
         $this->validate($request, [
             'category_id.*' => 'required',
-            'title.*'       => 'min:2|required|max:255|unique:sub_categories,title,NULL,id,category_id,'.$request->category_id[0],
+            'title.*'       => 'min:2|required|max:255|unique:sub_categories,title,'.$id.',id,category_id,'.$request->category_id[0],
             'status.*'      => 'nullable',
         ]);
-
-        $status = request('status')[0];
-        if ($status == null) {
-            $stat = 0;
-        } else {
-            $stat = 1;
-        }
+        
+        $statusArray = request('status');
+        $stat = isset($statusArray[0]) ? 1 : 0;
 
         try {
             if($sub_category->title != request('title')[0]) {
