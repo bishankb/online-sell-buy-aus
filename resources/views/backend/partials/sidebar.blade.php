@@ -62,6 +62,15 @@
             </a>
           </li>
         @endcan
+
+        @can('view_dashboards')
+          <li class="nav-item {{Request::is('admin/contact-us*') ? 'active' : ''}}">
+              <a href="{{route('contact-us.edit')}}" class="nav-link">
+                <i class="fa fa-phone" style="margin: 5px;"></i><span>Contact Us</span>
+              </a>
+          </li>
+        @endcan
+
         @can('view_faqs')
             <li class="nav-item {{ Request::is('admin/faqs*') ? 'active' : '' }}">
                 <a href="{{ route('faqs.index') }}" class="nav-link">

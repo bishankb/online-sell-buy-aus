@@ -43,5 +43,8 @@ Route::group([
     Route::post('/faqs/restore/{id}', 'App\Http\Controllers\Backend\FaqController@restore')->name('faqs.restore');
     Route::delete('/faqs/force-delete/{id}', 'App\Http\Controllers\Backend\FaqController@forceDestroy')->name('faqs.forceDestroy');
 
+    Route::get('/contact-us/edit', 'App\Http\Controllers\Backend\ContactUsController@edit')->name('contact-us.edit');
+    Route::patch('/contact-us/update', 'App\Http\Controllers\Backend\ContactUsController@update')->name('contact-us.update');
+
 
 });
