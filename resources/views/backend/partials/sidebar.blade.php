@@ -11,7 +11,7 @@
       />
       <!--end::Brand Image-->
       <!--begin::Brand Text-->
-      <span class="brand-text fw-light">MAIN NAVIGATION</span>
+      <span class="brand-text fw-light">{{ env('APP_NAME')}}</span>
       <!--end::Brand Text-->
     </a>
     <!--end::Brand Link-->
@@ -29,15 +29,13 @@
         data-accordion="false"
         id="navigation"
       >
-        <li class="nav-item menu-open">
-          <a href="#" class="nav-link active">
-            <i class="nav-icon bi bi-speedometer"></i>
-            <p>
-              Dashboard
-              <i class="nav-arrow bi bi-chevron-right"></i>
-            </p>
-          </a>
-        </li>
+        @can('view_dashboards')
+          <li class="nav-item">
+              <a href="#" class="nav-link ">
+                <i class="fa fa-dashboard " style="margin: 5px;"></i><span>Dashboard</span>
+              </a>
+          </li>
+        @endcan
 
         @can('view_categories')
           <li class="nav-item">
@@ -70,7 +68,8 @@
               </a>
           </li>
         @endcan
-
+        
+        <li class="nav-header" style="margin-left: 12px;">Misc</li>
         @can('view_faqs')
             <li class="nav-item">
                 <a href="{{ route('faqs.index') }}" class="nav-link {{ Request::is('admin/faqs*') ? 'active' : '' }}">
