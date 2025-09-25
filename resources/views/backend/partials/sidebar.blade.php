@@ -46,6 +46,7 @@
               </a>
           </li>
         @endcan
+
         @can('view_sub_categories')
             <li class="nav-item">
                 <a href="{{route('sub-categories.index')}}" class="nav-link {{Request::is('admin/sub-categories*') ? 'active' : ''}}">
@@ -57,8 +58,7 @@
         @can('view_users')
           <li class="nav-item {Request::is('admin/users*') ? 'active' : ''}}">
             <a href="{{route('users.index')}}" class="nav-link {{Request::is('admin/users*') ? 'active' : ''}}">
-              <i class="fa fa-user" style="margin: 5px;"></i>
-              <p>Users</p>
+              <i class="fa fa-user" style="margin: 5px;"></i><span>Users</span>
             </a>
           </li>
         @endcan
@@ -85,6 +85,7 @@
               </a>
           </li>
         @endcan
+
         @can('view_countries')
           <li class="nav-item">
             <a href="{{route('countries.index')}}" class="nav-link {{Request::is('admin/countries*') ? 'active' : ''}}">
@@ -92,6 +93,7 @@
             </a>
           </li>
         @endcan
+        
         @can('view_roles')
             <li class="nav-item ">
                 <a href="{{ route('roles.index') }}" class="nav-link {{ Request::is('admin/roles*') ? 'active' : '' }}">
