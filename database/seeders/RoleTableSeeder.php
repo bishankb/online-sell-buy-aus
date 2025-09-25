@@ -19,5 +19,6 @@ class RoleTableSeeder extends Seeder
         Role::create(['display_name' => 'User', 'name' => 'user']);
 
         User::where('id', 1)->first()->assignRole('admin');
+        User::where('id', 2)->first()->assignRole('admin');
     }
 }
