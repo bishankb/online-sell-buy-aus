@@ -8,13 +8,12 @@ import '../../node_modules/admin-lte/dist/js/adminlte.js';
 import '../../node_modules/admin-lte/dist/js/adminlte.js';
 import "../../node_modules/@fortawesome/fontawesome-free/css/fontawesome.css";
 import "../../node_modules/font-awesome/css/font-awesome.css";
+import "../../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js";
 import "../toggleSwitch/toggle-switch.css";
 import "../css/custom-backend.css";
 import "../js/custom-backend.js";
 
 //CK Editor
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.ckeditor').forEach(textarea => {
         ClassicEditor
