@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Product;
+use App\Models\Product;
 use Auth;
 use DB;
-use App\Category;
-use App\SubCategory;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Carbon\Carbon;
 use App\Notifications\FeaturedProductNotification;
 use Image;
@@ -632,8 +632,6 @@ class ProductController extends Controller
                     'product_title' => $product->title,
                     'product_slug' => $product->slug
                 ];
-
-                $product->createdBy->notify(new FeaturedProductNotification($featuredProduct));
 
                 flash('Product marked as featured and message has been sent to its seller.')->info();
             } else {

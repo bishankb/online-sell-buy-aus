@@ -77,7 +77,7 @@ class ProductTableSeeder extends Seeder
         Product::create(
             [
                 'category_id' => 9,
-                'sub_category_id'  => 2,
+                'sub_category_id'  => 107,
                 'title' => 'Iphone 16 pro max',
                 'slug' => Str::slug('Iphone 16 pro max'),
                 'description' => 'Good Mobile',
