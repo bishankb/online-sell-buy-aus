@@ -308,7 +308,7 @@ class ProductController extends Controller
             array_push($productImagesUrls,"/storage/media/product/".$productId."/".$productImage->filename);
         }
 
-        return view('backend.product.add-image', compact('productId', 'productSlug', 'productImagesUrls', 'productImagesInformations'));
+        return view('backend.product.add-image', compact('product', 'productId', 'productSlug', 'productImagesUrls', 'productImagesInformations'));
     }
 
     /**
@@ -321,6 +321,7 @@ class ProductController extends Controller
     {
         if ($request->file('product_image')) {
             $fileData = $request->file('product_image');
+
             $productImage = saveFile($fileData, 'product', $productId);
 
             $productImage->products()->attach($productId);
