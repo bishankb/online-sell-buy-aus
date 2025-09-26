@@ -141,7 +141,7 @@
             <div class="form-group {{ $errors->has('kilometer_run') ? ' has-error' : '' }} clearfix ">
                 <label for="kilometer_run" class="form-label">Kilometer Run</label>
 
-                <input type="text" name="kilometer_run" value="{{ old('kilometer_run', $product->kilometer_run ?? '') }}" class="form-control">
+                <input type="number" name="kilometer_run" value="{{ old('kilometer_run', $product->kilometer_run ?? '') }}" class="form-control">
 
                 @if ($errors->has('kilometer_run'))
                     <span class="help-block">
