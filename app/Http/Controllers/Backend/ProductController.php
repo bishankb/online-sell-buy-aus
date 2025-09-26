@@ -141,7 +141,7 @@ class ProductController extends Controller
         //Automobiles Only
         if ($category->slug == 'automobiles') {
             $this->validate($request, [
-                'kilometer_run'           => 'numeric'
+                'kilometer_run'           => 'numeric',
                 'make_year'               => 'required|numeric',
             ]);
         }
