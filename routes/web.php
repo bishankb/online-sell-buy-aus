@@ -61,5 +61,8 @@ Route::group([
     Route::post('/products/restore/{id}', 'App\Http\Controllers\Backend\ProductController@restore')->name('products.restore');
     Route::delete('/products/force-delete/{id}', 'App\Http\Controllers\Backend\ProductController@forceDestroy')->name('products.forceDestroy');
 
+    Route::get('/', 'App\Http\Controllers\Backend\DashboardController@index')->name('dashboard.index');
+
+
 
 });
