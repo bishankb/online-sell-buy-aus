@@ -158,11 +158,26 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $category = Category::with([
+            'subCategories' => function ($query) {
+                $query->withTrashed();
+            },
+            'products' => function ($query) {
+                $query->withTrashed();
+            },
+            ])->find($id);
 
         try {
-            $category->delete();
-            flash('Category deleted successfully.')->error();
+            if(count($category->subCategories) > 0 && count($category->products) > 0) {
+                flash('Please first delete its related product(s) first and subcategory(s) permanently.')->warning();
+            } elseif(count($category->subCategories) > 0) {
+                flash('Please first delete its related subcategory(s) permanently.')->warning();
+            } elseif(count($category->products) > 0) {
+                flash('Please first delete its related product(s) permanently.')->warning();
+            } else {
+                $category->delete();
+                flash('Category deleted successfully.')->error();
+            }
         } catch (\Exception $exception) {
             logger()->error($exception->getMessage());
             flash('There was some intenal error while deleting the category.')->error();

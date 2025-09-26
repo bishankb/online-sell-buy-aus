@@ -188,14 +188,22 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $sub_category = SubCategory::find($id);
+        $sub_category = SubCategory::with([
+               'products' => function ($query) {
+                    $query->withTrashed();
+                },
+            ])->find($id);
 
         try {
-            $sub_category->delete();
-            flash('SubCategory deleted successfully.')->error();
+            if(count($sub_category->products) > 0) {
+                flash('Please first delete its related product(s) permanently.')->warning();
+            } else {
+                $sub_category->delete();
+                flash('Sub Category deleted successfully.')->error();
+            }
         } catch (\Exception $exception) {
             logger()->error($exception->getMessage());
-            flash('There was some intenal error while deleting the sub_category.')->error();
+            flash('There was some intenal error while deleting the sub category.')->error();
         }
 
         return redirect(route('sub-categories.index'));

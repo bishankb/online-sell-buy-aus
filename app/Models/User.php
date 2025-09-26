@@ -92,8 +92,13 @@ class User extends Authenticatable
         return $this->belongsTo('Spatie\Permission\Models\Role');
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'created_by');
+    }
+
     /**
-     *Filter by Role.
+     *Filter by City.
      *
      */
     public function scopeCityFilter($query, $filter)
@@ -153,13 +158,16 @@ class User extends Authenticatable
         static::deleting(function($user) {
             if ($user->isForceDeleting()) {
                 $user->profile()->withTrashed()->forceDelete();
+                $user->products()->withTrashed()->forceDelete();
             } else {
                 $user->profile()->delete();
-            }
+                $user->products()->delete();
+           }
         });
 
         static::restoring(function ($user) {
             $user->profile()->withTrashed()->restore();
+            $user->products()->withTrashed()->restore();
         });
     }
 }

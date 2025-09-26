@@ -20,6 +20,11 @@ class SubCategory extends BaseModel
         return $this->belongsTo(Category::class);
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     /**
      *Filter by category.
      *
@@ -51,5 +56,24 @@ class SubCategory extends BaseModel
                     ->OrWhereHas('updatedBy', function ($r) use ($search) {
                         $r->where('name', 'like', '%' . $search . '%');
                     });
+    }
+
+    /**
+     * Delete the relation of category
+    */
+    protected static function boot() {
+        parent::boot();
+        
+        static::deleting(function($sub_category) {
+            if ($sub_category->isForceDeleting()) {
+                $sub_category->products()->withTrashed()->forceDelete();
+            } else {
+                $sub_category->products()->delete();
+            }
+        });
+
+        static::restoring(function ($sub_category) {
+            $sub_category->products()->withTrashed()->restore();
+        });
     }
 }

@@ -20,6 +20,11 @@ class Category extends BaseModel
         return $this->hasMany(SubCategory::class);
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public function scopeSearch($query, $search)
     {
         return $query->where('title', 'like', '%' . $search . '%')
@@ -29,5 +34,27 @@ class Category extends BaseModel
                     ->OrWhereHas('updatedBy', function ($r) use ($search) {
                         $r->where('name', 'like', '%' . $search . '%');
                     });
+    }
+
+    /**
+     * Delete the relation of category
+    */
+    protected static function boot() {
+        parent::boot();
+        
+        static::deleting(function($category) {
+            if ($category->isForceDeleting()) {
+                $category->subCategories()->withTrashed()->forceDelete();
+                $category->products()->withTrashed()->forceDelete();
+            } else {
+                $category->subCategories()->delete();
+                $category->products()->delete();
+            }
+        });
+
+        static::restoring(function ($category) {
+            $category->subCategories()->withTrashed()->restore();
+            $category->products()->withTrashed()->restore();
+        });
     }
 }
