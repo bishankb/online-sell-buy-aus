@@ -1,3 +1,15 @@
+@if ($errors->any())
+    <div class="callout callout-danger">
+        <strong>Whoops!</strong> There were some problems with your input:
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    <br>
+@endif
+
 <div class="country">
     <div class="form-group required {{ $errors->has('name.*') ? ' has-error' : '' }} clearfix ">
         <div class="row">

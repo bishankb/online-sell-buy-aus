@@ -1,3 +1,16 @@
+@if ($errors->any())
+    <br>
+    <div class="callout callout-danger">
+        <strong>Whoops!</strong> There were some problems with your input:
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    <br>
+@endif
+
 <div class="form-group required {{ $errors->has('title') ? ' has-error' : '' }} clearfix ">
     <label for="title" class="form-label">Title</label>
     
