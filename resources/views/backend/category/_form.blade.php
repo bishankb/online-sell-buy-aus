@@ -1,5 +1,5 @@
 <div class="category">
-    <div class="form-group{{ $errors->has('title.*') ? ' has-error' : '' }} clearfix ">
+    <div class="form-group required {{ $errors->has('title.*') ? ' has-error' : '' }} clearfix ">
         <div class="row">
             <label for="title" class="col-md-4 form-label">Title</label>
 
@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="form-group{{ $errors->has('status.*') ? ' has-error' : '' }} clearfix">
+    <div class="form-group required {{ $errors->has('status.*') ? ' has-error' : '' }} clearfix">
         <div class="row">
             <label for="status" class="col-md-4 form-label">Status</label>
 

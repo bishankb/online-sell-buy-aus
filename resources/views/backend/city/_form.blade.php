@@ -1,5 +1,5 @@
 <div class="city">
-    <div class="form-group {{ $errors->has('name.*') ? ' has-error' : '' }} clearfix ">
+    <div class="form-group required {{ $errors->has('name.*') ? ' has-error' : '' }} clearfix ">
         <div class="row">
             <label for="name" class="col-md-4 form-label">Name</label>
 
@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="form-group{{ $errors->has('order.*') ? ' has-error' : '' }} clearfix ">
+    <div class="form-group required {{ $errors->has('order.*') ? ' has-error' : '' }} clearfix ">
          <div class="row">
             <label for="name" class="col-md-4 form-label">Order</label>
 
