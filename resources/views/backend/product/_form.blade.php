@@ -1,7 +1,7 @@
 <div class="form-group required {{ $errors->has('title') ? ' has-error' : '' }} clearfix ">
-    {!! Form::label('title', 'Title', ['class' => 'control-label']) !!}
-
-    {!! Form::text('title', null, ['class' => 'form-control', 'required' => 'required' ]) !!}
+    <label for="title" class="form-label">Title</label>
+    
+    <input type="text" name="title" value="{{ old('title', $product->title ?? '') }}" class="form-control" required>
 
     @if ($errors->has('title'))
         <span class="help-block">
@@ -11,9 +11,9 @@
 </div>
 
 <div class="form-group required {{ $errors->has('description') ? ' has-error' : '' }} clearfix">
-    {!! Form::label('description', 'Description', ['class' => 'control-label']) !!}
+    <label for="description" class="form-label">Description</label>
 
-    {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => '5', 'required' => 'required']) !!}
+    <textarea name="description" class="form-control" rows="5" required>{{ old('description', $product->description ?? '') }}</textarea>
 
     @if ($errors->has('description'))
         <span class="help-block">
@@ -25,9 +25,9 @@
 <div class="row">
     <div class="col-md-8">
         <div class="form-group required {{ $errors->has('price') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('price', 'Price (Rs)', ['class' => 'control-label']) !!}
+            <label for="price" class="form-label">Price ($)</label>
 
-            {!! Form::number('price', null, ['class' => 'form-control', 'required' => 'required' ]) !!}
+            <input type="number" name="price" value="{{ old('price', $product->price ?? '') }}" class="form-control" required>
 
             @if ($errors->has('price'))
                 <span class="help-block">
@@ -39,7 +39,8 @@
 
     <div class="col-md-4">
         <div class="form-group required {{ $errors->has('is_negotiable') ? ' has-error' : '' }} clearfix ">
-            {!! Form::label('is_negotiable', 'Negotiable', ['class' => 'control-label']) !!}
+            <label for="is_negotiable" class="form-label">Negotiable</label>
+
             <div>
                 <label class="switch">
                     @if(isset($product->is_negotiable))
@@ -61,9 +62,26 @@
 </div>
 
 <div class="form-group required {{ $errors->has('condition_type') ? ' has-error' : '' }} clearfix">
-    {!! Form::label('condition_type', 'Condition', ['class' => 'control-label']) !!}
+    <label for="condition_type" class="form-label">Condition</label>
 
-    {!! Form::select('condition_type', $condition_types, null,['id'=>'condition_type', 'class' => 'form-control', 'placeholder' => 'Select the condition type']) !!}
+    <select name = "condition_type" id="condition_type" class="form-control form-select" required>
+        <option disabled selected>Select the condition type</option>
+        @foreach($condition_types as $key => $condition_type)
+            @if(isset($product->condition_type))
+                <option value = "{{ $key }}" @if($product->condition_type == $key) selected @endif>
+                    {{$condition_type}}
+                </option>
+            @elseif(old('condition_type') != null)
+                <option value = "{{ $key }}" @if($key == old('condition_type')) selected @endif>
+                    {{$condition_type}}
+                </option>
+            @else
+                <option value = "{{ $key }}">
+                    {{$condition_type}}
+                </option>
+            @endif
+        @endforeach
+    </select>
 
     @if ($errors->has('condition_type'))
         <span class="help-block">
@@ -73,40 +91,43 @@
 </div>
 
 
-@isset($product)
-    <div class="form-group required {{ $errors->has('expiry_period') ? ' has-error' : '' }} clearfix">
-        {!! Form::label('expiry_period', 'Product Expiry Period', ['class' => 'control-label']) !!}
+<div class="form-group required {{ $errors->has('expiry_period') ? ' has-error' : '' }} clearfix">
+    <label for="expiry_period" class="form-label">Product Expiry Period</label>
 
-        {!! Form::select('expiry_period', $expiry_periods, $product->expiry_period_type, ['id'=>'expiry_period', 'class' => 'form-control', 'placeholder' => 'Select the expiry period']) !!}
+    <select name = "expiry_period" id="expiry_period" class="form-control form-select" required>
+        <option disabled selected>Select the expiry period</option>
+        @foreach($expiry_periods as $key => $expiry_period)
+            @if(isset($product->expiry_period_type))
+                <option value = "{{ $key }}" @if($product->expiry_period_type == $key) selected @endif>
+                    {{$expiry_period}}
+                </option>
+            @elseif(old('expiry_period') != null)
+                <option value = "{{ $key }}" @if($key == old('expiry_period')) selected @endif>
+                    {{$expiry_period}}
+                </option>
+            @else
+                <option value = "{{ $key }}">
+                    {{$expiry_period}}
+                </option>
+            @endif
+        @endforeach
+    </select>
 
-        @if ($errors->has('expiry_period'))
-            <span class="help-block">
-                <strong>{{ $errors->first('expiry_period') }}</strong>
-            </span>
-        @endif
-    </div>
-@else
-    <div class="form-group required {{ $errors->has('expiry_period') ? ' has-error' : '' }} clearfix">
-        {!! Form::label('expiry_period', 'Ad Expiry Period', ['class' => 'control-label']) !!}
-
-        {!! Form::select('expiry_period', $expiry_periods, null, ['id'=>'expiry_period', 'class' => 'form-control', 'placeholder' => 'Select the expiry period']) !!}
-
-        @if ($errors->has('expiry_period'))
-            <span class="help-block">
-                <strong>{{ $errors->first('expiry_period') }}</strong>
-            </span>
-        @endif
-    </div>
-@endif
+    @if ($errors->has('expiry_period'))
+        <span class="help-block">
+            <strong>{{ $errors->first('expiry_period') }}</strong>
+        </span>
+    @endif
+</div>
 
 <!--  Automobiles Only -->
 @if(isset($sub_category) && $sub_category->category->slug == 'automobiles' || isset($product) && $product->category->slug == 'automobiles')
     <div class="row">
         <div class="col-md-4">
             <div class="form-group required {{ $errors->has('make_year') ? ' has-error' : '' }} clearfix ">
-                {!! Form::label('make_year', 'Make Year', ['class' => 'control-label']) !!}
+                <label for="make_year" class="form-label">Make Year</label>
 
-                {!! Form::number('make_year', null, ['class' => 'form-control', 'required' => 'required' ]) !!}
+                <input type="number" name="make_year" value="{{ old('make_year', $product->make_year ?? '') }}" class="form-control" required>
 
                 @if ($errors->has('make_year'))
                     <span class="help-block">
@@ -118,9 +139,9 @@
 
         <div class="col-md-4">
             <div class="form-group {{ $errors->has('kilometer_run') ? ' has-error' : '' }} clearfix ">
-                {!! Form::label('kilometer_run', 'Kilometer Run', ['class' => 'control-label']) !!}
+                <label for="kilometer_run" class="form-label">Kilometer Run</label>
 
-                {!! Form::text('kilometer_run', null, ['class' => 'form-control']) !!}
+                <input type="text" name="kilometer_run" value="{{ old('kilometer_run', $product->kilometer_run ?? '') }}" class="form-control">
 
                 @if ($errors->has('kilometer_run'))
                     <span class="help-block">
@@ -132,9 +153,9 @@
 
         <div class="col-md-4">
            <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }} clearfix ">
-                {!! Form::label('color', 'Color', ['class' => 'control-label']) !!}
+                <label for="color" class="form-label">Color</label>
 
-                {!! Form::text('color', null, ['class' => 'form-control']) !!}
+                <input type="text" name="color" value="{{ old('color', $product->color ?? '') }}" class="form-control">
 
                 @if ($errors->has('color'))
                     <span class="help-block">
@@ -159,9 +180,9 @@
         isset($product) && $product->category->slug == 'mobile-accessories'
     )
     <div class="form-group {{ $errors->has('manufacturer') ? ' has-error' : '' }} clearfix ">
-        {!! Form::label('manufacturer', 'Manufacturer', ['class' => 'control-label']) !!}
-
-        {!! Form::text('manufacturer', null, ['class' => 'form-control' ]) !!}
+        <label for="manufacturer" class="form-label">Manufacturer</label>
+        
+        <input type="text" name="manufacturer" value="{{ old('manufacturer', $product->manufacturer ?? '') }}" class="form-control">
 
         @if ($errors->has('manufacturer'))
             <span class="help-block">
@@ -198,9 +219,9 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('usedFor_period') ? ' has-error' : '' }} clearfix ">
-                {!! Form::label('usedFor_period', 'Used for', ['class' => 'control-label']) !!}
+                <label for="usedFor_period" class="form-label">Used for</label>
 
-                {!! Form::number('usedFor_period', null, ['class' => 'form-control']) !!}
+                <input type="number" name="usedFor_period" value="{{ old('usedFor_period', $product->usedFor_period ?? '') }}" class="form-control">
 
                 @if ($errors->has('usedFor_period'))
                     <span class="help-block">
@@ -212,9 +233,26 @@
 
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('usedFor_period_type') ? ' has-error' : '' }} clearfix">
-                {!! Form::label('usedFor_period_type', 'Time Period', ['class' => 'control-label']) !!}
+                <label for="usedFor_period_type" class="form-label">Time Period</label>
 
-                {!! Form::select('usedFor_period_type', $time_periods, null,['id'=>'usedFor_period_type', 'class' => 'form-control', 'placeholder' => 'Select the period']) !!}
+                <select name = "usedFor_period_type" id="usedFor_period_type" class="form-control form-select">
+                    <option disabled selected>Select the period</option>
+                    @foreach($time_periods as $key => $time_period)
+                        @if(isset($product->usedFor_period_type))
+                            <option value = "{{ $key }}" @if($product->usedFor_period_type == $key) selected @endif>
+                                {{$time_period}}
+                            </option>
+                        @elseif(old('time_period') != null)
+                            <option value = "{{ $key }}" @if($key == old('time_period')) selected @endif>
+                                {{$time_period}}
+                            </option>
+                        @else
+                            <option value = "{{ $key }}">
+                                {{$time_period}}
+                            </option>
+                        @endif
+                    @endforeach
+                </select>
 
                 @if ($errors->has('usedFor_period_type'))
                     <span class="help-block">
@@ -228,9 +266,26 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group {{ $errors->has('warranty_type') ? ' has-error' : '' }} clearfix">
-                {!! Form::label('warranty_type', 'Warranty Type', ['class' => 'control-label']) !!}
+                <label for="warranty_type" class="form-label">Warranty Type</label>
 
-                {!! Form::select('warranty_type', $warranty_types, null,['id'=>'warranty_type', 'class' => 'form-control', 'placeholder' => 'Select the warranty type']) !!}
+                <select name = "warranty_type" id="warranty_type" class="form-control form-select">
+                    <option disabled selected>Select the warranty type</option>
+                    @foreach($warranty_types as $key => $warranty_type)
+                        @if(isset($product->warranty_type))
+                            <option value = "{{ $key }}" @if($product->warranty_type == $key) selected @endif>
+                                {{$warranty_type}}
+                            </option>
+                        @elseif(old('time_period') != null)
+                            <option value = "{{ $key }}" @if($key == old('warranty_type')) selected @endif>
+                                {{$warranty_type}}
+                            </option>
+                        @else
+                            <option value = "{{ $key }}">
+                                {{$warranty_type}}
+                            </option>
+                        @endif
+                    @endforeach
+                </select>
 
                 @if ($errors->has('warranty_type'))
                     <span class="help-block">
@@ -242,9 +297,9 @@
 
         <div class="col-md-4">
             <div class="form-group {{ $errors->has('warranty_period') ? ' has-error' : '' }} clearfix ">
-                {!! Form::label('warranty_period', 'Warranty Period', ['class' => 'control-label']) !!}
+                <label for="warranty_period" class="form-label">Warranty Period</label>
 
-                {!! Form::number('warranty_period', null, ['class' => 'form-control']) !!}
+                <input type="number" name="warranty_period" value="{{ old('warranty_period', $product->warranty_period ?? '') }}" class="form-control">
 
                 @if ($errors->has('warranty_period'))
                     <span class="help-block">
@@ -256,9 +311,26 @@
 
         <div class="col-md-4">
             <div class="form-group {{ $errors->has('warranty_period_type') ? ' has-error' : '' }} clearfix">
-                {!! Form::label('warranty_period_type', 'Time Period', ['class' => 'control-label']) !!}
+                <label for="warranty_period_type" class="form-label">Time Period</label>
 
-                {!! Form::select('warranty_period_type', $time_periods, null,['id'=>'warranty_period_type', 'class' => 'form-control', 'placeholder' => 'Select the period']) !!}
+                <select name = "warranty_period_type" id="warranty_period_type" class="form-control form-select">
+                    <option disabled selected>Select the period</option>
+                    @foreach($time_periods as $key => $time_period)
+                        @if(isset($product->warranty_period_type))
+                            <option value = "{{ $key }}" @if($product->warranty_period_type == $key) selected @endif>
+                                {{$time_period}}
+                            </option>
+                        @elseif(old('time_period') != null)
+                            <option value = "{{ $key }}" @if($key == old('time_period')) selected @endif>
+                                {{$time_period}}
+                            </option>
+                        @else
+                            <option value = "{{ $key }}">
+                                {{$time_period}}
+                            </option>
+                        @endif
+                    @endforeach
+                </select>
 
                 @if ($errors->has('warranty_period_type'))
                     <span class="help-block">
@@ -272,7 +344,8 @@
     <div class="row">
         <div class="col-md-2">
             <div class="form-group {{ $errors->has('has_home_delivery') ? ' has-error' : '' }} clearfix ">
-                {!! Form::label('has_home_delivery', 'Home Delivery', ['class' => 'control-label']) !!}
+                <label for="has_home_delivery" class="form-label">Home Delivery</label>
+
                 <div>
                     <label class="switch">
                         @if(isset($product->has_home_delivery))
@@ -294,9 +367,26 @@
 
         <div class="col-md-5">
             <div class="form-group {{ $errors->has('delivery_area') ? ' has-error' : '' }} clearfix">
-                {!! Form::label('delivery_area', 'Delivery Area', ['class' => 'control-label']) !!}
+                <label for="delivery_area" class="form-label">Delivery Area</label>
 
-                {!! Form::select('delivery_area', $delivery_areas, null,['id'=>'delivery_area', 'class' => 'form-control', 'placeholder' => 'Select the delivery Area']) !!}
+                <select name = "delivery_area" id="delivery_area" class="form-control form-select">
+                    <option disabled selected>Select the delivery Area</option>
+                    @foreach($delivery_areas as $key => $delivery_area)
+                        @if(isset($product->delivery_area))
+                            <option value = "{{ $key }}" @if($product->delivery_area == $key) selected @endif>
+                                {{$delivery_area}}
+                            </option>
+                        @elseif(old('delivery_area') != null)
+                            <option value = "{{ $key }}" @if($key == old('delivery_area')) selected @endif>
+                                {{$delivery_area}}
+                            </option>
+                        @else
+                            <option value = "{{ $key }}">
+                                {{$delivery_area}}
+                            </option>
+                        @endif
+                    @endforeach
+                </select>
 
                 @if ($errors->has('delivery_area'))
                     <span class="help-block">
@@ -308,9 +398,9 @@
 
         <div class="col-md-5">
             <div class="form-group {{ $errors->has('delivery_charge') ? ' has-error' : '' }} clearfix ">
-                {!! Form::label('delivery_charge', 'Delivery Charge (Rs)', ['class' => 'control-label']) !!}
+                <label for="delivery_charge" class="form-label">Delivery Charge ($)</label>
 
-                {!! Form::number('delivery_charge', null, ['class' => 'form-control']) !!}
+                <input type="number" name="delivery_charge" value="{{ old('delivery_charge', $product->delivery_charge ?? '') }}" class="form-control">
 
                 @if ($errors->has('delivery_charge'))
                     <span class="help-block">
@@ -325,9 +415,9 @@
 <!--  Fashion Wear Only -->
 @if(isset($sub_category) && $sub_category->category->slug == 'fashion-wear' || isset($product) && $product->category->slug == 'fashion-wear')
     <div class="form-group {{ $errors->has('quantity') ? ' has-error' : '' }} clearfix ">
-        {!! Form::label('quantity', 'Quantity', ['class' => 'control-label']) !!}
+        <label for="quantity" class="form-label">Quantity)</label>
 
-        {!! Form::number('quantity', null, ['class' => 'form-control' ]) !!}
+        <input type="number" name="quantity" value="{{ old('quantity', $product->quantity ?? '') }}" class="form-control">
 
         @if ($errors->has('quantity'))
             <span class="help-block">
@@ -346,7 +436,8 @@
     <div class="row">
         <div class="col-md-2">
             <div class="form-group {{ $errors->has('has_home_delivery') ? ' has-error' : '' }} clearfix ">
-                {!! Form::label('has_home_delivery', 'Home Delivery', ['class' => 'control-label']) !!}
+                <label for="has_home_delivery" class="form-label">Home Delivery</label>
+
                 <div>
                     <label class="switch">
                         @if(isset($product->has_home_delivery))
@@ -368,9 +459,26 @@
 
         <div class="col-md-5">
             <div class="form-group {{ $errors->has('delivery_area') ? ' has-error' : '' }} clearfix">
-                {!! Form::label('delivery_area', 'Delivery Area', ['class' => 'control-label']) !!}
+                <label for="delivery_area" class="form-label">Delivery Area</label>
 
-                {!! Form::select('delivery_area', $delivery_areas, null,['id'=>'delivery_area', 'class' => 'form-control', 'placeholder' => 'Select the delivery Area']) !!}
+                <select name = "delivery_area" id="delivery_area" class="form-control form-select">
+                    <option disabled selected>Select the delivery Area</option>
+                    @foreach($delivery_areas as $key => $delivery_area)
+                        @if(isset($product->delivery_area))
+                            <option value = "{{ $key }}" @if($product->delivery_area == $key) selected @endif>
+                                {{$delivery_area}}
+                            </option>
+                        @elseif(old('delivery_area') != null)
+                            <option value = "{{ $key }}" @if($key == old('delivery_area')) selected @endif>
+                                {{$delivery_area}}
+                            </option>
+                        @else
+                            <option value = "{{ $key }}">
+                                {{$delivery_area}}
+                            </option>
+                        @endif
+                    @endforeach
+                </select>
 
                 @if ($errors->has('delivery_area'))
                     <span class="help-block">
@@ -382,9 +490,9 @@
 
         <div class="col-md-5">
             <div class="form-group {{ $errors->has('delivery_charge') ? ' has-error' : '' }} clearfix ">
-                {!! Form::label('delivery_charge', 'Delivery Charge (Rs)', ['class' => 'control-label']) !!}
+                <label for="delivery_charge" class="form-label">Delivery Charge ($)</label>
 
-                {!! Form::number('delivery_charge', null, ['class' => 'form-control']) !!}
+                <input type="number" name="delivery_charge" value="{{ old('delivery_charge', $product->delivery_charge ?? '') }}" class="form-control">
 
                 @if ($errors->has('delivery_charge'))
                     <span class="help-block">
@@ -399,9 +507,9 @@
 <!--  Fashion Wear  & Real State-->
 @if(isset($sub_category) && $sub_category->category->slug == 'fashion-wear' || isset($sub_category) && $sub_category->category->slug == 'real-state' || isset($product) && $product->category->slug == 'fashion-wear' || isset($product) && $product->category->slug == 'real-state')
     <div class="form-group {{ $errors->has('size') ? ' has-error' : '' }} clearfix ">
-        {!! Form::label('size', 'Size', ['class' => 'control-label']) !!}
+        <label for="size" class="form-label">Size</label>
 
-        {!! Form::text('size', null, ['class' => 'form-control']) !!}
+        <input type="text" name="size" value="{{ old('size', $product->size ?? '') }}" class="form-control">
 
         @if ($errors->has('size'))
             <span class="help-block">
@@ -414,9 +522,9 @@
 <!-- Real State Only -->
 @if(isset($sub_category) && $sub_category->category->slug == 'real-state' || isset($product) && $product->category->slug == 'real-state')
     <div class="form-group required {{ $errors->has('location') ? ' has-error' : '' }} clearfix ">
-        {!! Form::label('location', 'Location', ['class' => 'control-label']) !!}
+        <label for="location" class="form-label">Location</label>
 
-        {!! Form::text('location', null, ['class' => 'form-control', 'required' => 'required' ]) !!}
+        <input type="text" name="location" value="{{ old('location', $product->location ?? '') }}" class="form-control" required>
 
         @if ($errors->has('location'))
             <span class="help-block">
@@ -427,9 +535,9 @@
 @endif
 
 <div class="form-group {{ $errors->has('features') ? ' has-error' : '' }} clearfix">
-    {!! Form::label('features', 'Feature', ['class' => 'control-label']) !!}
+    <label for="features" class="form-label">Feature</label>
 
-    {!! Form::textarea('features', null, ['class' => 'form-control custom-textarea', 'id' => 'custom-textarea']) !!}
+    <textarea name="features" class="form-control ckeditor" rows="5">{{ old('features', $product->features ?? '') }}</textarea>
 
     @if ($errors->has('features'))
         <span class="help-block">
@@ -439,7 +547,7 @@
 </div>
 
 <div class="form-group required {{ $errors->has('status') ? ' has-error' : '' }} clearfix ">
-    {!! Form::label('status', 'Status', ['class' => 'control-label']) !!}
+    <label for="status" class="form-label">Status</label>
     <div>
         <label class="switch">
             @if(isset($product->status))

@@ -61,8 +61,8 @@ class ProductController extends Controller
      */
     public function addCategories()
     {
-        $categories = Category::where('status', 1)->get()->pluck('title', 'id');
-        $sub_categories = SubCategory::where('status', 1)->get()->pluck('title', 'id');
+        $categories = Category::where('status', 1)->select('title', 'id')->get();
+        $sub_categories = SubCategory::where('status', 1)->select('title', 'id')->get();
 
         return view('backend.product.add-category', compact('categories', 'sub_categories'));
     }   
@@ -280,7 +280,7 @@ class ProductController extends Controller
             logger()->error($exception->getMessage());
             flash('There was some intenal error while adding the product.')->error();
 
-            return redirect(route('products.index'));
+            return redirect()->back();
         }
 
     }
@@ -476,7 +476,6 @@ class ProductController extends Controller
             Carbon::now()->addWeek(2),
         ];
 
-        DB::beginTransaction();
         try {
             if ($product->title != request('title')) {
                 $product->update(['slug' => $this->setSlugAttribute(request('title'))]);
@@ -489,6 +488,7 @@ class ProductController extends Controller
                     'price'                   => request('price'),
                     'condition_type'          => request('condition_type'),
                     'is_negotiable'           => request('is_negotiable') ? 1 : 0,
+                    'expiry_period'           => $expiryPeriod[request('expiry_period')],
                     'expiry_period_type'      => request('expiry_period'),
                     'features'                => request('features'),
                     'is_sold'                 => request('is_sold') ? 1 : 0,
@@ -527,10 +527,9 @@ class ProductController extends Controller
                 ]
             );
    
-            DB::commit();
             flash('Product updated successfully.')->success();
+
         } catch (\Exception $exception) {
-            DB::rollback();
             logger()->error($exception->getMessage());
             flash('There was some intenal error while updating the product.')->error();
         }

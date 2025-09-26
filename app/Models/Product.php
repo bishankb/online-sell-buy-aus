@@ -79,7 +79,7 @@ class Product extends BaseModel
     const DeliveryArea = [
         'Within my Area',
         'Within my City',
-        'Almost anywhere in Nepal'
+        'Almost anywhere'
     ];
 
     const WarrantyTypes = [
