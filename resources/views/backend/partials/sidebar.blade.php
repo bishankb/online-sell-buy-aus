@@ -46,9 +46,17 @@
         @endcan
 
         @can('view_sub_categories')
+          <li class="nav-item">
+              <a href="{{route('sub-categories.index')}}" class="nav-link {{Request::is('admin/sub-categories*') ? 'active' : ''}}">
+                <i class="fa fa-list-alt" style="margin: 5px;"></i><span>SubCategory</span>
+              </a>
+          </li>
+        @endcan
+
+        @can('view_products')
             <li class="nav-item">
-                <a href="{{route('sub-categories.index')}}" class="nav-link {{Request::is('admin/sub-categories*') ? 'active' : ''}}">
-                  <i class="fa fa-list-alt" style="margin: 5px;"></i><span>SubCategory</span>
+                <a href="{{route('products.index')}}" class="nav-link {{Request::is('admin/products*') ? 'active' : ''}}">
+                  <i class="fa fa-shopping-cart" style="margin: 5px;"></i><span>Product</span>
                 </a>
             </li>
         @endcan

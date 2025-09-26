@@ -46,5 +46,20 @@ Route::group([
     Route::get('/contact-us/edit', 'App\Http\Controllers\Backend\ContactUsController@edit')->name('contact-us.edit');
     Route::patch('/contact-us/update', 'App\Http\Controllers\Backend\ContactUsController@update')->name('contact-us.update');
 
+    Route::resource('/products', 'App\Http\Controllers\Backend\ProductController')->except('show', 'create');
+    Route::get('/products/categories', 'App\Http\Controllers\Backend\ProductController@addCategories')->name('products.addCategories');
+    Route::get('/products/get-sub-categories/{categoryId}', 'App\Http\Controllers\Backend\ProductController@getSubCategories')->name('products.getSubCategories');
+    Route::post('/products/categories/add', 'App\Http\Controllers\Backend\ProductController@redirectProductForm')->name('products.redirectProductForm');
+    Route::get('/products/{subCategorySlug}/create', 'App\Http\Controllers\Backend\ProductController@create')->name('products.create');
+    Route::get('/products/{productSlug}/images', 'App\Http\Controllers\Backend\ProductController@addImages')->name('products.addImages');
+    Route::post('/products/{productId}/images/add', 'App\Http\Controllers\Backend\ProductController@saveImages')->name('products.saveImages');
+    Route::post('/products/{productId}/images/destory/{imageId}', 'App\Http\Controllers\Backend\ProductController@destoryImages')->name('products.destroyImages');
+    Route::post('/products/change-status/{id}', 'App\Http\Controllers\Backend\ProductController@changeStatus')->name('products.changeStatus');
+    Route::patch('/products/mark-sold/{id}', 'App\Http\Controllers\Backend\ProductController@markSold')->name('products.markSold');
+    Route::patch('/products/mark-featured/{id}', 'App\Http\Controllers\Backend\ProductController@markFeatured')->name('products.markFeatured');
+    Route::patch('/products/renew/{id}', 'App\Http\Controllers\Backend\ProductController@renew')->name('products.renew');
+    Route::post('/products/restore/{id}', 'App\Http\Controllers\Backend\ProductController@restore')->name('products.restore');
+    Route::delete('/products/force-delete/{id}', 'App\Http\Controllers\Backend\ProductController@forceDestroy')->name('products.forceDestroy');
+
 
 });
