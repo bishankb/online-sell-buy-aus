@@ -1,9 +1,12 @@
 @extends('layouts.frontend')
 
 @section('content')
-	<div class="page-grid panel panel-default term-panel">
-		<div class="panel-body">
-			<h2 class="text-center">Posting Rules</h2>
+	<div class="card term-panel mb-3">
+		<div class="card-header text-center">
+        	<h1 class="text-center">Posting Rules</h1>
+
+    	</div>
+		<div class="card-body">
 			<p>
 				Visitors or users in {{ env('APP_NAME') }} ({{ env('APP_FULL_NAME') }}) who wants be member of our group must follow these rules compulsorily before posting their products. We do not allow posting of products that are considered illegal in our country Australia. There will be certain consequences if any user is observed violating these rules and regulations.
 			</p><br>

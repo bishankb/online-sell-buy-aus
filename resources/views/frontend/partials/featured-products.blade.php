@@ -8,7 +8,7 @@
 @endsection
 
 @if(count($featured_products) > 0)
-	<div class="well featured-products">
+	<div class="p-3 mb-3 bg-light rounded border featured-products">
 		<h4 class="text-center">FEATURED PRODUCTS  </h4>
 		<div id="featured-div">
 			<ul id="featuredProductSlider">

@@ -1,9 +1,12 @@
 @extends('layouts.frontend')
 
 @section('content')
-	<div class="page-grid panel panel-default term-panel">
-		<div class="panel-body">
-			<h2 class="text-center">Privacy Policy</h2>
+	<div class="card term-panel mb-3">
+		<div class="card-header text-center">
+        	<h1 class="text-center">Privacy Policy</h1>
+    	</div>
+    	
+		<div class="card-body">
 			<p>
 				This Privacy Policy describes how your personal information is collected, used, and shared when you buy or sell products from {{ env('APP_URL') }}. Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your Personally Identifiable Information in accordance with our website.
 			</p>

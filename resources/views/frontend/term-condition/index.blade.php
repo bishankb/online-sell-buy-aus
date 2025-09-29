@@ -1,9 +1,12 @@
 @extends('layouts.frontend')
 
 @section('content')
-	<div class="page-grid panel panel-default term-panel">
-		<div class="panel-body">
-			<h2 class="text-center">Terms and Conditions</h2>
+<div class="card term-panel mb-3">
+		<div class="card-header text-center">
+        	<h1 class="text-center">Terms and Conditions</h1>
+    	</div>
+    	
+		<div class="card-body">
 			<p>
 				This website is operated by {{ env('APP_NAME') }} ({{ env('APP_FULL_NAME') }}). {{ env('APP_NAME') }} offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.	By visiting our site and being our user, you engage in our services and agree to be bound by the following terms and conditions. These Terms of Service apply  to all users of the site, including users who are browsers and buyers, sellers.
 			</p>
