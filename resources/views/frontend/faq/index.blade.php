@@ -1,23 +1,32 @@
 @extends('layouts.frontend')
 
 @section('content')
-	<div class="page-grid panel panel-default">
-		<div class="panel-body">
-			<h2>Frequently Asked Questions</h2>
-			<p>Please contact us if you have any querries !!!</p><br>
+	<div class="card term-panel mb-3">
+		<div class="card-header text-center">
+        	<h1 class="text-center">Frequently Asked Questions</h1>
+    	</div>
+    	
+		<div class="card-body">
+	        <h4>Please contact us if you have any queries !!!</h4><br>
+
 	        @if(count($faqs) > 0)
 	            @foreach($faqs as $faq)
-	                <div class="panel panel-default faq-body-panel">
-	                    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#question{{ $loop->iteration }}" style="">
-	                        <h4 class="panel-title">
-	                            <a href="javascript:void(0)" class="faq-anchor">Q: {{ $faq->faq }}</a>
-	                        </h4>
-
+	                <div class="card faq-body-panel mb-2">
+	                    <div class="card-header p-2" style="cursor: pointer;"
+	                         data-bs-toggle="collapse" 
+	                         data-bs-target="#question{{ $loop->iteration }}" 
+	                         aria-expanded="false" 
+	                         aria-controls="question{{ $loop->iteration }}">
+	                        <h5 class="mb-0">
+	                            <a href="javascript:void(0)" class="faq-anchor text-decoration-none">Q: {{ $faq->faq }}</a>
+	                        	<span class="faq-arrow" style="float: right;">&#9662;</span>
+	                        </h5>
 	                    </div>
-	                    <div id="question{{ $loop->iteration }}" class="answer-body panel-collapse collapse">
-	                        <div class="panel-body">
+
+	                    <div id="question{{ $loop->iteration }}" class="collapse">
+	                        <div class="card-body">
 	                            <h5>
-	                            	<span class="label label-success answer">Answer</span>
+	                                <span class="badge bg-success answer">Answer</span>
 	                            </h5><br>
 
 	                            <div class="faq-answer">
@@ -28,9 +37,9 @@
 	                </div>
 	            @endforeach
 
-	            <div class="text-center">
-					{{ $faqs->appends(request()->input())->links() }}
-				</div>
+	            <div class="text-center mt-3">
+	                {{ $faqs->appends(request()->input())->links() }}
+	            </div>
 	        @else
 	            <div class="alert alert-info" role="alert">
 	                <a href="#" class="alert-link">FAQs will be uploaded soon!!!!</a>

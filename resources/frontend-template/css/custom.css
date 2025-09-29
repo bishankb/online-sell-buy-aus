@@ -1883,6 +1883,17 @@ ul.cute li i {
 	line-height: 25px;
 }
 
+/* Smooth rotation for arrow */
+.faq-arrow {
+    transition: transform 0.3s ease;
+    font-size: 1.2rem; /* optional: bigger arrow */
+}
+
+/* Rotate arrow when collapse is open */
+.card-header[aria-expanded="true"] .faq-arrow {
+    transform: rotate(180deg); /* arrow points up */
+}
+
 .faq-body-panel .panel-heading {
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -1891,6 +1902,9 @@ ul.cute li i {
 .faq-body-panel .answer {
 	font-size: 12px;
 }
+
+/*FAQ*/
+
 
 .paragraph-section {
 	padding: 6px 0;
