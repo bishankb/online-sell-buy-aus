@@ -2,14 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+//Backend Routes
 Route::group([
     'prefix' => 'admin',
     'middleware' => ['auth']
@@ -61,8 +56,13 @@ Route::group([
     Route::post('/products/restore/{id}', 'App\Http\Controllers\Backend\ProductController@restore')->name('products.restore');
     Route::delete('/products/force-delete/{id}', 'App\Http\Controllers\Backend\ProductController@forceDestroy')->name('products.forceDestroy');
 
-    Route::get('/', 'App\Http\Controllers\Backend\DashboardController@index')->name('dashboard.index');
-
-
+    Route::get('/', 'App\Http\Controllers\Backend\DashboardController@index')->name('backend.dashboard');
 
 });
+
+//Frontend Routes
+Route::get('/', 'App\Http\Controllers\Frontend\HomeController@index')->name('frontend.home');
+Route::get('/faq', 'App\Http\Controllers\FaqController@index')->name('frontend.faq');
+Route::get('/term-condition', 'App\Http\Controllers\TermConditionController@index')->name('frontend.term-condition');
+Route::get('/privacy-policy', 'App\Http\Controllers\PrivacyPolicyController@index')->name('frontend.privacy-policy');
+Route::get('/rules-tips', 'App\Http\Controllers\RuleTipController@index')->name('frontend.rule-tip');

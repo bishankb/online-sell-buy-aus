@@ -31,7 +31,7 @@
       >
         @can('view_dashboards')
           <li class="nav-item">
-              <a href="{{route('dashboard.index')}}" class="nav-link {{Request::is('admin/dashboard*') ? 'active' : ''}}">
+              <a href="{{route('backend.dashboard')}}" class="nav-link {{Request::is('admin/dashboard*') ? 'active' : ''}}">
                 <i class="fa fa-dashboard " style="margin: 5px;"></i><span>Dashboard</span>
               </a>
           </li>

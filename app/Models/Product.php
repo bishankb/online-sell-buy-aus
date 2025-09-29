@@ -4,9 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 
-class Product extends BaseModel
+class Product extends BaseModel implements Viewable
 {
+    use InteractsWithViews;
+    
     /**
      * The attributes that are mass assignable.
      *
