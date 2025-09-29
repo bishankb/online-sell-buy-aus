@@ -15,8 +15,6 @@ class TermConditionController extends Controller
      */
     public function index()
     {
-        $this->seoTermCondition();
-
         $contact_us = ContactUs::first();
        
         return view('frontend.term-condition.index', compact('contact_us'));

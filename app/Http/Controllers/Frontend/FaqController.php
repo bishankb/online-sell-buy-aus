@@ -15,8 +15,6 @@ class FaqController extends Controller
      */
     public function index()
     {
-        $this->seoFaq();
-
         $faqs = Faq::where('status', 1)->paginate(config('product.faq_paginate'));
         
         return view('frontend.faq.index', compact('faqs'));

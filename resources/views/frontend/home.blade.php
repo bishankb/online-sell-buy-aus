@@ -31,7 +31,7 @@
 		   		     			@if(!empty($latest_product->images->first()))
 		   		     				<img src="/storage/media/product/{{ $latest_product->id }}/thumbnail/{{ $latest_product->images->first()->filename }}" alt=" " />
 		   		     			@else
-		   		     				<img src="{{ asset('images/no-image.jpg') }}" alt=" " />
+		   		     				<img src="{{ asset('frontend-template/img/no-image.jpg') }}" alt=" " />
 		   		     			@endif
 		   		     		</a>
 		   		     		<div class="grid-chain-bottom">
@@ -65,7 +65,7 @@
 		   		     			@if(!empty($popular_product->images->first()))
 		   		     				<img src="/storage/media/product/{{ $popular_product->id }}/thumbnail/{{ $popular_product->images->first()->filename }}" alt=" " />
 		   		     			@else
-		   		     				<img src="{{ asset('images/no-image.jpg') }}" alt=" " />
+		   		     				<img src="{{ asset('frontend-template/img/no-image.jpg') }}" alt=" " />
 		   		     			@endif
 		   		     		</a>
 		   		     		<div class="grid-chain-bottom">
@@ -100,7 +100,7 @@
 			   		     			@if(!empty($recentlyViewed_product->images->first()))
 			   		     				<img src="/storage/media/product/{{ $recentlyViewed_product->id }}/thumbnail/{{ $recentlyViewed_product->images->first()->filename }}" alt=" " />
 			   		     			@else
-			   		     				<img src="{{ asset('images/no-image.jpg') }}" alt=" " />
+			   		     				<img src="{{ asset('frontend-template/img/no-image.jpg') }}" alt=" " />
 			   		     			@endif
 			   		     		</a>
 			   		     		<div class="grid-chain-bottom">
@@ -128,7 +128,7 @@
 					<li class="item1" style="position: relative;">
 						@if(count($category->subCategories) > 0)
 							<a onclick="event.preventDefault();" href="#">{{ $category->title }}
-								<img class="arrow-img" src="{{ asset('images/arrow1.png') }}" alt=""  style="position: absolute;"/>
+								<img class="arrow-img" src="{{ asset('frontend-template/img/arrow1.png') }}" alt=""  style="position: absolute;"/>
 							</a>
 						@else
 							<a href="#">{{ $category->title }}</a>

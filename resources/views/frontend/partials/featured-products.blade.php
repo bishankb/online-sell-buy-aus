@@ -18,7 +18,7 @@
 							@if(!empty($featured_product->images->first()))
 				 				<img src="/storage/media/product/{{ $featured_product->id }}/thumbnail/{{ $featured_product->images->first()->filename }}"/>
 				 			@else
-				 				<img src="{{ asset('images/no-image.jpg') }}"/>
+				 				<img src="{{ asset('rontend-template/img/no-image.jpg') }}"/>
 				 			@endif
 							<div class="grid-flex">
 								{{ Str::limit($featured_product->title, $limit = 12, $end = '...') }}

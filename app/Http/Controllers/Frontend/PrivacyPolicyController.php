@@ -15,8 +15,6 @@ class PrivacyPolicyController extends Controller
      */
     public function index()
     {
-        $this->seoPrivacyPolicy();
-
         $contact_us = ContactUs::first();
        
         return view('frontend.privacy-policy.index', compact('contact_us'));

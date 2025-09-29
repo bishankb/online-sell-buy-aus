@@ -14,9 +14,7 @@ class RuleTipController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $this->seoRuleTip();
-       
+    {       
         $contact_us = ContactUs::first();
         
         return view('frontend.rule-tip.index', compact('contact_us'));
