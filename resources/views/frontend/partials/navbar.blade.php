@@ -25,7 +25,7 @@
 		<div class="container">
 			<div class="header-bottom-left">
 				<div class="logo">
-					<a href="{{ route('frontend.home') }}"><img src="{{ asset('/images/logo.png') }}" alt=" " /></a>
+					<a href="{{ route('frontend.home') }}"><img src="{{ asset('frontend-template/img/logo.png') }}" alt=" " /></a>
 				</div>
 				<div class="mobile-login-section">
 						@if (Auth::user())

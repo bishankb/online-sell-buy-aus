@@ -10,7 +10,7 @@
 			<div class="panel-body">
 				<h2>Welcome to {{ env('APP_NAME') }}</h2>
 				<p class="m_text">
-					<b>{{ env('APP_NAME') }}</b> ({{ env('APP_FULL_NAME') }}) is a online platform to buy, sell and exchange of goods and commodities all over the Nepal. We allow our clients to post the ads of their products <b>completely free</b>. We directly connect our customers to genuine sellers.
+					<b>{{ env('APP_NAME') }}</b> ({{ env('APP_FULL_NAME') }}) is a online platform to buy, sell and exchange of goods and commodities all over the Australia. Users can post the ads of their products <b>completely free</b>. We directly connect our customers to genuine sellers.
 				</p>
 			</div>
 		</div>
@@ -40,7 +40,7 @@
 		   		     					{{ Str::limit($latest_product->title, $limit = 25, $end = '...') }}
 		   		     				</a>
 		   		     			</h4>
-	   		     				<h3>Rs. {{ nepaliCurrencyFormat($latest_product->price) }}</h3>
+	   		     				<h3>{{ Number::currency($latest_product->price, 'AUD') }}</h3>
 	   		     				<h5>({{ \App\Models\Product::ConditionType[$latest_product->condition_type] }})</h5>
 		   		     		</div>
 		   		     	</div>
@@ -74,7 +74,7 @@
 		   		     					{{ Str::limit($popular_product->title, $limit = 25, $end = '...') }}
 		   		     				</a>
 		   		     			</h4>
-	   		     				<h3>Rs. {{ nepaliCurrencyFormat($popular_product->price) }}</h3>
+	   		     				<h3>{{ Number::currency($popular_product->price, 'AUD') }}</h3>
 				     			<h5>({{ \App\Models\Product::ConditionType[$popular_product->condition_type] }})</h5>
 		   		     		</div>
 		   		     	</div>
@@ -109,7 +109,7 @@
 			   		     					{{ Str::limit($recentlyViewed_product->title, $limit = 25, $end = '...') }}
 			   		     				</a>
 			   		     			</h4>
-	   		     					<h3>Rs. {{ nepaliCurrencyFormat($recentlyViewed_product->price) }}</h3>
+	   		     					<h3>{{ Number::currency($recentlyViewed_product->price, 'AUD') }}</h3>
 					     			<h5>({{ \App\Models\Product::ConditionType[$recentlyViewed_product->condition_type] }})</h5>
 			   		     		</div>
 				     		</div>

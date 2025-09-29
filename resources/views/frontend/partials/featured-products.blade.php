@@ -18,11 +18,11 @@
 							@if(!empty($featured_product->images->first()))
 				 				<img src="/storage/media/product/{{ $featured_product->id }}/thumbnail/{{ $featured_product->images->first()->filename }}"/>
 				 			@else
-				 				<img src="{{ asset('rontend-template/img/no-image.jpg') }}"/>
+				 				<img src="{{ asset('frontend-template/img/no-image.jpg') }}"/>
 				 			@endif
 							<div class="grid-flex">
 								{{ Str::limit($featured_product->title, $limit = 12, $end = '...') }}
-								<p>Rs. {{ nepaliCurrencyFormat($featured_product->price) }}</p>
+								<p> {{ Number::currency($featured_product->price, 'AUD') }}</p>
 								<span>({{ \App\Models\Product::ConditionType[$featured_product->condition_type] }})</span>
 							</div>
 						</a>
@@ -40,7 +40,7 @@
 @if(\Route::current()->getName() != 'product.show')
 	 @section('frontend-script')
 		<script async type="text/javascript">
-			$(window).load(function() {
+			document.addEventListener('DOMContentLoaded', function () {
 			    $("#featured-div").css("visibility", "visible");
 				$("#featuredProductSlider").flexisel({
 					visibleItems: 4,
@@ -49,7 +49,7 @@
 		            infinite: true,
 		            navigationTargetSelector: null,
 		            autoPlay: {
-		                enable: true,
+		                enable: false,
 		                interval: 3000,
 		                pauseOnHover: true
 		            },

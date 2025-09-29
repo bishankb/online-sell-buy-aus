@@ -5,7 +5,7 @@
 		<div class="panel-body">
 			<h2 class="text-center">Posting Rules</h2>
 			<p>
-				Visitors or users in {{ env('APP_NAME') }} ({{ env('APP_FULL_NAME') }}) who wants be member of our group must follow these rules compulsorily before posting their products. We do not allow posting of products that are considered illegal in our country Nepal. There will be certain consequences if any user is observed violating these rules and regulations.
+				Visitors or users in {{ env('APP_NAME') }} ({{ env('APP_FULL_NAME') }}) who wants be member of our group must follow these rules compulsorily before posting their products. We do not allow posting of products that are considered illegal in our country Australia. There will be certain consequences if any user is observed violating these rules and regulations.
 			</p><br>
 
 			<div class="paragraph-section" style="padding-top: 0">		
@@ -43,7 +43,7 @@
 					<ul>
 						<li>Weapons, drugs, human organs, endangered animals, prohibited antiques, black marketing, etc.</li>
 						<li>Flammable, toxic or poisonous products</li>
-						<li>Products that are prohibited by Nepalese law.</li>
+						<li>Products that are prohibited by Australian law.</li>
 						<li>Adult entertainment products like escort, prostituion, indecent massages, pornography, sexual items, etc.</li>
 						<li>Products that can harm any person, group, religion, other third parties intellectual property, moral right and privacy.</li>
 					</ul>

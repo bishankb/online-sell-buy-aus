@@ -19,7 +19,7 @@
 			<div class="paragraph-section" style="padding-top: 0">
 				<h4>Online Store Terms</h4>
 				<p>
-					By agreeing to these Terms of Service, you represent that you are at least the age of majority in your country Nepal or province of state and you have given us your consent to allow any of your minor dependents to use this site.
+					By agreeing to these Terms of Service, you represent that you are at least the age of majority in your country Australia or province of state and you have given us your consent to allow any of your minor dependents to use this site.
 				</p>
 
 				<p>
