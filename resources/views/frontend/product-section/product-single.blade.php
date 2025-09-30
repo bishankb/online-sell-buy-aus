@@ -396,26 +396,23 @@
 		<br> 	    	
 
 		@if(count($related_products) > 0)
-			<div class="related-products">
-			    <h3>Related Products</h3>
-
+			<div class="p-3 mb-3 bg-light rounded border featured-products">
+				<h4 class="text-center">Related PRODUCTS  </h4>
 			    <ul id="relatedProductSlider">
-			    	@foreach($related_products as $related_product)
+					@foreach($related_products as $related_product)
 						<li>
 							<a href="{{ route('product.show', $related_product->slug) }}">
 								@if(!empty($related_product->images->first()))
-				     				<img src="/storage/media/product/{{ $related_product->id }}/thumbnail/{{ $related_product->images->first()->filename }}"/>
-				     			@else
-				     				<img src="{{ asset('frontend-template/img/no-image.jpg') }}" alt=" " />
-				     			@endif
-				     		</a>
-							<div class="grid-flex">
-								<a href="{{ route('product.show', $related_product->slug) }}">
-									{{ $related_product->title }}
-								</a>
-								<p>{{ Number::currency($related_product->price, 'AUD') }}</p>
-								<span>({{ \App\Models\Product::ConditionType[$related_product->condition_type] }})</span>
-							</div>
+					 				<img src="/storage/media/product/{{ $related_product->id }}/thumbnail/{{ $related_product->images->first()->filename }}"/>
+					 			@else
+					 				<img src="{{ asset('frontend-template/img/no-image.jpg') }}"/>
+					 			@endif
+								<div class="grid-flex">
+									{{ Str::limit($related_product->title, $limit = 12, $end = '...') }}
+									<p> {{ Number::currency($related_product->price, 'AUD') }}</p>
+									<span>({{ \App\Models\Product::ConditionType[$related_product->condition_type] }})</span>
+								</div>
+							</a>
 						</li>
 					@endforeach
 				</ul>
@@ -444,13 +441,13 @@
 		});
 
 		$("#relatedProductSlider").flexisel({
-			visibleItems: 5,
-            itemsToScroll: 1,
+			visibleItems: 4,
+            itemsToScroll: {{ config('product.feature_item_scroll') }},
             animationSpeed: 800,
             infinite: true,
             navigationTargetSelector: null,
             autoPlay: {
-                enable: true,
+                enable: false,
                 interval: 3000,
                 pauseOnHover: true
             },
@@ -466,7 +463,7 @@
                     itemsToScroll: 2
                 },
                 tablet: { 
-                    changePoint:768,
+                    changePoint:769,
                     visibleItems: 3,
                     itemsToScroll: 3
                 }

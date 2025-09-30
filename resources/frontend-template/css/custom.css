@@ -886,8 +886,9 @@ ul.cute li i {
 }
 
 #relatedProductSlider img {
-	height: 180px;
-	width: 140px;
+	width: 75px;
+	height: 100px;
+	display: inline;
 }
 
 .grid-flex {
@@ -898,6 +899,7 @@ ul.cute li i {
 	color: #36b297;
 	font-size: 14px;
 	margin-top: 12px;
+	display: inline;
 }
 
 #relatedProductSlider p {

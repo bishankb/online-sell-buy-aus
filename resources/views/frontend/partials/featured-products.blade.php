@@ -48,7 +48,7 @@
 	            infinite: true,
 	            navigationTargetSelector: null,
 	            autoPlay: {
-	                enable: true,
+	                enable: false,
 	                interval: 3000,
 	                pauseOnHover: true
 	            },
