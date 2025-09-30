@@ -1,7 +1,6 @@
 @extends('layouts.frontend')
 
 @section('content')
-	
 
 	@include('frontend.partials.featured-products')
 
@@ -26,7 +25,7 @@
 	   		     		<div class="item-grid">
 		   		     		<a href="#">
 		   		     			@if(\App\Models\Product::ConditionType[$latest_product->condition_type] == 'Brand New')
-		   		     				<span class="star"> </span>
+		   		     				<div class="star"> </div>
 		   		     			@endif
 		   		     			@if(!empty($latest_product->images->first()))
 		   		     				<img src="/storage/media/product/{{ $latest_product->id }}/thumbnail/{{ $latest_product->images->first()->filename }}" alt=" " />
@@ -126,29 +125,29 @@
 			 <ul class="menu">
 			 	@foreach($categories as $category)
 					<li class="item1" style="position: relative;">
-						@if(count($category->subCategories) > 0)
-							<a onclick="event.preventDefault();" href="#">{{ $category->title }}
-								<img class="arrow-img" src="{{ asset('frontend-template/img/arrow1.png') }}" alt=""  style="position: absolute;"/>
-							</a>
-						@else
-							<a href="#">{{ $category->title }}</a>
-						@endif
-						@if(count($category->subCategories) > 0)
-							<ul class="cute">
-								@foreach($category->subCategories->where('home_visibility', 1) as $subCategory)
-									<li class="subitem1">
-										<a href="#">
-											<i class="fa fa-angle-right"></i>{{ $subCategory->title }}
-										</a>
-									</li>
-								@endforeach
-								<li class="subitem1">
-									<a href="#">
-										<i class="fa fa-angle-right"></i>See All
-									</a>
-								</li>
-							</ul>
-						@endif
+					    @if(count($category->subCategories) > 0)
+					        <a href="#" onclick="event.preventDefault();" style="display: block; position: relative;">
+					            {{ $category->title }}
+					            <img class="arrow-img" src="{{ asset('frontend-template/img/arrow1.png') }}" alt="">
+					        </a>
+
+					        <ul class="cute">
+					            @foreach($category->subCategories->where('home_visibility', 1) as $subCategory)
+					                <li class="subitem1">
+					                   <a href="#">
+					                        <i class="fa fa-angle-right"></i>{{ $subCategory->title }}
+					                    </a>
+					                </li>
+					            @endforeach
+					            <li class="subitem1">
+					                <a href="#">
+					                    <i class="fa fa-angle-right"></i>See All
+					                </a>
+					            </li>
+					        </ul>
+					    @else
+					        <a href="#">{{ $category->title }}</a>
+					    @endif
 					</li>
 				@endforeach
 			</ul>
@@ -159,3 +158,27 @@
 		</h5>
 	</div>
 @endsection
+
+
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+	    document.querySelectorAll(".menu .item1 > a").forEach(function(anchor) {
+		    anchor.addEventListener("click", function(e) {
+		        e.preventDefault();
+		        let parent = anchor.parentElement;
+		        let submenu = parent.querySelector(".cute");
+		        if (!submenu) return;
+
+		        // close all others
+		        document.querySelectorAll(".menu .item1").forEach(function(item) {
+		            if (item !== parent) {
+		                item.classList.remove("open");
+		            }
+		        });
+
+		        // toggle current
+		        parent.classList.toggle("open");
+		    });
+		});
+	});
+</script>
