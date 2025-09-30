@@ -37,41 +37,39 @@
 	</div>
 @endisset
 
-@if(\Route::current()->getName() != 'product.show')
-	 @section('frontend-script')
-		<script async type="text/javascript">
-			document.addEventListener('DOMContentLoaded', function () {
-			    $("#featured-div").css("visibility", "visible");
-				$("#featuredProductSlider").flexisel({
-					visibleItems: 4,
-		            itemsToScroll: {{ config('product.feature_item_scroll') }},
-		            animationSpeed: 800,
-		            infinite: true,
-		            navigationTargetSelector: null,
-		            autoPlay: {
-		                enable: true,
-		                interval: 3000,
-		                pauseOnHover: true
-		            },
-		            responsiveBreakpoints: { 
-		                portrait: { 
-		                    changePoint:480,
-		                    visibleItems: 1,
-		                    itemsToScroll: 1
-		                }, 
-		                landscape: { 
-		                    changePoint:640,
-		                    visibleItems: 2,
-		                    itemsToScroll: 2
-		                },
-		                tablet: { 
-		                    changePoint:769,
-		                    visibleItems: 3,
-		                    itemsToScroll: 3
-		                }
-		            },
-			    });
-			});
-		</script>
-	@endsection
-@endif
+ @section('frontend-script')
+	<script async type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+		    $("#featured-div").css("visibility", "visible");
+			$("#featuredProductSlider").flexisel({
+				visibleItems: 4,
+	            itemsToScroll: {{ config('product.feature_item_scroll') }},
+	            animationSpeed: 800,
+	            infinite: true,
+	            navigationTargetSelector: null,
+	            autoPlay: {
+	                enable: true,
+	                interval: 3000,
+	                pauseOnHover: true
+	            },
+	            responsiveBreakpoints: { 
+	                portrait: { 
+	                    changePoint:480,
+	                    visibleItems: 1,
+	                    itemsToScroll: 1
+	                }, 
+	                landscape: { 
+	                    changePoint:640,
+	                    visibleItems: 2,
+	                    itemsToScroll: 2
+	                },
+	                tablet: { 
+	                    changePoint:769,
+	                    visibleItems: 3,
+	                    itemsToScroll: 3
+	                }
+	            },
+		    });
+		});
+	</script>
+@endsection
