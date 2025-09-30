@@ -77,8 +77,14 @@
 						</div>
 				</div>
 				<div class="search">
-					
-
+					<form method="GET" action="{{ route('product.search') }}">
+						@if(Request('search_product'))
+							<input type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="search_product" value="{{Request('search_product')}}" required>
+						@else 
+							<input type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="search_product" required placeholder="Search Product">
+						@endif
+						<input type="submit" value="SEARCH">
+					</form>
 				</div>
 				<div class="clearfix"> </div>
 			</div>

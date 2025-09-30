@@ -62,7 +62,17 @@ Route::group([
 
 //Frontend Routes
 Route::get('/', 'App\Http\Controllers\Frontend\HomeController@index')->name('frontend.home');
+
 Route::get('/faq', 'App\Http\Controllers\Frontend\FaqController@index')->name('frontend.faq');
+
 Route::get('/term-condition', 'App\Http\Controllers\Frontend\TermConditionController@index')->name('frontend.term-condition');
 Route::get('/privacy-policy', 'App\Http\Controllers\Frontend\PrivacyPolicyController@index')->name('frontend.privacy-policy');
 Route::get('/rules-tips', 'App\Http\Controllers\Frontend\RuleTipController@index')->name('frontend.rule-tip');
+
+Route::get('/product/{productViewType}', 'App\Http\Controllers\Frontend\ProductController@index')->name('product.index');
+Route::get('/view-product/{product}', 'App\Http\Controllers\Frontend\ProductController@show')->name('product.show');
+Route::get('/filter/product', 'App\Http\Controllers\Frontend\ProductController@filter')->name('product.filter');
+Route::get('/search/product', 'App\Http\Controllers\Frontend\ProductController@search')->name('product.search');
+
+
+

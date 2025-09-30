@@ -196,7 +196,7 @@ class Product extends BaseModel implements Viewable
     {
         if ($filter) {
             if ($filter == "popular") {
-                return $query->where('status', 1)->where('is_sold', 0)->orderByViewsCount();
+                return $query->where('status', 1)->where('is_sold', 0)->withViewsCount()->orderBy('views_count', 'desc');
             } elseif($filter == "recent") {
                 return $query->where('status', 1)->where('is_sold', 0)->latest();
             } elseif($filter == "old") {

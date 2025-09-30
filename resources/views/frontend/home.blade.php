@@ -15,7 +15,7 @@
 		</div>
 		<div class="products">
 	     	<h5 class="latest-product">LATEST PRODUCTS</h5>	
-	     	<a class="view-all" href="#">VIEW ALL<span> </span></a>  
+	     	<a class="view-all" href="{{ route('product.index', 'latest-products') }}">VIEW ALL<span> </span></a>
 	    </div>
 	    
 	    <div class="product-left">
@@ -23,7 +23,7 @@
 	     		@foreach($latest_products as $latest_product)
 	   		     	<div class="col-md-3 col-sm-4 col-xs-6 main-item">
 	   		     		<div class="item-grid">
-		   		     		<a href="#">
+		   		     		<a href="{{ route('product.show', $latest_product->slug) }}">
 		   		     			@if(\App\Models\Product::ConditionType[$latest_product->condition_type] == 'Brand New')
 		   		     				<div class="star"> </div>
 		   		     			@endif
@@ -50,7 +50,7 @@
 
 		 <div class="products">
 		 	<h5 class="latest-product">POPULAR PRODUCTS</h5>	
-		 	<a class="view-all" href="#">VIEW ALL<span> </span></a>  
+		 	<a class="view-all" href="{{ route('product.index', 'popular-products') }}">VIEW ALL<span> </span></a>  
 		 </div>
 		 <div class="product-left">
 		 	<div class="row">
@@ -60,7 +60,7 @@
 				     			@if(\App\Models\Product::ConditionType[$popular_product->condition_type] == 'Brand New')
 				     				<span class="star"> </span>
 				     			@endif
-		   		     		<a href="#">
+		   		     		<a href="{{ route('product.show', $popular_product->slug) }}">
 		   		     			@if(!empty($popular_product->images->first()))
 		   		     				<img src="/storage/media/product/{{ $popular_product->id }}/thumbnail/{{ $popular_product->images->first()->filename }}" alt=" " />
 		   		     			@else
@@ -69,7 +69,7 @@
 		   		     		</a>
 		   		     		<div class="grid-chain-bottom">
 		   		     			<h4>
-		   		     				<a href="#">
+		   		     				<a href="{{ route('product.show', $popular_product->slug) }}">
 		   		     					{{ Str::limit($popular_product->title, $limit = 25, $end = '...') }}
 		   		     				</a>
 		   		     			</h4>
@@ -85,7 +85,7 @@
 		@if(count($recentlyViewed_products) > 0)
 			 <div class="products">
 			 	<h5 class="latest-product">RECENTLY VIEWED</h5>	
-	     		<a class="view-all" href="#">VIEW ALL<span> </span></a>
+	     		<a class="view-all" href="{{ route('product.index', 'recently-viewed-products') }}">VIEW ALL<span> </span></a>
 			 </div>
 			 <div class="product-left">
 			 	<div class="row">
@@ -125,27 +125,29 @@
 			 <ul class="menu">
 			 	@foreach($categories as $category)
 					<li class="item1" style="position: relative;">
-					    @if(count($category->subCategories) > 0)
-					        <a href="#" onclick="event.preventDefault();" style="display: block; position: relative;">
-					            {{ $category->title }}
-					            <img class="arrow-img" src="{{ asset('frontend-template/img/arrow1.png') }}" alt="">
-					        </a>
-
-					        <ul class="cute">
-					            @foreach($category->subCategories->where('home_visibility', 1) as $subCategory)
-					                <li class="subitem1">
-					                   <a href="#">
-					                        <i class="fa fa-angle-right"></i>{{ $subCategory->title }}
-					                    </a>
-					                </li>
-					            @endforeach
-					            <li class="subitem1">
-					                <a href="#">
-					                    <i class="fa fa-angle-right"></i>See All
-					                </a>
-					            </li>
-					        </ul>
-					    @else
+						@if(count($category->subCategories) > 0)
+							<a onclick="event.preventDefault();" href="#">{{ $category->title }}
+								<img class="arrow-img" src="{{ asset('frontend-template/img/arrow1.png') }}" alt=""  style="position: absolute;"/>
+							</a>
+						@else
+							<a href="{{ route('product.index',$category->slug) }}">{{ $category->title }}</a>
+						@endif
+						@if(count($category->subCategories) > 0)
+							<ul class="cute">
+								@foreach($category->subCategories->where('home_visibility', 1) as $subCategory)
+									<li class="subitem1">
+										<a href="{{ route('product.index', $subCategory->slug) }}">
+											<i class="fa fa-angle-right"></i>{{ $subCategory->title }}
+										</a>
+									</li>
+								@endforeach
+								<li class="subitem1">
+									<a href="{{ route('product.index', $category->slug) }}">
+										<i class="fa fa-angle-right"></i>See All
+									</a>
+								</li>
+							</ul>
+						@else
 					        <a href="#">{{ $category->title }}</a>
 					    @endif
 					</li>
@@ -154,7 +156,7 @@
 		</div>
 		
 		<h5>
-		    <a class="view-all all-product" href="#">VIEW ALL PRODUCTS<span> </span></a>
+		    <a class="view-all all-product" href="{{ route('product.index', 'all-products') }}">VIEW ALL PRODUCTS<span> </span></a>
 		</h5>
 	</div>
 @endsection

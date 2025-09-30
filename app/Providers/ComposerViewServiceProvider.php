@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Product;
 use App\Models\ContactUs;
+use Carbon\Carbon;
 
 class ComposerViewServiceProvider extends ServiceProvider
 {
@@ -27,7 +28,7 @@ class ComposerViewServiceProvider extends ServiceProvider
                 $featured_products = Product::where('status', 1)
                                             ->where('is_sold', 0)
                                             ->where('is_featured', 1)
-                                            ->where('is_featured', 1)
+                                            ->where('expiry_period', '>', Carbon::now())
                                             ->latest()
                                             ->take(15)
                                             ->get();
