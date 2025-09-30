@@ -21,7 +21,7 @@
 						@endforeach
 					</ul>
 				@else 
-					<img src="{{ asset('images/no-image.jpg') }}" alt=" " class="img-responsive" style="margin-bottom: 55px;" />
+					<img src="{{ asset('frontend-template/img/no-image.jpg') }}" alt=" " class="img-responsive" style="margin-bottom: 55px;" />
 				@endif
 				<div class="clearfix"> </div>		
 			</div> 
@@ -35,7 +35,7 @@
 				<div class="cart-a">
 					<div class="product-name">{{ $product->title }}</div>
 					<h5 class="now-get get-cart-in">
-						<span class="label label-danger">Total Views: {{ $product->getViews() }}</span>
+						<span class="label label-danger">Total Views: {{ views($product)->count() }}</span>
 					</h5>
 
 					<div class="clearfix"></div>
@@ -78,7 +78,7 @@
 								@if($product->expiry_period < Carbon\Carbon::now())
 									<span style="color: red">Expired</span>
 								@else
-									{{$product->expiry_period->format('d M, Y')}}
+									{{ Carbon\Carbon::parse($product->expiry_period)->format('d M, Y') }}
 								@endif  
 							</li>
 						</div>
@@ -127,17 +127,17 @@
 					<ul class="share_nav">
 						<li>
 							<a href="https://www.facebook.com/sharer/sharer.php?u=obsnepal.com/view-product/{{$product->slug}}&display=popup" title="Share on Facebook" target="__blank">
-								<img src="{{ asset('images/facebook.png') }}" title="facebook">
+								<img src="{{ asset('frontend-template/img/facebook.png') }}" title="facebook">
 							</a>
 						</li>
 						<li>
 							<a href="https://twitter.com/intent/tweet?url={{ Request::fullUrl() }}" title="Share on Twitter" target="__blank">
-								<img src="{{ asset('images/twitter.png') }}" title="Twiiter">
+								<img src="{{ asset('frontend-template/img/twitter.png') }}" title="Twiiter">
 							</a>
 						</li>
 						<li>
 							<a href="https://plus.google.com/share?url={{ Request::fullUrl() }}" title="Share on Google+" target="__blank">
-								<img src="{{ asset('images/gpluse.png') }}" title="Google+">
+								<img src="{{ asset('frontend-template/img/gpluse.png') }}" title="Google+">
 							</a>
 						</li>
 					</ul>
@@ -352,11 +352,7 @@
 				    <div class="panel-heading">
 				    	<h5>
 				    		<i class="fa fa-question-circle"></i>Discussion
-				    		@if(count($product->buyerQuestions) > 4) 
-					    		<span style="float: right;">
-					    			<i class="fa fa-plus"></i><a href="{{ route('buyer-question.readMore', $product->slug) }}" class="read-more">Read All</a>
-					    		</span>
-					    	@endif
+				    		
 				    	</h5>
 				    </div>
 				    <div class="panel-body">
@@ -410,7 +406,7 @@
 								@if(!empty($related_product->images->first()))
 				     				<img src="/storage/media/product/{{ $related_product->id }}/thumbnail/{{ $related_product->images->first()->filename }}"/>
 				     			@else
-				     				<img src="{{ asset('images/no-image.jpg') }}" alt=" " />
+				     				<img src="{{ asset('frontend-template/img/no-image.jpg') }}" alt=" " />
 				     			@endif
 				     		</a>
 							<div class="grid-flex">

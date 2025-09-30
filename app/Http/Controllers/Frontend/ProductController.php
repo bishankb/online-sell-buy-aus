@@ -10,7 +10,7 @@ use App\Models\SubCategory;
 use App\Models\BuyerQuestion;
 use App\Models\City;
 use Carbon\Carbon;
-
+use CyrildeWit\EloquentViewable\Support\Period;
 
 class ProductController extends Controller
 {
@@ -132,7 +132,7 @@ class ProductController extends Controller
     {
         session()->push('products.recently_viewed', $product->getKey());
 
-        $product->addView();
+        views($product)->record();  
 
         if($product->sub_category_id != 0) {
             $related_products = Product::where('id', '!=', $product->id)->where('sub_category_id', $product->sub_category_id)->take(10)->get();
@@ -140,9 +140,7 @@ class ProductController extends Controller
             $related_products = Product::where('id', '!=', $product->id)->where('category_id', $product->category_id)->take(10)->get();
         }
 
-        $buyer_questions = BuyerQuestion::where('product_id', $product->id)->take(5)->latest()->get();
-
-        return view('frontend.product-section.product-single', compact('product', 'related_products', 'buyer_questions'));
+        return view('frontend.product-section.product-single', compact('product', 'related_products'));
     }
 
     /**
