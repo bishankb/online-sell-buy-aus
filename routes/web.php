@@ -74,5 +74,9 @@ Route::get('/view-product/{product}', 'App\Http\Controllers\Frontend\ProductCont
 Route::get('/filter/product', 'App\Http\Controllers\Frontend\ProductController@filter')->name('product.filter');
 Route::get('/search/product', 'App\Http\Controllers\Frontend\ProductController@search')->name('product.search');
 
+Route::get('/sush', function () {
+    return view('frontend.product-section.sush');  // resources/views/about.blade.php
+});
+
 
 

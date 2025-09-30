@@ -14,7 +14,7 @@
 			<ul id="featuredProductSlider">
 				@foreach($featured_products as $featured_product)
 					<li>
-						<a href="#">
+						<a href="{{ route('product.show', $featured_product->slug) }}">
 							@if(!empty($featured_product->images->first()))
 				 				<img src="/storage/media/product/{{ $featured_product->id }}/thumbnail/{{ $featured_product->images->first()->filename }}"/>
 				 			@else
@@ -49,7 +49,7 @@
 		            infinite: true,
 		            navigationTargetSelector: null,
 		            autoPlay: {
-		                enable: false,
+		                enable: true,
 		                interval: 3000,
 		                pauseOnHover: true
 		            },

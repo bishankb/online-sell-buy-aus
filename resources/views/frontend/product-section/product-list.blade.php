@@ -193,33 +193,3 @@
 		</h5>
 	</div>
 @endsection
-
-@section('frontend-script')
-	<script>
-		$(document).ready(function(){
-			$("#featuredProductSlider").flexisel({
-				visibleItems: 5,
-				animationSpeed: 400,
-				infinite: true,
-				autoPlay: true,
-				autoPlaySpeed: 3000,    		
-				pauseOnHover: true,
-				enableResponsiveBreakpoints: true,
-		    	responsiveBreakpoints: { 
-		    		portrait: { 
-		    			changePoint:480,
-		    			visibleItems: 2
-		    		}, 
-		    		landscape: { 
-		    			changePoint:640,
-		    			visibleItems: 3
-		    		},
-		    		tablet: { 
-		    			changePoint:768,
-		    			visibleItems: 4
-		    		}
-		    	}
-		    });
-		});
-	</script>
-@endsection
