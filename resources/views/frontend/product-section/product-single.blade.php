@@ -424,88 +424,54 @@
     </div>
 @endsection
 
-@section('frontend-script')
-	<script type="text/javascript">
-		jQuery(document).ready(function($){
-			$('#etalage').etalage({
-				thumb_image_width: 300,
-				thumb_image_height: 400,
-				source_image_width: 900,
-				source_image_height: 1200,
-				show_hint: false,
-				click_callback: function(image_anchor, instance_id){
-					var index = $( '[href="' + image_anchor + '"]' ).first().parents('li').index();
-					$.fancybox(allimages, { index: index });
-				}
-			});
-
-			var allimages = [];
-			$('.etalage_source_image').each(function(){
-				allimages.push({ href:$(this).attr('src') });
-			});
-
-			$("#relatedProductSlider").flexisel({
-				visibleItems: 5,
-	            itemsToScroll: 1,
-	            animationSpeed: 800,
-	            infinite: true,
-	            navigationTargetSelector: null,
-	            autoPlay: {
-	                enable: true,
-	                interval: 3000,
-	                pauseOnHover: true
-	            },
-	            responsiveBreakpoints: { 
-	                portrait: { 
-	                    changePoint:480,
-	                    visibleItems: 1,
-	                    itemsToScroll: 1
-	                }, 
-	                landscape: { 
-	                    changePoint:640,
-	                    visibleItems: 2,
-	                    itemsToScroll: 2
-	                },
-	                tablet: { 
-	                    changePoint:768,
-	                    visibleItems: 3,
-	                    itemsToScroll: 3
-	                }
-	            },
-		    });
-
-			$("#featured-div").css("visibility", "visible");
-			$("#featuredProductSlider").flexisel({
-				visibleItems: 4,
-		        itemsToScroll: {{ config('product.feature_item_scroll') }},
-	            animationSpeed: 800,
-	            infinite: true,
-	            navigationTargetSelector: null,
-	            autoPlay: {
-	                enable: true,
-	                interval: 3000,
-	                pauseOnHover: true
-	            },
-	            responsiveBreakpoints: { 
-	                portrait: { 
-	                    changePoint:480,
-	                    visibleItems: 1,
-	                    itemsToScroll: 1
-	                }, 
-	                landscape: { 
-	                    changePoint:640,
-	                    visibleItems: 2,
-	                    itemsToScroll: 2
-	                },
-	                tablet: { 
-	                    changePoint:769,
-	                    visibleItems: 3,
-	                    itemsToScroll: 3
-	                }
-	            },
-		    });
-
+<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function () {
+		$('#etalage').etalage({
+			thumb_image_width: 300,
+			thumb_image_height: 400,
+			source_image_width: 900,
+			source_image_height: 1200,
+			show_hint: false,
+			click_callback: function(image_anchor, instance_id){
+				var index = $( '[href="' + image_anchor + '"]' ).first().parents('li').index();
+				$.fancybox(allimages, { index: index });
+			}
 		});
-	</script>
-@endsection
+
+		var allimages = [];
+		$('.etalage_source_image').each(function(){
+			allimages.push({ href:$(this).attr('src') });
+		});
+
+		$("#relatedProductSlider").flexisel({
+			visibleItems: 5,
+            itemsToScroll: 1,
+            animationSpeed: 800,
+            infinite: true,
+            navigationTargetSelector: null,
+            autoPlay: {
+                enable: true,
+                interval: 3000,
+                pauseOnHover: true
+            },
+            responsiveBreakpoints: { 
+                portrait: { 
+                    changePoint:480,
+                    visibleItems: 1,
+                    itemsToScroll: 1
+                }, 
+                landscape: { 
+                    changePoint:640,
+                    visibleItems: 2,
+                    itemsToScroll: 2
+                },
+                tablet: { 
+                    changePoint:768,
+                    visibleItems: 3,
+                    itemsToScroll: 3
+                }
+            },
+	    });
+	});
+</script>
 
