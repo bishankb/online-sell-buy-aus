@@ -1991,11 +1991,13 @@ ul.cute li i {
 .featured-products #featuredProductSlider img {
 	width: 75px;
 	height: 100px;
+	display: inline;
 }
 
 .featured-products #featuredProductSlider a {
 	color: #ff5a4f;
 	font-size: 14px;
+	display: inline;
 }
 
 .featured-products #featuredProductSlider p {
