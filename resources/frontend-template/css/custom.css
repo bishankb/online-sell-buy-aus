@@ -524,12 +524,6 @@ ul.cute li i {
     position: absolute;
     right: 5px;                  /* fixed horizontal position */
     top: 50%;                    /* vertically center */
-    transform: translateY(-50%) rotate(0deg); /* default: down */
-    transition: transform 0.3s ease;
-}
-
-.item1.open .arrow-img {
-    transform: translateY(-50%) rotate(180deg); /* flips up */
 }
 
 /*Product List*/
