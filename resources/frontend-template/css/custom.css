@@ -697,7 +697,7 @@ ul.cute li i {
 }
 /*Product List*/
 
-/*Single Product*/
+/*Product Single*/
  .single_top, .main {
     width: 100%;
     float: none;
@@ -984,13 +984,10 @@ ul.cute li i {
 	top: 80px !important;
 }
 
-/*Product Single*/
-
 .left-n {
 	font-size: 25px;
 }
 
-/* Previous / Next controls */
 #productCarousel .carousel-control-prev-icon,
 #productCarousel .carousel-control-next-icon {
     background-color: black;
@@ -999,9 +996,29 @@ ul.cute li i {
 }
 
 #productCarousel .carousel-item img {
-    height: 400px;       /* adjust the height as needed */
-    width: 250px;             /* keep full width */
-    object-fit: cover;       /* crop/scale image nicely */
+    height: 400px;
+    width: 250px;
+    object-fit: cover;
+}
+
+.zoom-wrapper {
+    position: relative;
+}
+
+.zoom-wrapper .zoom-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.3rem;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.zoom-wrapper:hover .zoom-icon {
+    opacity: 1;
 }
 
 /*Product Single*/

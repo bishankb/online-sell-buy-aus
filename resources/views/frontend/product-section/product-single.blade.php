@@ -8,13 +8,16 @@
 	  	<div class="single_grid">
 	  		<div class="row">
 				<div class="col-md-4 col-sm-6 col-12 image-slider">
-				    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+				    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
 					    <div class="carousel-inner">
 					        @if($product->images->count() > 0)
 					            @foreach($product->images as $key => $image)
 					                <div class="carousel-item @if($key == 0) active @endif">
-					                    <a data-fancybox="gallery" href="{{ asset('storage/media/product/'.$product->id.'/'.$image->filename) }}">
+					                    <a data-fancybox="gallery" href="{{ asset('storage/media/product/'.$product->id.'/'.$image->filename) }}" class="zoom-wrapper">
 					                        <img src="{{ asset('storage/media/product/'.$product->id.'/'.$image->filename) }}"class="d-block w-100" alt="Product Image">
+					                        <span class="zoom-icon">
+						                        <i class="bi bi-zoom-in"></i>
+						                    </span>
 					                    </a>
 					                </div>
 					            @endforeach
