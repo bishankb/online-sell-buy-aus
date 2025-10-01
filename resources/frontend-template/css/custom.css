@@ -480,7 +480,7 @@ ul.login li a span i {
 /*Sidebar*/
 a.all-product:hover {
 	color: #E74C3C;
-    text-decoration: underline;
+    txt-decoration: underline;
 }
 
 .item1 {
@@ -493,6 +493,9 @@ a.all-product:hover {
 }
 /*Sidebar*/
 
+.shoes-grid p{
+	color: #000;
+}
 /*Home*/
 .sub-cate, .slide-grid, .women-product, .account_grid {
 	margin-top: 0;
@@ -555,6 +558,7 @@ ul.cute li i {
 	height: 185px;
     width: 130px;
 	position: relative;
+	float: left;
 }
 
 
@@ -567,6 +571,23 @@ ul.cute li i {
     top: auto;
 	bottom: 0px;
     left: 140px;
+}
+
+.item-list-grid h4 {
+	font-size: 18px;
+	margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.item-list-grid a {
+	transition: 0.5s;
+	color: #000;
+	text-decoration: none;
+}
+
+.item-list-grid a:hover, .item-list-grid a:focus {
+    color: rgb(231, 76, 60);
+    text-decoration: underline;
 }
 
 @media (max-width: 1024px) {
@@ -604,6 +625,8 @@ ul.cute li i {
 
 .item-list-grid p{
 	text-align: justify;
+	margin: 0px 0px 10px;
+	font-size: 14px;
 }
 
 @media (max-width: 736px) {
@@ -625,6 +648,7 @@ ul.cute li i {
 .item-list-grid li {
 	list-style: none;
 	line-height: 22px;
+	font-size: 14px;
 }
 
 .item-list-grid .item-seller, .item-list-grid .item-date {

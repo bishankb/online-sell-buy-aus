@@ -56,58 +56,60 @@
 		</div>
 		
 		<div class="grid-product">
-			@if(count($products) > 0)
-				@foreach($products as $product)
-				  	<div class="col-md-4 col-sm-4 col-xs-6 custom-col-xs">
-				  		<div class="item-list-grid">
-							<div class="content_box">
-								<a href="{{ route('product.show', $product->slug) }}">
-									<div class="left-grid-view grid-view-left">
-										@if(!empty($product->images->first()))
-				   		     				<img src="/storage/media/product/{{ $product->id }}/thumbnail/{{ $product->images->first()->filename }}" class="watch-right" alt=" ">
-				   		     			@else
-				   		     				<img src="{{ asset('frontend-template/img/no-image.jpg') }}" class="watch-right" alt=" ">
-				   		     			@endif
-				   		     			@if(\App\Models\Product::ConditionType[$product->condition_type] == 'Brand New')
-				   		     				<div class="brand-new"> </div>
-				   		     			@endif
-				   		     			
-				   		     			@if($product->is_sold == 1)
-											<div class="sold-overlay">
-												<img src="{{ asset('frontend-template/img/soldout.png')}}">
-											</div>
-										@endif
-									</div>
-								</a>
+			<div class="row">
+				@if(count($products) > 0)
+					@foreach($products as $product)
+					  	<div class="col-md-4 col-sm-4 col-6 custom-col-xs">
+					  		<div class="item-list-grid">
+								<div class="content_box">
+									<a href="{{ route('product.show', $product->slug) }}">
+										<div class="left-grid-view grid-view-left">
+											@if(!empty($product->images->first()))
+					   		     				<img src="/storage/media/product/{{ $product->id }}/thumbnail/{{ $product->images->first()->filename }}" class="watch-right" alt=" ">
+					   		     			@else
+					   		     				<img src="{{ asset('frontend-template/img/no-image.jpg') }}" class="watch-right" alt=" ">
+					   		     			@endif
+					   		     			@if(\App\Models\Product::ConditionType[$product->condition_type] == 'Brand New')
+					   		     				<div class="brand-new"> </div>
+					   		     			@endif
+					   		     			
+					   		     			@if($product->is_sold == 1)
+												<div class="sold-overlay">
+													<img src="{{ asset('frontend-template/img/soldout.png')}}">
+												</div>
+											@endif
+										</div>
+									</a>
+								</div>
+								<h4>
+									<a href="{{ route('product.show', $product->slug) }}">
+										{{ Str::limit($product->title, $limit = 20, $end = '...') }}
+									</a>
+								</h4>
+								<p>
+									{{ Str::limit($product->description, $limit = 100, $end = '...') }}
+								</p>
+								<li>
+									<span class="item-price">{{ Number::currency($product->price, 'AUD') }}</span>
+									<span class="item-type">({{ \App\Models\Product::ConditionType[$product->condition_type] }})</span>
+								</li>
+								<li><span class="item-seller">Seller: </span>{{ $product->createdBy->name }}</li>
+								<li><span class="item-date">Posted On: </span>{{ $product->created_at->format('d M, Y') }}</li>
 							</div>
-							<h4>
-								<a href="{{ route('product.show', $product->slug) }}">
-									{{ Str::limit($product->title, $limit = 20, $end = '...') }}
-								</a>
-							</h4>
-							<p>
-								{{ Str::limit($product->description, $limit = 100, $end = '...') }}
-							</p>
-							<li>
-								<span class="item-price">{{ Number::currency($product->price, 'AUD') }}</span>
-								<span class="item-type">({{ \App\Models\Product::ConditionType[$product->condition_type] }})</span>
-							</li>
-							<li><span class="item-seller">Seller: </span>{{ $product->createdBy->name }}</li>
-							<li><span class="item-date">Posted On: </span>{{ $product->created_at->format('d M, Y') }}</li>
+						</div>
+					@endforeach
+					<div class="clearfix"> </div>
+					<div class="text-center">
+						{{ $products->appends(request()->input())->links() }}
+					</div>
+				@else
+					<div class="panel panel-default">
+						<div class="panel-body">
+							Sorry !!! No Items Found
 						</div>
 					</div>
-				@endforeach
-				<div class="clearfix"> </div>
-				<div class="text-center">
-					{{ $products->appends(request()->input())->links() }}
-				</div>
-			@else
-				<div class="panel panel-default">
-					<div class="panel-body">
-						Sorry !!! No Items Found
-					</div>
-				</div>
-			@endif
+				@endif
+			</div>
 		</div>
 	</div>
 

@@ -5,13 +5,11 @@
 	@include('frontend.partials.featured-products')
 
 	<div class="shoes-grid">
-		<div class="panel panel-default welcome-panel">
-			<div class="panel-body">
-				<h2>Welcome to {{ env('APP_NAME') }}</h2>
-				<p class="m_text">
-					<b>{{ env('APP_NAME') }}</b> ({{ env('APP_FULL_NAME') }}) is a online platform to buy, sell and exchange of goods and commodities all over the Australia. Users can post the ads of their products <b>completely free</b>. We directly connect our customers to genuine sellers.
-				</p>
-			</div>
+		<div class="p-3 mb-3 bg-light rounded border">
+			<h2>Welcome to {{ env('APP_NAME') }}</h2>
+			<p class="m_text">
+				<b>{{ env('APP_NAME') }}</b> ({{ env('APP_FULL_NAME') }}) is a online platform to buy, sell and exchange of goods and commodities all over the Australia. Users can post the ads of their products <b>completely free</b>. We directly connect our customers to genuine sellers.
+			</p>
 		</div>
 		<div class="products">
 	     	<h5 class="latest-product">LATEST PRODUCTS</h5>	

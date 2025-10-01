@@ -9,7 +9,7 @@
 
 @if(count($featured_products) > 0)
 	<div class="p-3 mb-3 bg-light rounded border featured-products">
-		<h4 class="text-center">FEATURED PRODUCTS  </h4>
+		<h5 class="text-center">FEATURED PRODUCTS  </h5>
 		<div id="featured-div">
 			<ul id="featuredProductSlider">
 				@foreach($featured_products as $featured_product)
