@@ -185,7 +185,7 @@
 				</div>
 
 				<div class="text-center">
-					<button type="submit" class="btn btn-danger filter-button">Filter</button>
+					<button type="submit" class="btn btn-primary filter-button">Filter</button>
 				</div>
 			</form>
 		</div>
