@@ -475,7 +475,7 @@
             infinite: true,
             navigationTargetSelector: null,
             autoPlay: {
-                enable: false,
+                enable: true,
                 interval: 3000,
                 pauseOnHover: true
             },
