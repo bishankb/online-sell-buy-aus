@@ -986,6 +986,26 @@ ul.cute li i {
 
 /*Product Single*/
 
+.left-n {
+	font-size: 25px;
+}
+
+/* Previous / Next controls */
+#productCarousel .carousel-control-prev-icon,
+#productCarousel .carousel-control-next-icon {
+    background-color: black;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+#productCarousel .carousel-item img {
+    height: 400px;       /* adjust the height as needed */
+    width: 250px;             /* keep full width */
+    object-fit: cover;       /* crop/scale image nicely */
+}
+
+/*Product Single*/
+
 /*Login Section*/
 .account_grid {
 	padding: 0;
