@@ -16,7 +16,7 @@ body a{
 	-moz-transition: 0.5s all;
 }
 .top-header{
-	background: #F97E76;
+	background: #3e8be8;
 	padding: 0.7em 0;
 }
 .top-header-left{
@@ -286,7 +286,7 @@ ul.cute li{
 	font-weight: 700;
 }
 .banner-off label b{
-	color:#F97E76;
+	color:#3e8be8;
 }
 .banner-off  p{
 	font-size: 1em;
@@ -440,7 +440,7 @@ h5.latest-product{
 }
 .grid-chain-bottom h6 a:hover{
 	text-decoration:none;
-	color:#F97E76;
+	color:#3e8be8;
 }
 .chain-grid{
 	border: 1px solid #ddd;
@@ -795,7 +795,7 @@ p.m_text {
 .contact-form input[type="submit"] {
 	padding: 10px 25px;
 	color: #fff;
-	background: #F97E76;
+	background: #3e8be8;
 	font-size: 1.1em;
 	border: none;
 	outline: none;
@@ -816,7 +816,7 @@ p.m_text {
 	padding: 0;
 }
 .login-left h3, .login-right h3 {
-	color: #F97E76;
+	color: #3e8be8;
 	font-size: 1.1em;
 	text-transform: uppercase;
 	font-weight: 600;
@@ -831,7 +831,7 @@ p.m_text {
 	width: 95%;
 }
 .acount-btn {
-	background:#F97E76;
+	background:#3e8be8;
 	color: #FFF;
 	font-size: 0.9em;
 	padding: 0.7em 1.2em;
@@ -866,7 +866,7 @@ p.m_text {
 	padding:10px;
 }
 .login-right input[type="submit"] {
-	background:#F97E76;
+	background:#3e8be8;
 	color: #FFF;
 	font-size: 1em;
 	padding: 0.5em 1.2em;
@@ -887,7 +887,7 @@ a.forgot {
 }
 /*--register--*/
 .register-top-grid h3, .register-bottom-grid h3 {
-	color:#F97E76;
+	color:#3e8be8;
 	font-size: 1.1em;
 	padding-bottom: 5px;
 	margin: 0;
@@ -979,7 +979,7 @@ a.forgot {
 	margin-top:1em;
 }
 .register-but form input[type="submit"] {
-	background:#F97E76;
+	background:#3e8be8;
 	color: #FFF;
 	font-size:1em;
 	padding: 0.8em 2em;
@@ -1122,7 +1122,7 @@ ul.face-in-to li a span.facebook-in{
 	font-size:1.1em;
 }
 .cate-bottom ul li p a{
-	color:#F97E76;
+	color:#3e8be8;
 	font-size:1.1em;
 	font-weight: 500;
 }
@@ -1180,7 +1180,7 @@ ul.face-in-to li a span.facebook-in{
 .left-n{
 	font-size:1.8em;
 	float:left;
-	color:#F97E76;
+	color:#3e8be8;
 }
 .span_3_of_2 p {
 	font-size: 1em;
@@ -1208,7 +1208,7 @@ select.in-drop {
 }
 .in-of{
 	color:#fff;
-	background:#F97E76;
+	background:#3e8be8;
 	outline:none;
 	
 }

@@ -182,13 +182,13 @@ ul.login li a span {
 ul.login li a span i { 
 	font-size: 22px;
 	height: 22px;
-	color: #f97e76;
+	color: #3e8be8;
 }
 
  .account a span i, #nav_notification i { 
 	font-size: 22px;
 	height: 22px;
-	color: #f97e76;
+	color: #3e8be8;
 	margin-right: 12px;
 }
 
@@ -692,8 +692,8 @@ ul.cute li i {
 }
 
 .pagination > .active > span{
-    background-color: #f97e76;
-    border-color: #f97e76;
+    background-color: #3e8be8;
+    border-color: #3e8be8;
 }
 /*Product List*/
 
@@ -1888,7 +1888,7 @@ ul.cute li i {
 
 .cont-body .contact-no .phone-span {
     font-size: 15px;
-    background-color: #f97e76;
+    background-color: #3e8be8;
 }
 
 .cont-body .contact-no i {
@@ -2066,6 +2066,7 @@ ul.cute li i {
 }
 
 .featured-products .grid-flex {
+	color: #3e8be8;
 	float: right;
 	text-align: left;
 	margin-right: 60px;
