@@ -397,7 +397,7 @@
 
 		@if(count($related_products) > 0)
 			<div class="p-3 mb-3 bg-light rounded border featured-products">
-				<h4 class="text-center">Related PRODUCTS  </h4>
+				<h4 class="text-center">Related Products  </h4>
 			    <ul id="relatedProductSlider">
 					@foreach($related_products as $related_product)
 						<li>
