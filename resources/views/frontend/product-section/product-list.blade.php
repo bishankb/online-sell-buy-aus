@@ -173,8 +173,8 @@
 				<div class="form-group">
 					<label for="sel1">Price:</label>
 					<div class="price-range">
-						<input type="text" name="min_price" class="form-control" placeholder="Min Price" value="{{ old('min_price') }}">
-						<input type="text" name="max_price" class="form-control" placeholder="Max Price" value="{{ old('max_price') }}">
+						<input type="text" name="min_price" class="form-control" placeholder="Min Price" value="{{ Request('min_price') }}">
+						<input type="text" name="max_price" class="form-control" placeholder="Max Price" value="{{ Request('max_price') }}">
 					</div>
 				</div>
 
