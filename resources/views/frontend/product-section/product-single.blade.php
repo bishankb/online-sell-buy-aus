@@ -35,7 +35,7 @@
 				<div class="cart-a">
 					<div class="product-name">{{ $product->title }}</div>
 					<h5 class="now-get get-cart-in">
-						<span class="label label-danger">Total Views: {{ views($product)->count() }}</span>
+						<span class="badge bg-danger">Total Views: {{ views($product)->count() }}</span>
 					</h5>
 
 					<div class="clearfix"></div>
@@ -47,7 +47,7 @@
 						@endif
 					</div>
 					<h5 class="now-get get-cart-in">
-						<span class="label label-success">{{ \App\Models\Product::ConditionType[$product->condition_type] }}</span>
+						<span class="badge bg-success">{{ \App\Models\Product::ConditionType[$product->condition_type] }}</span>
 					</h5>
 
 					<div class="clearfix"></div>
@@ -149,11 +149,11 @@
 
 	  	<div class="row">
 	      	<div class="col-md-12">
-	          	<div class="panel panel-primary panel-single">
-				    <div class="panel-heading">
+	          	<div class="card mb-3 card-single">
+				    <div class="card-header bg-primary text-white">
 				    	<h5><i class="fa fa-money"></i>Pricing Detail</h5>
 				    </div>
-				     <div class="panel-body">
+				     <div class="card-body">
 				     	<div class="product-detail">
 				     		<table>
 				     			<tr>
@@ -186,11 +186,11 @@
 		@if($product->has_home_delivery == 1 || isset($product->delivery_area) || isset($product->delivery_charge))
 			<div class="row">
 		      	<div class="col-md-12">
-		          	<div class="panel panel-primary panel-single">
-					    <div class="panel-heading">
+		          	<div class="card mb-3 card-single">
+					    <div class="card-header bg-primary text-white">
 					    	<h5><i class="fa fa-plane"></i>Delivery Detail</h5>
 					    </div>
-					     <div class="panel-body">
+					     <div class="card-body">
 					     	<div class="product-detail">
 					     		<table>
 					     			<tr>
@@ -236,11 +236,11 @@
 		)
 			<div class="row">
 		      	<div class="col-md-12">
-		          	<div class="panel panel-primary panel-single">
-					    <div class="panel-heading">
+		          	<div class="card mb-3 card-single">
+					    <div class="card-header bg-primary text-white">
 					    	<h5><i class="fa fa-info-circle"></i>Product Detail</h5>
 					    </div>
-					     <div class="panel-body">
+					     <div class="card-body">
 					     	<div class="product-detail">
 					     		<table>
 					     			@isset($product->manufacturer)
@@ -334,11 +334,11 @@
 		@isset($product->features)
 			<div class="row">
 		      	<div class="col-md-12">
-		          	<div class="panel panel-primary panel-single">
-					    <div class="panel-heading">
+		          	<div class="card mb-3 card-single">
+					    <div class="card-header bg-primary text-white">
 					    	<h5><i class="fa fa-star"></i>Feature</h5>
 					    </div>
-					     <div class="panel-body product-features">
+					     <div class="card-body product-features">
 						     	{!! $product->features !!}
 					     </div>
 				    </div>
@@ -348,14 +348,14 @@
 
 		<div class="row">
 	      	<div class="col-md-12">
-	          	<div class="panel panel-primary panel-single question-panel">
-				    <div class="panel-heading">
+	          	<div class="card mb-3 card-single question-panel">
+				    <div class="card-header bg-primary text-white">
 				    	<h5>
 				    		<i class="fa fa-question-circle"></i>Discussion
 				    		
 				    	</h5>
 				    </div>
-				    <div class="panel-body">
+				    <div class="card-body">
 				     	<h5 class="no-querries">No querries has been asked yet.</h5>
 						@if (Auth::user())
 							@if($product->created_by != Auth::user()->id)

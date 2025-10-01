@@ -736,6 +736,7 @@ ul.cute li i {
 }
 
 .product-detail li {
+	font-size: 15px;
 	margin-bottom: 12px;
 	font-weight: 600;
 	list-style: none;
@@ -763,76 +764,103 @@ ul.cute li i {
 	float: none;
 }
 
-.panel-single {
+.card-single {
 	border-color: #d0d0d0;
 	margin-bottom: 40px;
 }
 
-.panel-single .panel-heading {
-	background-color: #157cad;
+.card-single .card-header {
+	background-color: #157cad !important;
 	color: #fff;
 	border-color: #eee;
 	padding: 3px 15px;
 }
 
-.panel-single .panel-heading h5 {
+.card-single .card-header  h5 {
 	font-size: 16px;
+	margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.panel-single .panel-heading i {
+.card-single .card-header  i {
 	margin-right: 12px;
 }
 
-.panel-single .panel-body li {
+.card-single .card-body{
+	font-size: 14px;
+	list-style: disc;
+	margin: 5px;
+}
+
+.card-single .card-body li {
 	font-size: 14px;
 	list-style: disc;
 }
 
-.panel-single .panel-body p {
+.card-single .panel-body p {
 	line-height: 32px;
 	text-align: justify;
 }
 
-.panel-single .panel-body td {
+.card-single .panel-body td {
 	line-height: 32px;
 	list-style: none;
 	font-size: 14px;
 }
 
-.panel-single .td-detail-header {
-	width: 240px;
+.card .card-body td {
+	line-height: 32px;
+    font-size: 14px;
+    list-style: none;
 }
 
-.panel-single .td-detail {
+.card-single .td-detail-header {
+	width: 240px;
+	display: table-cell;
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+    line-height: 32px;
+    font-size: 14px;
+    list-style: none;
+}
+
+.card-single .td-detail-header:before {
+  content: '•';
+  position: absolute;
+  color: black;
+  left: 12px;
+}
+
+.card-single .td-detail {
 	width: 75%;
 }
 
 @media(max-width: 1024px) {
-	.panel-single .td-detail-header {
+	.card-single .td-detail-header {
 		width: 300px;
 	}
 
-	.panel-single .td-detail {
+	.card-single .td-detail {
 		width: 75%;
 	}
 }
 
 @media(max-width: 768px) {
-	.panel-single .td-detail-header {
+	.card-single .td-detail-header {
 		width: 350px;
 	}
 
-	.panel-single .td-detail {
+	.card-single .td-detail {
 		width: 65%;
 	}
 }
 
 @media(max-width: 568px) {
-	.panel-single .td-detail-header {
+	.card-single .td-detail-header {
 		width: 360px;
 	}
 
-	.panel-single .td-detail {
+	.card-single .td-detail {
 		width: 60%;
 	}
 }
@@ -860,7 +888,7 @@ ul.cute li i {
 	font-weight: normal;
 }
 
-.panel-single .panel-body .other-detail:before {
+.card-single .panel-body .other-detail:before {
 	content:"• ";
 }
 
@@ -903,7 +931,7 @@ ul.cute li i {
 	font-weight: 600;
 }
 
-.panel-single .panel-body .question-warning li {
+.card-single .panel-body .question-warning li {
 	margin: 12px 0;
 	font-size: 14px;
 	line-height: 22px;
@@ -936,7 +964,7 @@ ul.cute li i {
 	color: #676565;
 }
 
-.panel-single .login-links {
+.card-single .login-links {
 	color: #E74C3C;
     text-decoration: underline;
 }
@@ -1472,6 +1500,11 @@ ul.cute li i {
 }
 
 /*Buyer Question*/
+.question-panel h5 {
+	font-size: 14px;
+}
+
+
 .question-panel .no-querries {
 	margin-bottom: 30px;
 }
