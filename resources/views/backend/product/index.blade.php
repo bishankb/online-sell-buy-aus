@@ -80,7 +80,7 @@
                     </ul>
                   </div>
 
-                  <div class="dropdown inline">
+                    <div class="dropdown inline">
                       <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
                         @if(request('category') != null)
                           {{ request('category') }}

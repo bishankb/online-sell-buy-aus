@@ -60,6 +60,14 @@
                 </a>
             </li>
         @endcan
+
+        @can('view_buyer_questions')
+            <li class="nav-item">
+                <a href="{{route('buyer-questions.index')}}" class="nav-link {{Request::is('admin/buyer-questions*') ? 'active' : ''}}">
+                  <i class="fa fa-question-circle" style="margin: 5px;"></i><span>Buyer Questions</span>
+                </a>
+            </li>
+        @endcan
         
         @can('view_users')
           <li class="nav-item {Request::is('admin/users*') ? 'active' : ''}}">

@@ -22,7 +22,8 @@ class PermissionTableSeeder extends Seeder
             'products',
             'faqs',
             'cities',
-            'countries'
+            'countries',
+            'buyer_questions'
         ];
 
         foreach ($permissions as $key => $permission) {

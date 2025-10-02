@@ -58,6 +58,10 @@ Route::group([
 
     Route::get('/', 'App\Http\Controllers\Backend\DashboardController@index')->name('backend.dashboard');
 
+    Route::resource('/buyer-questions', 'App\Http\Controllers\Backend\BuyerQuestionController');
+    Route::get('/buyer-questions/{buyer_question}/reply', 'App\Http\Controllers\Backend\BuyerQuestionController@reply')->name('buyer-questions.reply');
+    Route::patch('/buyer-questions/{buyer_question}/send-reply', 'App\Http\Controllers\Backend\BuyerQuestionController@sendReply')->name('buyer-questions.sendReply');
+
 });
 
 //Frontend Routes
