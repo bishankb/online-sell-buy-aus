@@ -16,7 +16,7 @@ class BuyerQuestion extends Model
         'product_id',
         'question',
         'answer',
-        'answer2',
+        'answer2',  //Admin Answer
         'asked_by',
         'is_read'
     ];

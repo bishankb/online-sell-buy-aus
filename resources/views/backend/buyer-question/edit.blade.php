@@ -46,45 +46,43 @@
 						</table>
 
 						<div class="form-group required {{ $errors->has('question') ? ' has-error' : '' }}">
-						      	<label for="question" class="form-label">Buyer's query</label>
+					      	<label for="question" class="form-label">Buyer's query</label>
 
-						      	<textarea name="question" id="comment" class="form-control" rows="3" minlength="2" maxlength="256" required>{{ old('question', $buyer_question->question ?? '') }}</textarea>
+					      	<textarea name="question" id="comment" class="form-control" rows="3" minlength="2" maxlength="256" required>{{ old('question', $buyer_question->question ?? '') }}</textarea>
 
-						      	 @if ($errors->has('question'))
+					      	 @if ($errors->has('question'))
+				                <span class="help-block">
+				                    <strong>{{ $errors->first('question') }}</strong>
+				                </span>
+				            @endif
+					    </div>
+						@isset($buyer_question->answer)
+							<div class="form-group {{ $errors->has('answer') ? ' has-error' : '' }}">
+								<label for="answer" class="form-label">Seller Answer: <span class="font-13">(Clear the message to delete the seller answer)</span></label>
+					      	
+					      		<textarea name="answer" id="comment" class="form-control" rows="3" minlength="2" maxlength="256">{{ old('answer', $buyer_question->answer ?? '') }}</textarea>
+								
+						      	 @if ($errors->has('answer'))
 					                <span class="help-block">
-					                    <strong>{{ $errors->first('question') }}</strong>
+					                    <strong>{{ $errors->first('answer') }}</strong>
 					                </span>
 					            @endif
 						    </div>
-							@isset($buyer_question->answer)
-								<div class="form-group {{ $errors->has('answer') ? ' has-error' : '' }}">
-									<label for="answer" class="form-label">Seller Answer: <span class="font-13">(Clear the message to delete the seller answer)</span></label>
-						      	
-						      		<textarea name="answer" id="comment" class="form-control" rows="3" minlength="2" maxlength="256">{{ old('answer', $buyer_question->answer ?? '') }}</textarea>
-									
-							      	 @if ($errors->has('answer'))
-						                <span class="help-block">
-						                    <strong>{{ $errors->first('answer') }}</strong>
-						                </span>
-						            @endif
-							    </div>
-							@endisset
-							@isset($buyer_question->answer2)
-							    <div class="form-group {{ $errors->has('answer2') ? ' has-error' : '' }}">
-							    	<label for="answer2" class="form-label">Your Answer: <span class="font-13">(Clear the message to delete the your answer)</span></label>
-						      	
-						      		<textarea name="answer2" id="comment" class="form-control" rows="3" minlength="2" maxlength="256">{{ old('answer2', $buyer_question->answer2 ?? '') }}</textarea>
+						@endisset
+						@isset($buyer_question->answer2)
+						    <div class="form-group {{ $errors->has('answer2') ? ' has-error' : '' }}">
+						    	<label for="answer2" class="form-label">{{ env('APP_NAME')}} (Admin) Answer: <span class="font-13">(Clear the message to delete the your answer)</span></label>
+					      	
+					      		<textarea name="answer2" id="comment" class="form-control" rows="3" minlength="2" maxlength="256">{{ old('answer2', $buyer_question->answer2 ?? '') }}</textarea>
 
-							      	 @if ($errors->has('answer2'))
-						                <span class="help-block">
-						                    <strong>{{ $errors->first('answer2') }}</strong>
-						                </span>
-						            @endif
-							    </div>
-							@endisset
-						</div>
-
-                    </div>
+						      	 @if ($errors->has('answer2'))
+					                <span class="help-block">
+					                    <strong>{{ $errors->first('answer2') }}</strong>
+					                </span>
+					            @endif
+						    </div>
+						@endisset
+					</div>
                     <!--begin::Footer-->
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Save</button>

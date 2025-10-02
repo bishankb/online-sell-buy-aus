@@ -40,25 +40,24 @@
 							</ul>
 							<ul class="login">
 						      	<li class="dropdown">
-						      		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						      		<a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="userDropdown" aria-expanded="false">
 						      			@if(isset( Auth::user()->profile->image->filename))
 		                					<img src="/storage/media/user/{{ Auth::user()->id }}/thumbnail/{{ Auth::user()->profile->image->filename }}" alt="User Image" class="user-image">
 						      			@else 
 						      				<span> <i class="fa fa-user"></i></span>
 						      			@endif
 						      		</a>
-						      		<span class="caret"></span></a>
-							        <ul class="dropdown-menu custom-dropdown">
+							        <ul class="dropdown-menu dropdown-menu-end custom-dropdown">
 										@can('view_dashboards')
 											<li>
-											    <a href="{{ route('backend.dashboard') }}" target="__blank">Dashboard</a>
+											    <a class="dropdown-item" href="{{ route('backend.dashboard') }}" target="__blank">Dashboard</a>
 											</li>
 										@endcan
-							        	<li><a href="#">My Account</a></li>
+							        	<li><a class="dropdown-item" href="#">My Account</a></li>
 							          	<li>
-											<a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+											<a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
 											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-												{{ csrf_field() }}
+												@csrf
 											</form>
 										</li>
 							        </ul>
@@ -117,26 +116,26 @@
 
 					<ul class="login">
 				      	<li class="dropdown">
-				      		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				      		<a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="userDropdown" aria-expanded="false">
 				      			@if(isset( Auth::user()->profile->image->filename))
                 					<img src="/storage/media/user/{{ Auth::user()->id }}/thumbnail/{{ Auth::user()->profile->image->filename }}" alt="User Image" class="user-image">
 				      			@else 
 				      				<span> <i class="fa fa-user"></i></span>
 				      			@endif
-						        {{ Str::limit(auth()->user()->name, $limit = 7, $end = '...')  }}
+				      			{{ Str::limit(auth()->user()->name, $limit = 7, $end = '...')  }}
+
 				      		</a>
-				      		<span class="caret"></span></a>
-					        <ul class="dropdown-menu custom-dropdown">
+					        <ul class="dropdown-menu dropdown-menu-end custom-dropdown">
 								@can('view_dashboards')
 									<li>
-									    <a href="{{ route('backend.dashboard') }}" target="__blank">Dashboard</a>
+									    <a class="dropdown-item" href="{{ route('backend.dashboard') }}" target="__blank">Dashboard</a>
 									</li>
 								@endcan
-					        	<li><a href="#">My Account</a></li>
+					        	<li><a class="dropdown-item" href="#">My Account</a></li>
 					          	<li>
-									<a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+									<a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
 									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-										{{ csrf_field() }}
+										@csrf
 									</form>
 								</li>
 					        </ul>

@@ -63,7 +63,7 @@
 								@endisset
 								@isset($buyer_question->answer2)
 									<tr>
-										<td class="td-header">Your Answer:</td>
+										<td class="td-header">{{ env('APP_NAME')}} (Admin) Answer:</td>
 										<td class="small-height">{{ $buyer_question->answer2 }}</td>
 									</tr>
 								@endisset
@@ -73,7 +73,7 @@
 
 						@if($buyer_question->answer2 == null)
 							<div class="form-group {{ $errors->has('answer2') ? ' has-error' : '' }}">
-						      	<label for="answer2" class="form-label">Your Answer:</label>
+						      	<label for="answer2" class="form-label">{{ env('APP_NAME')}} (Admin) Answer:</label>
 					      	
 					      		<textarea name="answer2" id="comment" class="form-control" rows="3" minlength="2" maxlength="256">{{ old('answer2', $buyer_question->answer2 ?? '') }}</textarea>
 								
@@ -87,7 +87,7 @@
 
 					</div>
                 	@if($buyer_question->answer2 == null)
-	                    <div class="box-footer">
+	                    <div class="card-footer">
 	                        <button type="submit" class="btn btn-success">
 					    		Submit
 					    	</button>

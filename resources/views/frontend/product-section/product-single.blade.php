@@ -378,14 +378,52 @@
 				    <div class="card-header bg-primary text-white">
 				    	<h5>
 				    		<i class="fa fa-question-circle"></i>Discussion
-				    		
+				    		@if(count($product->buyerQuestions) > 4) 
+					    		<span style="float: right;">
+					    			<i class="fa fa-plus"></i><a href="{{ route('buyer-question.readMore', $product->slug) }}" class="read-more">Read All</a>
+					    		</span>
+					    	@endif
 				    	</h5>
 				    </div>
 				    <div class="card-body">
-				     	<h5 class="no-querries">No querries has been asked yet.</h5>
+				    	@forelse($buyer_questions as $buyer_question)
+					     	<div class="product-question">
+					     		<div class="question-section">
+					     			<span class="question">
+					     				Q. {{ $buyer_question->question }}
+					     			</span>
+					     			<span class="asked-by">
+					    				Asked By: {{ $buyer_question->askedBy->name }}
+					    			</span>
+					     		</div>
+					     		@isset($buyer_question->answer)
+									<div class="question-section">
+						     			<span class="question">
+						     				A. {{ $buyer_question->answer }}
+						     			</span>
+						     			<span class="asked-by">
+						    				Answered By: {{ $buyer_question->product->createdBy->name }} (Seller)
+						    			</span>
+						     		</div>
+						     	@endisset
+						     	@isset($buyer_question->answer2)
+									<div class="question-section">
+						     			<span class="question">
+						     				A2. {{ $buyer_question->answer2 }}
+						     			</span>
+						     			<span class="asked-by">
+						    				Answered By: {{ env('APP_NAME') }}  (Admin)
+						    			</span>
+						     		</div>
+						     	@endisset
+					     	</div>
+					    @empty
+					    	<h5 class="no-querries">No querries has been asked yet.</h5>
+						@endif
+						
 						@if (Auth::user())
 							@if($product->created_by != Auth::user()->id)
-						     	<form class="question-form" method="POST" action="#">
+						     	<form class="question-form" method="POST" action="{{ route('buyer-question.store') }}">
 						     		@csrf
 						     		<input type="hidden" name="product_slug" value="{{ $product->slug }}">
 								    <div class="form-group {{ $errors->has('question') ? ' has-error' : '' }}">
@@ -405,7 +443,7 @@
 								    </div>
 								</form>
 
-								<div class="alert alert-danger question-warning">
+								<div class="callout callout-danger question-warning">
 								  	<strong>Warning!</strong>
 								  	<li>Do not use any obscene/abusive words which may hurt the feelings of other users. Such posts will be deleted immediately, and your account will be banned.</li>
 									<li>Only post comment regarding this ad. Do not advertise about other ads, product or website.</li>
@@ -497,6 +535,6 @@
                 }
             },
 	    });
-	});
+	});z
 </script>
 

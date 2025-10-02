@@ -36,7 +36,7 @@ class UserTableSeeder extends Seeder
                 'password'          => bcrypt('secret'),
                 'remember_token'    => Str::random(10),
                 'role_id'           => 1, 
-                'active'            => false,
+                'active'            => true,
             ]
         );
     }

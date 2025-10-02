@@ -276,6 +276,11 @@ class Product extends BaseModel implements Viewable
         return $this->belongsTo(City::class);
     }
 
+    public function buyerQuestions()
+    {
+        return $this->hasMany(BuyerQuestion::class);
+    }
+
     /**
      * Delete the relation of user
     */

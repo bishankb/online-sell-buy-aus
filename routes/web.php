@@ -78,5 +78,17 @@ Route::get('/view-product/{product}', 'App\Http\Controllers\Frontend\ProductCont
 Route::get('/filter/product', 'App\Http\Controllers\Frontend\ProductController@filter')->name('product.filter');
 Route::get('/search/product', 'App\Http\Controllers\Frontend\ProductController@search')->name('product.search');
 
+Route::group([
+    'prefix' => 'admin',
+    'middleware' => ['auth']
+], function(){    
+    Route::get('/buyer-question/{productSlug}/read-more', 'App\Http\Controllers\Frontend\BuyerQuestionController@readMore')->name('buyer-question.readMore');
+    Route::post('/buyer-question/store', 'App\Http\Controllers\Frontend\BuyerQuestionController@store')->name('buyer-question.store');
+});
+
+
+
+
+
 
 

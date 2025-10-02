@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('product_id');
             $table->text('question');
             $table->text('answer')->nullable();
-            $table->text('answer2')->nullable();
+            $table->text('answer2')->nullable(); //Admin Answer
             $table->unsignedInteger('asked_by');
             $table->boolean('is_read')->default(0);
             $table->timestamps();

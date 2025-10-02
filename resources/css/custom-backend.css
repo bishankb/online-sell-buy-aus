@@ -458,7 +458,7 @@ table .btn-link:focus{
 /*Buyer Question*/
 .reply-table .td-header {
     line-height: 32px;
-    width: 200px;
+    width: 280px;
 }
 
 @media(max-width: 580px) {

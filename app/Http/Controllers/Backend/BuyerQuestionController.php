@@ -56,7 +56,6 @@ class BuyerQuestionController extends Controller
      */
     public function reply($question_id)
     {
-
         $buyer_question = BuyerQuestion::where('question_id', $question_id)->firstOrFail();
 
         return view('backend.buyer-question.reply', compact('buyer_question'));
@@ -100,7 +99,7 @@ class BuyerQuestionController extends Controller
      */
     public function edit($question_id)
     {
-        $buyer_question = BuyerQuestion::where('question_id', $question_id)->firstOrFail();
+        $buyer_question = BuyerQuestion::find($question_id);
 
         return view('backend.buyer-question.edit', compact('buyer_question'));
     }
@@ -114,7 +113,7 @@ class BuyerQuestionController extends Controller
      */
     public function update(Request $request, $question_id)
     {
-        $buyer_question = BuyerQuestion::where('question_id', $question_id)->firstOrFail();
+        $buyer_question = BuyerQuestion::find($question_id);
 
         $this->validate($request, [
             'question' => 'required|min:2|max:256',
@@ -174,7 +173,7 @@ class BuyerQuestionController extends Controller
      */
     public function destroy($question_id)
     {
-        $buyer_question = BuyerQuestion::where('question_id', $question_id)->firstOrFail();
+        $buyer_question = BuyerQuestion::find($question_id);
 
         try {
             $buyer_question->delete();
