@@ -27,54 +27,58 @@
 				<div class="logo">
 					<a href="{{ route('frontend.home') }}"><img src="{{ asset('frontend-template/img/logo1.png') }}" alt=" " /></a>
 				</div>
-				<div class="mobile-login-section">
-						@if (Auth::user())
-							<ul class="login notify-bell">
-		                        <li class="dropdown notification-btn">
-						      		<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="nav_notification">
-		                                <i class="fa fa-bell" aria-hidden="true"></i>
-		              					
-		                            </a>
-		                            
-		                        </li>
-							</ul>
-							<ul class="login">
-						      	<li class="dropdown">
-						      		<a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="userDropdown" aria-expanded="false">
-						      			@if(isset( Auth::user()->profile->image->filename))
-		                					<img src="/storage/media/user/{{ Auth::user()->id }}/thumbnail/{{ Auth::user()->profile->image->filename }}" alt="User Image" class="user-image">
-						      			@else 
-						      				<span> <i class="fa fa-user"></i></span>
-						      			@endif
-						      		</a>
-							        <ul class="dropdown-menu dropdown-menu-end custom-dropdown">
-										@can('view_dashboards')
-											<li>
-											    <a class="dropdown-item" href="{{ route('backend.dashboard') }}" target="__blank">Dashboard</a>
-											</li>
-										@endcan
-							        	<li><a class="dropdown-item" href="#">My Account</a></li>
-							          	<li>
-											<a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-												@csrf
-											</form>
-										</li>
-							        </ul>
-								</li>
-							</ul>
 
-						@else
-							<ul class="login" style="margin-left: 22px; width: 8%">
-								<li><a href="{{ route('login') }}"><span> <i class="fa fa-lock"></i></span></a></li>
-							</ul>
-						@endif
-						<div class="account">
-							<a href="#">
-								<span> <i class="fa fa-shopping-cart"></i></span>
-							</a>
-						</div>
+  				<!--Mobile Screen-->
+				<div class="mobile-login-section">
+					@if (Auth::user())
+						<ul class="login notify-bell">
+	                        <li class="dropdown notification-btn">
+					      		<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="nav_notification">
+	                                <i class="fa fa-bell" aria-hidden="true"></i>
+	              					
+	                            </a>
+	                            
+	                        </li>
+						</ul>
+						<ul class="login">
+					      	<li class="dropdown">
+					      		<a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="userDropdown" aria-expanded="false">
+					      			@if(isset( Auth::user()->profile->image->filename))
+	                					<img src="/storage/media/user/{{ Auth::user()->id }}/thumbnail/{{ Auth::user()->profile->image->filename }}" alt="User Image" class="user-image">
+					      			@else 
+					      				<span> <i class="fa fa-user"></i></span>
+					      			@endif
+					      		</a>
+						        <ul class="dropdown-menu dropdown-menu-end custom-dropdown">
+									@can('view_dashboards')
+										<li>
+										    <a class="dropdown-item" href="{{ route('backend.dashboard') }}" target="_blank">Dashboard</a>
+										</li>
+									@endcan
+						        	<li><a class="dropdown-item" href="#">My Account</a></li>
+						          	<li>
+										<a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+										<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+											@csrf
+										</form>
+									</li>
+						        </ul>
+							</li>
+						</ul>
+
+					@else
+						<ul class="login" style="margin-left: 22px; width: 8%">
+							<li><a href="{{ route('login') }}"><span> <i class="fa fa-lock"></i></span></a></li>
+						</ul>
+					@endif
+					<div class="account">
+						<a href="#">
+							<span> <i class="fa fa-shopping-cart"></i></span>
+						</a>
+					</div>
 				</div>
+  				<!--Mobile Screen-->
+
 				<div class="search">
 					<form method="GET" action="{{ route('product.search') }}">
 						@if(Request('search_product'))
@@ -87,6 +91,8 @@
 				</div>
 				<div class="clearfix"> </div>
 			</div>
+
+			<!--Large Screen-->
 			<div class="login-section">					
 				@if (Auth::user())
 					<ul class="login" style="width: 30px;">
@@ -128,7 +134,7 @@
 					        <ul class="dropdown-menu dropdown-menu-end custom-dropdown">
 								@can('view_dashboards')
 									<li>
-									    <a class="dropdown-item" href="{{ route('backend.dashboard') }}" target="__blank">Dashboard</a>
+									    <a class="dropdown-item" href="{{ route('backend.dashboard') }}" target="_blank">Dashboard</a>
 									</li>
 								@endcan
 					        	<li><a class="dropdown-item" href="#">My Account</a></li>
@@ -154,6 +160,8 @@
 					</a>
 				</div>
 			</div>
+			<!--Large Screen-->
+
 			<div class="clearfix"> </div>	
 		</div>
 	</div>

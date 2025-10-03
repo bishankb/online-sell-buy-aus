@@ -2,16 +2,9 @@
   <!--begin::Sidebar Brand-->
   <div class="sidebar-brand">
     <!--begin::Brand Link-->
-    <a href="./index.html" class="brand-link">
-      <!--begin::Brand Image-->
-      <img
-        src="{{ asset('adminlte/img/AdminLTELogo.png') }}"
-        alt="AdminLTE Logo"
-        class="brand-image opacity-75 shadow"
-      />
-      <!--end::Brand Image-->
+    <a href="{{ route('frontend.home') }}" target="__blank" class="brand-link">
       <!--begin::Brand Text-->
-      <span class="brand-text fw-light">{{ env('APP_NAME')}}</span>
+      <span class="brand-text fw-light"><i class="fa fa-cogs" style="margin: 5px;"></i>{{ env('APP_NAME')}}</span>
       <!--end::Brand Text-->
     </a>
     <!--end::Brand Link-->
