@@ -487,25 +487,6 @@
 
 <script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function () {
-		// Collect all source images for Fancybox
-	    var allimages = [];
-	    $('.etalage_source_image').each(function(){
-	        allimages.push({ href: $(this).attr('src') });
-	    });
-
-	    // Initialize Etalage
-	    $('#etalage').etalage({
-	        thumb_image_width: 300,
-	        thumb_image_height: 400,
-	        source_image_width: 900,
-	        source_image_height: 1200,
-	        show_hint: false,
-	        click_callback: function(image_anchor, instance_id){
-	            var index = $( '[href="' + image_anchor + '"]' ).first().parents('li').index();
-	            $.fancybox.open(allimages, { index: index });
-	        }
-	    });
-
 		$("#relatedProductSlider").flexisel({
 			visibleItems: 4,
             itemsToScroll: {{ config('product.feature_item_scroll') }},
@@ -535,6 +516,6 @@
                 }
             },
 	    });
-	});z
+	});
 </script>
 

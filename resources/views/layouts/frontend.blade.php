@@ -36,44 +36,34 @@
 @yield('frontend-script')
 
 <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function () {
+    @if (session('success'))
+        toastr.success("{{ session('success') }}");
+    @elseif (session('error'))
+        toastr.error("{{ session('error') }}");
+    @elseif (session('info'))
+        toastr.info("{{ session('info') }}");
+    @elseif (session('warning'))
+        toastr.warning("{{ session('warning') }}");
+    @endif  
+  });
+
   $(function() {
    var menu_ul = $('.menu > li > ul'),
    menu_a  = $('.menu > li > a');
    menu_ul.hide();
    menu_a.click(function(e) {
-     if(!$(this).hasClass('active')) {
-       menu_a.removeClass('active');
-       menu_ul.filter(':visible').slideUp('normal');
-       $(this).addClass('active').next().stop(true,true).slideDown('normal');
-     } else {
+    if(!$(this).hasClass('active')) {
+      menu_a.removeClass('active');
+      menu_ul.filter(':visible').slideUp('normal');
+      $(this).addClass('active').next().stop(true,true).slideDown('normal');
+    } else {
        $(this).removeClass('active');
        $(this).next().stop(true,true).slideUp('normal');
-     }
-   });
-   
- });
+      }
+    });
+  });
 
-  @if(Session::has('message'))
-    var type = "{{ Session::get('alert-type', 'info') }}";
-    switch(type){
-      case 'success':
-      toastr.success("{{ Session::get('message') }}");
-      break;
-      
-      case 'info':
-      toastr.info("{{ Session::get('message') }}");
-      break;
-
-      case 'warning':
-      toastr.warning("{{ Session::get('message') }}");
-      break;
-
-      case 'error':
-      toastr.error("{{ Session::get('message') }}");
-      break;
-    }
-  @endif
-  
 </script>
 </body>
 </html>

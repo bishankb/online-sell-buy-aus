@@ -51,20 +51,18 @@ class BuyerQuestionController extends Controller
             ]);
 
             $notification = array(
-                'message'    => 'Your query has been submitted. You will be notified by the seller later.',
-                'alert-type' => 'success'
+                'success'    => 'Your query has been submitted. You will be notified by the seller later.',
             );
 
         } catch (\Exception $exception) {
             logger()->error($exception->getMessage());
             
             $notification = array(
-                'message'    => 'Internal Error, Please try again later.',
-                'alert-type' => 'error'
+                'error'    => 'Internal Error, Please try again later.',
             );
         }
 
-        return redirect()->route('buyer-question.readMore', $product->slug)->with($notification);
+        return redirect()->route('product.show', $product->slug)->with($notification);
     }
 
     /**

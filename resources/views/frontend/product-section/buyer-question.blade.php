@@ -84,8 +84,8 @@
 			    </div>
 			</div>
 		</div>
-		<div class="text-center">
-			{{ $buyer_questions->appends(request()->input())->links() }}
+		<div class="d-flex justify-content-center">
+		    {{ $buyer_questions->links('vendor.pagination.bootstrap-4') }}
 		</div>
     </div>
 @endsection

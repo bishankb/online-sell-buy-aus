@@ -24,8 +24,11 @@ import "../frontend-template/js/jquery.wmuSlider.js";
 import "../frontend-template/css/style.css";
 import "../frontend-template/css/custom.css";
 import "../frontend-template/js/custom.js";
+
 import "../../node_modules/toastr/toastr.js";
 import "../../node_modules/toastr/build/toastr.css";
+
+window.toastr = toastr;
 
 //CK Editor
 document.addEventListener('DOMContentLoaded', function () {
@@ -37,3 +40,11 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
+
+// Optional: Customize toastr default options
+toastr.options = {
+    "closeButton": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+};
+
