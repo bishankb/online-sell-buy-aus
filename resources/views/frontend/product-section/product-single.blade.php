@@ -123,18 +123,33 @@
 								@endif
 								<li>
 									<i class="fa fa-envelope"></i>										
-									<span class="detail-title">Email:</span> {{ $product->createdBy->email }}
+									<span class="detail-title">Email:</span>
+										@if (Auth::user())
+											{{ $product->createdBy->email }}
+										@else
+											***** <a style="color: #E74C3C;" href="{{ route('login') }}">Login</a> to View
+										@endif
 								</li>
 								@isset($product->createdBy->profile->phone1)
 									<li>
 										<i class="fa fa-phone"></i>										
-										<span class="detail-title">Phone:</span> {{ $product->createdBy->profile->phone1 }}
+										<span class="detail-title">Phone:</span> 
+										@if (Auth::user())
+											{{ $product->createdBy->profile->phone1 }}
+										@else
+											***** <a style="color: #E74C3C;" href="{{ route('login') }}">Login</a> to View
+										@endif
 									</li>
 								@endisset
 								@isset($product->createdBy->profile->phone2)
 									<li>
 										<i class="fa fa-phone"></i>										
-										<span class="detail-title">Secondary Phone:</span> {{ $product->createdBy->profile->phone2 }}
+										<span class="detail-title">Secondary Phone:</span> 
+										@if (Auth::user())
+											{{ $product->createdBy->profile->phone2 }}
+										@else
+											***** <a style="color: #E74C3C;" href="{{ route('login') }}">Login</a> to View
+										@endif
 									</li>
 								@endisset
 							</div>

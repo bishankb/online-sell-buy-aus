@@ -2,7 +2,7 @@
   <!--begin::Sidebar Brand-->
   <div class="sidebar-brand">
     <!--begin::Brand Link-->
-    <a href="{{ route('frontend.home') }}" target="__blank" class="brand-link">
+    <a href="{{ route('frontend.home') }}" target="_blank" class="brand-link">
       <!--begin::Brand Text-->
       <span class="brand-text fw-light"><i class="fa fa-cogs" style="margin: 5px;"></i>{{ env('APP_NAME')}}</span>
       <!--end::Brand Text-->
