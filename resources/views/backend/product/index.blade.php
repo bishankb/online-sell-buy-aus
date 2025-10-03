@@ -340,7 +340,7 @@
                     </tr>
                   @empty
                     <tr class="text-center">
-                      <td colspan="11">No data available in table</td>
+                      <td colspan="12">No data available in table</td>
                     </tr>
                   @endforelse
               </tbody>
