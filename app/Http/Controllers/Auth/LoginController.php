@@ -43,6 +43,7 @@ class LoginController extends Controller
     {
         if ($user->active != 1) {
             auth()->logout();
+            
             return redirect()->route('login')
                 ->withErrors(['email' => 'Your account is not active.']);
         }
