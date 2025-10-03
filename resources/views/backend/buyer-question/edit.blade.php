@@ -19,7 +19,7 @@
                 </div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                <form method="POST" action="{{ route('buyer-questions.update', $buyer_question->id) }}" class="reply-form">
+                <form method="POST" action="{{ route('buyer-questions.update', $buyer_question->question_id) }}" class="reply-form">
                     @csrf
                     @method('PATCH')
                     <!--begin::Body-->

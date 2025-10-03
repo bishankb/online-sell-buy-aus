@@ -139,10 +139,10 @@
                       @if(auth()->user()->can('edit_buyer_questions') || auth()->user()->can('delete_buyer_questions'))
                         <td class="text-center">
                           @can('edit_buyer_questions')
-                            <a class="btn btn-primary btn-sm action-button" href="{{ route('buyer-questions.edit', $buyer_question->id) }}" data-tooltip="Edit"><i class="fa fa fa-edit"></i></a>
+                            <a class="btn btn-primary btn-sm action-button" href="{{ route('buyer-questions.edit', $buyer_question->question_id) }}" data-tooltip="Edit"><i class="fa fa fa-edit"></i></a>
                           @endcan
                           @can('delete_buyer_questions')
-                            <button class="btn btn-danger btn-sm action-button" data-bs-toggle="modal" data-bs-target="#delete-modal{{$buyer_question->id}}"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-danger btn-sm action-button" data-bs-toggle="modal" data-bs-target="#delete-modal{{$buyer_question->question_id}}"><i class="fa fa-trash"></i></button>
                           @endcan
                         </td>
                       @endif
@@ -164,10 +164,10 @@
     <!--end::Row-->
     </div>
     @foreach($buyer_questions as $buyer_question)
-      <form action="{{ route('buyer-questions.destroy', $buyer_question->id) }}" class="pull-xs-right5 card-link" method="POST">
+      <form action="{{ route('buyer-questions.destroy', $buyer_question->question_id) }}" class="pull-xs-right5 card-link" method="POST">
         {{ csrf_field() }}
         {{method_field('DELETE')}}
-        <div class="modal fade" id="delete-modal{{$buyer_question->id}}" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="delete-modal{{$buyer_question->question_id}}" tabindex="-1" aria-hidden="true">
           @include('backend.partials.delete-modal')
         </div>
       </form>
