@@ -25,12 +25,12 @@
 				<tr>
 					<td class="td-header">Asked By:</td>
 					<td>
-                        @if(isset($buyer_question->askedBy->name))
-                          {{$buyer_question->askedBy->name}}
-                        @else
-                          <i>Deleted</i>
-                        @endif
-                    </td>
+              @if(isset($buyer_question->askedBy->name))
+                {{$buyer_question->askedBy->name}}
+              @else
+                <i>Deleted</i>
+              @endif
+          </td>
 				</tr>
 				<tr>
 					<td class="td-header">Asked On:</td>
@@ -56,23 +56,30 @@
 		</table>
 		
 		@if($buyer_question->answer == null)
-			{!! Form::model($buyer_question, ['method' => 'patch', 'route' => ['buyer-question.sendReply', $buyer_question->question_id], 'class' => 'reply-form']) !!}
+
+		  <form method="POST" action="{{ route('buyer-question.sendReply', $buyer_question->question_id) }}" class="reply-form">
+		  	@csrf
+        @method('PATCH')
+
 			    <div class="form-group {{ $errors->has('answer') ? ' has-error' : '' }}">
-			      	<label for="answer">Your Answer:</label>
-					{!! Form::textarea('answer', null, ['class' => 'form-control', 'minlength' => 2, 'maxlength' => 256, 'required' => 'required', 'id' => 'comment', 'rows' => 5]) !!}
-			      	 @if ($errors->has('answer'))
-		                <span class="help-block">
-		                    <strong>{{ $errors->first('answer') }}</strong>
-		                </span>
-		            @endif
+		      	<label for="answer">Your Answer:</label>
+
+		      	<textarea name="answer" id="comment" class="form-control" rows="3" minlength="2" maxlength="256" required>{{ old('answer2', $buyer_question->answer ?? '') }}</textarea>
+
+						@if ($errors->has('answer'))
+						    <span class="help-block">
+						        <strong>{{ $errors->first('answer') }}</strong>
+						    </span>
+						@endif
 			    </div>
+			    
 			    <div class="text-center">
 			    	<button type="submit" class="btn btn-success">
 			    		<i class="fa fa-check"></i>Submit
 			    	</button>
 			    </div>
-	    	{!! Form::close() !!}
-	    @endif
+			</form>
+	  @endif
 	</div>
 @endsection
 

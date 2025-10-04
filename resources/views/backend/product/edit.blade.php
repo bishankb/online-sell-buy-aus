@@ -34,7 +34,9 @@
                                 @endif
                             </h4>
                         </div>
+
                         @include('backend.product._form')
+                        
                     </div>
                     <!--begin::Footer-->
                     <div class="card-footer">

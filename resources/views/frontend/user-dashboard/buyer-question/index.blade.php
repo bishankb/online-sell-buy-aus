@@ -24,52 +24,50 @@
 	            	<div class="filter">
 		                <label>Filters: </label>
 		                <div class="dropdown inline">
-		                 	<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-			                	@if(request('category') != null)
-			                    	{{ request('category') }}
-			                  	@else
-			                    	Filter by Categories
-			                  	@endif
-			                  	<span class="caret"></span>
-		              		</button>
-		                  	<ul class="dropdown-menu scrollable-menu">
-		                      	<li>
-									<a href="{{ route('buyer-question.index') }}">
-									All
-									</a>
-		                      	</li>
-								@foreach($categories as $category)
-								<li>
-									<a href="{{ route('buyer-question.index', ['filter_by' => 'category', 'category' => $category->slug ]) }}">
-										{{ $category->title }}
-									</a>
-								</li>
-								@endforeach
-		                  	</ul>
+		                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+		                      @if(request('category') != null)
+		                        {{ request('category') }}
+		                      @else
+		                        Filter by Categories
+		                      @endif
+		                    </button>
+		                    <ul class="dropdown-menu scrollable-menu">
+		                        <li>
+		                            <a class="dropdown-item" href="{{ route('buyer-question.index') }}">
+		                             All
+		                            </a>
+		                        </li>
+		                        @foreach($categories as $category)
+		                          <li>
+		                            <a class="dropdown-item" href="{{ route('buyer-question.index', ['filter_by' => 'category', 'category' => $category->slug ]) }}">
+		                              {{ $category->title }}
+		                            </a>
+		                          </li>
+		                        @endforeach
+		                    </ul>
 		                </div>
 
 		                <div class="dropdown inline">
-		                    <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-			                    @if(request('sub_category') != null)
-			                        {{ request('sub_category') }}
-			                    @else
-			                        Filter by Sub-Categories
-			                    @endif
-			                    <span class="caret"></span>
-			                </button>
+		                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+		                      @if(request('sub_category') != null)
+		                        {{ request('sub_category') }}
+		                      @else
+		                        Filter by Sub-Categories
+		                      @endif
+		                    </button>
 		                    <ul class="dropdown-menu scrollable-menu">
 		                        <li>
-		                            <a href="{{ route('buyer-question.index') }}">
-		                            	All
-		                             </a>
-								</li>
-								@foreach($sub_categories as $sub_category)
-									<li>
-										<a href="{{ route('buyer-question.index', ['filter_by' => 'sub_category', 'sub_category' => $sub_category->slug ]) }}">
-											{{ $sub_category->title }}
-										</a>
-									</li>
-								@endforeach
+		                            <a class="dropdown-item" href="{{ route('buyer-question.index') }}">
+		                             All
+		                            </a>
+		                        </li>
+		                        @foreach($sub_categories as $sub_category)
+		                          <li>
+		                            <a class="dropdown-item" href="{{ route('buyer-question.index', ['filter_by' => 'sub_category', 'sub_category' => $sub_category->slug ]) }}">
+		                              {{ $sub_category->title }}
+		                            </a>
+		                          </li>
+		                        @endforeach
 		                    </ul>
 		                </div>
 		            </div>
@@ -135,7 +133,7 @@
 							</td>
 							@isset($buyer_question->answer)
 								<td class="text-center">
-									<a class="btn btn-default btn-sm action-button" href="{{ route('buyer-question.edit', $buyer_question->question_id) }}" data-tooltip="Edit"><i class="fa fa fa-edit"></i></a>
+									<a class="btn btn-primary btn-sm action-button" href="{{ route('buyer-question.edit', $buyer_question->question_id) }}" data-tooltip="Edit"><i class="fa fa fa-edit"></i></a>
 								</td>
 							@endif
 		                </tr>
@@ -149,8 +147,8 @@
 		        </tbody>
 	        </table>
 	    </div>
-	    <div class="text-center" style="margin-top: 20px;">
-            {{ $buyer_questions->appends(request()->input())->links() }}
+        <div class="d-flex justify-content-center">
+        	{{ $buyer_questions->links('vendor.pagination.bootstrap-4') }}
         </div>
 	</div>
 @endsection
