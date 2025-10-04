@@ -58,13 +58,11 @@
 							<h3>Sorry!!! This product has already been sold.</h3>
 						</div>
 					@endif
-					
+
 					@if($product->created_by == Auth::user()->id)
 						<div class="cart-a">
 							<h4>
-								<a href="{{ route('product-section.edit', $product->slug) }}">
-									<span class="badge bg-primary">Edit</span>
-								</a>
+								<span class="badge bg-primary">This is Your Product</span>
 							</h4>
 
 							<div class="clearfix"></div>
@@ -176,25 +174,31 @@
 					</div>
 					<br>
 					
-					<div class="share">
+					<div class="product-general-description">
 						<h6>Share Product :</h6>
-						<ul class="share_nav">
-							<li>
-								<a href="https://www.facebook.com/sharer/sharer.php?u=obsnepal.com/view-product/{{$product->slug}}&display=popup" title="Share on Facebook" target="__blank">
-									<img src="{{ asset('frontend-template/img/facebook.png') }}" title="facebook">
-								</a>
-							</li>
-							<li>
-								<a href="https://twitter.com/intent/tweet?url={{ Request::fullUrl() }}" title="Share on Twitter" target="__blank">
-									<img src="{{ asset('frontend-template/img/twitter.png') }}" title="Twiiter">
-								</a>
-							</li>
-							<li>
-								<a href="https://plus.google.com/share?url={{ Request::fullUrl() }}" title="Share on Google+" target="__blank">
-									<img src="{{ asset('frontend-template/img/gpluse.png') }}" title="Google+">
-								</a>
-							</li>
-						</ul>
+					    <!-- Facebook -->
+					    <a href="https://www.facebook.com/sharer/sharer.php?u={{ (route('product.show', $product->slug)) }}" 
+					       target="_blank" class="btn btn-primary mb-2">
+					        <i class="bi bi-facebook"></i>
+					    </a>
+
+					    <!-- Twitter -->
+					    <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('product.show', $product->slug)) }}&text={{ urlencode($product->name) }}" 
+					       target="_blank" class="btn btn-info mb-2 text-white">
+					        <i class="bi bi-twitter"></i>
+					    </a>
+
+					    <!-- WhatsApp -->
+					    <a href="https://api.whatsapp.com/send?text={{ urlencode($product->name . ' ' . route('product.show', $product->slug)) }}" 
+					       target="_blank" class="btn btn-success mb-2">
+					        <i class="bi bi-whatsapp"></i> 
+					    </a>
+
+					    <!-- LinkedIn -->
+					    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(route('product.show', $product->slug)) }}" 
+					       target="_blank" class="btn btn-secondary mb-2">
+					        <i class="bi bi-linkedin"></i> 
+					    </a>
 					</div>
 				</div>
 		  	    <div class="clearfix"> </div>
