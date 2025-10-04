@@ -31,139 +31,135 @@
 	    	<table class="table1 table-bordered table-striped">
 	            <thead>
 	            	<div class="filter">
-		                <label>Filters: </label>
+                  		<label>&nbsp Filters: </label>
 		                <div class="dropdown inline">
-		                 	<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-			                	@if(request('category') != null)
-			                    	{{ request('category') }}
-			                  	@else
-			                    	Filter by Categories
-			                  	@endif
-			                  	<span class="caret"></span>
-		              		</button>
-		                  	<ul class="dropdown-menu scrollable-menu">
-		                      	<li>
-									<a href="{{ route('product-section.index') }}">
-									All
-									</a>
-		                      	</li>
-								@foreach($categories as $category)
-								<li>
-									<a href="{{ route('product-section.index', ['filter_by' => 'category', 'category' => $category->slug ]) }}">
-										{{ $category->title }}
-									</a>
-								</li>
-								@endforeach
-		                  	</ul>
-		                </div>
-
-		                <div class="dropdown inline">
-		                    <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-			                    @if(request('sub_category') != null)
-			                        {{ request('sub_category') }}
-			                    @else
-			                        Filter by Sub-Categories
-			                    @endif
-			                    <span class="caret"></span>
-			                </button>
+		                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+		                      @if(request('category') != null)
+		                        {{ request('category') }}
+		                      @else
+		                        Filter by Categories
+		                      @endif
+		                    </button>
 		                    <ul class="dropdown-menu scrollable-menu">
 		                        <li>
-		                            <a href="{{ route('product-section.index') }}">
-		                            	All
-		                             </a>
-								</li>
-								@foreach($sub_categories as $sub_category)
-									<li>
-										<a href="{{ route('product-section.index', ['filter_by' => 'sub_category', 'sub_category' => $sub_category->slug ]) }}">
-											{{ $sub_category->title }}
-										</a>
-									</li>
-								@endforeach
+		                            <a class="dropdown-item" href="{{ route('product-section.index') }}">
+		                             All
+		                            </a>
+		                        </li>
+		                        @foreach($categories as $category)
+		                          <li>
+		                            <a class="dropdown-item" href="{{ route('product-section.index', ['filter_by' => 'category', 'category' => $category->slug ]) }}">
+		                              {{ $category->title }}
+		                            </a>
+		                          </li>
+		                        @endforeach
+		                    </ul>
+		                 </div>
+
+		                <div class="dropdown inline">
+		                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+		                      @if(request('sub_category') != null)
+		                        {{ request('sub_category') }}
+		                      @else
+		                        Filter by Sub-Categories
+		                      @endif
+		                    </button>
+		                    <ul class="dropdown-menu scrollable-menu">
+		                        <li>
+		                            <a class="dropdown-item" href="{{ route('product-section.index') }}">
+		                             All
+		                            </a>
+		                        </li>
+		                        @foreach($sub_categories as $sub_category)
+		                          <li>
+		                            <a class="dropdown-item" href="{{ route('product-section.index', ['filter_by' => 'sub_category', 'sub_category' => $sub_category->slug ]) }}">
+		                              {{ $sub_category->title }}
+		                            </a>
+		                          </li>
+		                        @endforeach
 		                    </ul>
 		                </div>
 
 		                <div class="dropdown inline">
-							<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-								@if(request('sold-items') != null)
-									{{ request('sold-items') }}
-								@else
-									Filter by Sold Items
-								@endif
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="{{ route('product-section.index') }}">
-										All
-									</a>
-								</li>
-								<li>
-									<a href="{{ route('product-section.index', ['filter_by' => 'sold-items', 'sold-items' => 'Sold Items']) }}">
-										Sold Items
-									</a>
-								</li>
-								<li>
-									<a href="{{ route('product-section.index', ['filter_by' => 'sold-items', 'sold-items' => 'Unsold Items']) }}">
-										Unsold Items
-									</a>
-								</li>
-							</ul>
-						</div>
+		                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+		                      @if(request('sold-items') != null)
+		                        {{ request('sold-items') }}
+		                      @else
+		                        Filter by Sold Items
+		                      @endif
+		                    </button>
+		                    <ul class="dropdown-menu scrollable-menu">
+		                        <li>
+		                            <a class="dropdown-item" href="{{ route('product-section.index') }}">
+		                              All
+		                            </a>
+		                        </li>
+		                        <li>
+		                          <a class="dropdown-item" href="{{ route('product-section.index', ['filter_by' => 'sold-items', 'sold-items' => 'Sold Items']) }}">
+		                            Sold Items
+		                          </a>
+		                        </li>
+		                        <li>
+		                          <a class="dropdown-item" href="{{ route('product-section.index', ['filter_by' => 'sold-items', 'sold-items' => 'Unsold Items']) }}">
+		                            Unsold Items
+		                          </a>
+		                        </li>
+		                    </ul>
+		                </div>
 
+						
 						<div class="dropdown inline">
-							<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-								@if(request('featured-items') != null)
-									{{ request('featured-items') }}
-								@else
-									Filter by Featured Items
-								@endif
-								<span class="caret"></span>
+							<button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+							  @if(request('featured-items') != null)
+							    {{ request('featured-items') }}
+							  @else
+							    Filter by Featured Items
+							  @endif
 							</button>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="{{ route('product-section.index') }}">
-										All
-									</a>
-								</li>
-								<li>
-									<a href="{{ route('product-section.index', ['filter_by' => 'featured-items', 'featured-items' => 'Featured Items']) }}">
-										Featured Items
-									</a>
-								</li>
-								<li>
-									<a href="{{ route('product-section.index', ['filter_by' => 'featured-items', 'featured-items' => 'UnFeatured Items']) }}">
-										UnFeatured Items
-									</a>
-								</li>
+							<ul class="dropdown-menu scrollable-menu">
+							    <li>
+							        <a class="dropdown-item" href="{{ route('product-section.index') }}">
+							          All
+							        </a>
+							    </li>
+							    <li>
+							      <a class="dropdown-item" href="{{ route('product-section.index', ['filter_by' => 'featured-items', 'featured-items' => 'Featured Items']) }}">
+							        Featured Items
+							      </a>
+							    </li>
+							    <li>
+							      <a class="dropdown-item" href="{{ route('product-section.index', ['filter_by' => 'featured-items', 'featured-items' => 'UnFeatured Items']) }}">
+							        UnFeatured Items
+							      </a>
+							    </li>
 							</ul>
 						</div>
 
 		                <div class="dropdown inline">
-							<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-								@if(request('expired-items') != null)
-									{{ request('expired-items') }}
-								@else
-									Filter by Expired Items
-								@endif
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="{{ route('product-section.index') }}">
-										All
-									</a>
-								</li>
-								<li>
-									<a href="{{ route('product-section.index', ['filter_by' => 'expired-items', 'expired-items' => 'Expired Items']) }}">
-										Expired Items
-									</a>
-								</li>
-								<li>
-									<a href="{{ route('product-section.index', ['filter_by' => 'expired-items', 'expired-items' => 'Unexpired Items']) }}">
-										Unexpired Items
-									</a>
-								</li>
-							</ul>
+		                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+		                      @if(request('expired-items') != null)
+		                        {{ request('expired-items') }}
+		                      @else
+		                        Filter by Expired Items
+		                      @endif
+		                    </button>
+		                    <ul class="dropdown-menu scrollable-menu">
+		                        <li>
+		                            <a class="dropdown-item" href="{{ route('product-section.index') }}">
+		                              All
+		                            </a>
+		                        </li>
+		                        <li>
+		                          <a class="dropdown-item" href="{{ route('product-section.index', ['filter_by' => 'expired-items', 'expired-items' => 'Expired Items']) }}">
+		                            Expired Items
+		                          </a>
+		                        </li>
+		                        <li>
+		                          <a class="dropdown-item" href="{{ route('product-section.index', ['filter_by' => 'expired-items', 'expired-items' => 'Unexpired Items']) }}">
+		                            Unexpired Items
+		                          </a>
+		                        </li>
+		                    </ul>
 		                </div>
 	              	</div>
 
@@ -196,7 +192,7 @@
                       		<td>{{ reversePagination($products, $loop) }}</td>                      
 							<td>
 								<a href="{{ route('product.show', $product->slug) }}" target="__blank">
-									{{ str_limit($product->title, $limit = 18, $end = '...') }}
+									{{ Str::limit($product->title, $limit = 18, $end = '...') }}
 								</a>
 							</td>
 							@if(isset($product->category->title))
@@ -210,9 +206,9 @@
 							
 							<td>
 								@if($product->is_sold == 0)
-									<button class="btn btn-link red-color" data-toggle="modal" data-target="#mark-sold-modal{{$product->slug}}">Unsold</button>
+									<button class="btn btn-link red-color" data-bs-toggle="modal" data-bs-target="#mark-sold-modal{{$product->slug}}">Unsold</button>
 								@else
-									<button class="btn btn-link red-color" data-toggle="modal" data-target="#mark-unsold-modal{{$product->slug}}">Sold</button>
+									<button class="btn btn-link red-color" data-bs-toggle="modal" data-bs-target="#mark-unsold-modal{{$product->slug}}">Sold</button>
 								@endif
 							</td>
 
@@ -230,16 +226,16 @@
 								@if($product->expiry_period < Carbon\Carbon::now())
 									Expired
 								@else
-									{{$product->expiry_period->format('d M, Y')}}
+                          			{{ Carbon\Carbon::parse($product->expiry_period)->format('d M, Y') }}
 								@endif  
 							</td>
 		                  	<td class="text-center">
-			                    <a class="btn btn-default btn-sm action-button" href="{{ route('product-section.edit', ['product' => $product]) }}" data-tooltip="Edit"><i class="fa fa fa-edit"></i></a>
+		                  		<a class="btn btn-primary btn-sm action-button" href="{{ route('product-section.edit', $product->slug) }}" data-tooltip="Edit"><i class="fa fa fa-edit"></i></a>
 			                    
-			                    <button class="btn btn-default btn-sm action-button" data-toggle="modal" data-target="#delete-modal{{$product->slug}}"><i class="fa fa-trash"></i></button>
+			                    <button class="btn btn-danger btn-sm action-button" data-bs-toggle="modal" data-bs-target="#delete-modal{{$product->slug}}"><i class="fa fa-trash"></i></button>
 
 			                    @if($product->expiry_period < Carbon\Carbon::now())
-		                        	<button class="btn btn-default btn-sm action-button" data-toggle="modal" data-target="#renew-modal{{$product->slug}}"><i class="fa fa-refresh"></i></button>
+		                        	<button class="btn btn-default btn-sm action-button" data-bs-toggle="modal" data-bs-target="#renew-modal{{$product->slug}}"><i class="fa fa-refresh"></i></button>
 		                        @endif
 			                </td>
 		                </tr>
@@ -253,8 +249,8 @@
 		        </tbody>
 	        </table>
 	    </div>
-        <div class="text-center" style="margin-top: 20px;">
-            {{ $products->appends(request()->input())->links() }}
+        <div class="d-flex justify-content-center">
+        	{{ $products->links('vendor.pagination.bootstrap-4') }}
         </div>
 
         @foreach($products as $product)

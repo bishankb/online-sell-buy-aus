@@ -47,8 +47,6 @@ class ProductSectionController extends Controller
     public function edit($slug)
     {
         $product = Product::where('slug', $slug)->where('created_by', Auth::user()->id)->firstOrFail();
-        $this->seoEdit($product);
-
         $expiry_periods = Product::ExpiryPeriod;
         $condition_types = Product::ConditionType;
         $time_periods = Product::TimePeriod;

@@ -80,135 +80,136 @@
                     </ul>
                   </div>
 
-                    <div class="dropdown inline">
-                      <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        @if(request('category') != null)
-                          {{ request('category') }}
-                        @else
-                          Filter by Categories
-                        @endif
-                      </button>
-                      <ul class="dropdown-menu scrollable-menu">
+                  <div class="dropdown inline">
+                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                      @if(request('category') != null)
+                        {{ request('category') }}
+                      @else
+                        Filter by Categories
+                      @endif
+                    </button>
+                    <ul class="dropdown-menu scrollable-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('products.index') }}">
+                             All
+                            </a>
+                        </li>
+                        @foreach($categories as $category)
                           <li>
-                              <a class="dropdown-item" href="{{ route('products.index') }}">
-                               All
-                              </a>
+                            <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'category', 'category' => $category->slug ]) }}">
+                              {{ $category->title }}
+                            </a>
                           </li>
-                          @foreach($categories as $category)
-                            <li>
-                              <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'category', 'category' => $category->slug ]) }}">
-                                {{ $category->title }}
-                              </a>
-                            </li>
-                          @endforeach
-                      </ul>
-                    </div>
+                        @endforeach
+                    </ul>
+                  </div>
 
-                    <div class="dropdown inline">
-                      <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        @if(request('sub_category') != null)
-                          {{ request('sub_category') }}
-                        @else
-                          Filter by Sub-Categories
-                        @endif
-                      </button>
-                      <ul class="dropdown-menu scrollable-menu">
+                  <div class="dropdown inline">
+                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                      @if(request('sub_category') != null)
+                        {{ request('sub_category') }}
+                      @else
+                        Filter by Sub-Categories
+                      @endif
+                    </button>
+                    <ul class="dropdown-menu scrollable-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('products.index') }}">
+                             All
+                            </a>
+                        </li>
+                        @foreach($sub_categories as $sub_category)
                           <li>
-                              <a class="dropdown-item" href="{{ route('products.index') }}">
-                               All
-                              </a>
+                            <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'sub_category', 'sub_category' => $sub_category->slug ]) }}">
+                              {{ $sub_category->title }}
+                            </a>
                           </li>
-                          @foreach($sub_categories as $sub_category)
-                            <li>
-                              <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'sub_category', 'sub_category' => $sub_category->slug ]) }}">
-                                {{ $sub_category->title }}
-                              </a>
-                            </li>
-                          @endforeach
-                      </ul>
-                    </div>
+                        @endforeach
+                    </ul>
+                  </div>
 
-                    <div class="dropdown inline">
-                      <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        @if(request('sold-items') != null)
-                          {{ request('sold-items') }}
-                        @else
-                          Filter by Sold Items
-                        @endif
-                      </button>
-                      <ul class="dropdown-menu scrollable-menu">
-                          <li>
-                              <a class="dropdown-item" href="{{ route('products.index') }}">
-                                All
-                              </a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'sold-items', 'sold-items' => 'Sold Items']) }}">
-                              Sold Items
+                  <div class="dropdown inline">
+                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                      @if(request('sold-items') != null)
+                        {{ request('sold-items') }}
+                      @else
+                        Filter by Sold Items
+                      @endif
+                    </button>
+                    <ul class="dropdown-menu scrollable-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('products.index') }}">
+                              All
                             </a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'sold-items', 'sold-items' => 'Unsold Items']) }}">
-                              Unsold Items
-                            </a>
-                          </li>
-                      </ul>
-                    </div>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'sold-items', 'sold-items' => 'Sold Items']) }}">
+                            Sold Items
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'sold-items', 'sold-items' => 'Unsold Items']) }}">
+                            Unsold Items
+                          </a>
+                        </li>
+                    </ul>
+                  </div>
 
-                    <div class="dropdown inline">
-                      <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        @if(request('featured-items') != null)
-                          {{ request('featured-items') }}
-                        @else
-                          Filter by Featured Items
-                        @endif
-                      </button>
-                      <ul class="dropdown-menu scrollable-menu">
-                          <li>
-                              <a class="dropdown-item" href="{{ route('products.index') }}">
-                                All
-                              </a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'featured-items', 'featured-items' => 'Featured Items']) }}">
-                              Featured Items
+                  <div class="dropdown inline">
+                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                      @if(request('featured-items') != null)
+                        {{ request('featured-items') }}
+                      @else
+                        Filter by Featured Items
+                      @endif
+                    </button>
+                    <ul class="dropdown-menu scrollable-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('products.index') }}">
+                              All
                             </a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'featured-items', 'featured-items' => 'UnFeatured Items']) }}">
-                              UnFeatured Items
-                            </a>
-                          </li>
-                      </ul>
-                    </div>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'featured-items', 'featured-items' => 'Featured Items']) }}">
+                            Featured Items
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'featured-items', 'featured-items' => 'UnFeatured Items']) }}">
+                            UnFeatured Items
+                          </a>
+                        </li>
+                    </ul>
+                  </div>
 
-                    <div class="dropdown inline">
-                      <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        @if(request('expired-items') != null)
-                          {{ request('expired-items') }}
-                        @else
-                          Filter by Expired Items
-                        @endif
-                      </button>
-                      <ul class="dropdown-menu scrollable-menu">
-                          <li>
-                              <a class="dropdown-item" href="{{ route('products.index') }}">
-                                All
-                              </a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'expired-items', 'expired-items' => 'Expired Items']) }}">
-                              Expired Items
+                  <div class="dropdown inline">
+                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                      @if(request('expired-items') != null)
+                        {{ request('expired-items') }}
+                      @else
+                        Filter by Expired Items
+                      @endif
+                    </button>
+                    <ul class="dropdown-menu scrollable-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('products.index') }}">
+                              All
                             </a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'expired-items', 'expired-items' => 'Unexpired Items']) }}">
-                              Unexpired Items
-                            </a>
-                          </li>
-                      </ul>
-                    </div>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'expired-items', 'expired-items' => 'Expired Items']) }}">
+                            Expired Items
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="{{ route('products.index', ['filter_by' => 'expired-items', 'expired-items' => 'Unexpired Items']) }}">
+                            Unexpired Items
+                          </a>
+                        </li>
+                    </ul>
+                  </div>
                 </div>
+                
                 <div class="search">
                   <form>
                     <div class="input-group input-group-sm">
