@@ -7,6 +7,11 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\UserProfile;
+use App\Models\City;
+use App\Models\Country;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -28,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -38,6 +43,19 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Overwriting the function to include city and country.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $cities = City::orderBy('order', 'asc')->select('name', 'id')->get();
+        $countries = Country::orderBy('order', 'asc')->select('name', 'id')->get();
+
+        return view('auth.register', compact('cities', 'countries'));
     }
 
     /**
@@ -51,7 +69,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'phone1' => ['nullable', 'min:5', 'max:20'],
+            'address' => ['nullable', 'min:2', 'max:100']
         ]);
     }
 
@@ -63,10 +83,41 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $userRoleId = Role::where('name', 'user')->first()->id;
+
+        $user = User::create([
             'name' => $data['name'],
+            'slug' => $this->setSlugAttribute(request('name')),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id' => $userRoleId
         ]);
+        $user->profile()->create([
+            'phone1' => $data['phone1'],
+            'address' => $data['address'],
+            'city_id' => $data['city'],
+            'country_id' => $data['country'],
+        ]);
+
+        return $user;
+    }
+
+    /**
+     * Creating the unique slug.
+     *
+     */
+    private function setSlugAttribute($slug)
+    {
+        $slug = Str::slug($slug);
+        $slugs = User::whereRaw("slug RLIKE '^{$slug}(-[0-9]*)?$'")
+                    ->orderBy('id')
+                    ->pluck('slug');
+        if (count($slugs) == 0) {
+            return $slug;
+        } elseif (! $slugs->isEmpty()) {
+            $pieces = explode('-', $slugs);
+            $number = (int) end($pieces);
+            return $slug .= '-' . ($number + 1);
+        }
     }
 }

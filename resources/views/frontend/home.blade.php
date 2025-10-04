@@ -33,7 +33,7 @@
 		   		     		</a>
 		   		     		<div class="grid-chain-bottom">
 		   		     			<h4>
-		   		     				<a href="#">
+		   		     				<a href="{{ route('product.show', $latest_product->slug) }}">
 		   		     					{{ Str::limit($latest_product->title, $limit = 25, $end = '...') }}
 		   		     				</a>
 		   		     			</h4>
