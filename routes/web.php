@@ -115,6 +115,9 @@ Route::group([
         Route::get('/your-question/{buyer_question}/view-reply', 'App\Http\Controllers\Frontend\UserAccount\YourQuestionController@viewReply')->name('your-question.view-reply');
 
     });
+
+    Route::get('/contact-us', 'App\Http\Controllers\Frontend\ContactUsController@index')->name('contact-us.index');
+    Route::post('/contact-us/send', 'App\Http\Controllers\Frontend\ContactUsController@send')->name('contact-us.send');
 });
 
 

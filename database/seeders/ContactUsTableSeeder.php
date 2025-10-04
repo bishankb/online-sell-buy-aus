@@ -18,7 +18,7 @@ class ContactUsTableSeeder extends Seeder
                 'name1'       => 'Bishank Badgami',
                 'name2'       => 'Sushank Badgami', 
                 'phone1'      => '0431046513', 
-                'phone2'      => '0431046513',
+                'phone2'      => '0451994543',
                 'address'     => '10/52 Daw Road, Runcorn, 4113',
                 'email'       => 'badgamib@gmail.com',
             ]

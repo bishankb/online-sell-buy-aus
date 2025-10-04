@@ -14,7 +14,7 @@
 				</ul>
 				<ul class="support" style="margin-left: 25px;">
 					<li><a href="#"><label> </label></a></li>
-					<li><a href="#"><i class="fa fa-phone"></i>Contact Us</span></a></li>
+					<li><a href="{{ route('contact-us.index') }}"><i class="fa fa-phone"></i>Contact Us</span></a></li>
 				</ul>
 				<div class="clearfix"> </div>	
 			</div>
