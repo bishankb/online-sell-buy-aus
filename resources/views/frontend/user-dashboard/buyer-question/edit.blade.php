@@ -56,7 +56,7 @@
 		    <div class="form-group required {{ $errors->has('answer') ? ' has-error' : '' }}">
 		      	<label for="answer" class="control-label">Your Answer:</label>
 
-					 	<textarea name="answer" id="comment" class="form-control" rows="3" minlength="2" maxlength="256">{{ old('answer', $buyer_question->answer ?? '') }}</textarea>
+					 	<textarea name="answer" id="comment" class="form-control" rows="3" minlength="2" maxlength="256" required>{{ old('answer', $buyer_question->answer ?? '') }}</textarea>
 
 		      	@if ($errors->has('answer'))
                 <span class="help-block">

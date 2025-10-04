@@ -44,23 +44,27 @@
 		</table>
 
 		@isset($your_question->question)
-			{!! Form::model($your_question, ['method' => 'patch', 'route' => ['your-question.update', $your_question->question_id], 'class' => 'reply-form']) !!}
-			    <div class="form-group required {{ $errors->has('question') ? ' has-error' : '' }}">
-			      	<label for="question" class="control-label">Your Query:</label>
-					{!! Form::textarea('question', null, ['class' => 'form-control', 'minlength' => 2, 'maxlength' => 256, 'required' => 'required', 'id' => 'comment', 'rows' => 5, 'required' => 'required']) !!}
-			      	 @if ($errors->has('question'))
-		                <span class="help-block">
-		                    <strong>{{ $errors->first('question') }}</strong>
-		                </span>
-		            @endif
-			    </div>
-			    <div class="text-center">
-			    	<button type="submit" class="btn btn-success">
-			    		<i class="fa fa-check"></i>Submit
-			    	</button>
-			    </div>
-	    	{!! Form::close() !!}
-	    @endif
+			<form method="POST" action="{{ route('your-question.update', $your_question->question_id) }}" class="reply-form">
+				@csrf
+		        @method('PATCH')
+				    <div class="form-group required {{ $errors->has('question') ? ' has-error' : '' }}">
+				      	<label for="question" class="control-label">Your Query:</label>
+
+						<textarea name="question" id="comment" class="form-control" rows="3" minlength="2" maxlength="256" required>{{ old('answer', $your_question->question ?? '') }}</textarea>
+
+				      	 @if ($errors->has('question'))
+			                <span class="help-block">
+			                    <strong>{{ $errors->first('question') }}</strong>
+			                </span>
+			            @endif
+				    </div>
+				    <div class="text-center">
+				    	<button type="submit" class="btn btn-success">
+				    		<i class="fa fa-check"></i>Submit
+				    	</button>
+				    </div>
+			</form>
+	    @endisset
 	</div>
 @endsection
 

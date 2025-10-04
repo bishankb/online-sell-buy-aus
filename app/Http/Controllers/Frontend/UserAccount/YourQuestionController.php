@@ -10,7 +10,6 @@ use App\Models\SubCategory;
 use App\Models\BuyerQuestion;
 use Auth;
 use Carbon\Carbon;
-use App\Notifications\SellerAnswerNotification;
 use DB;
 
 class YourQuestionController extends Controller
@@ -49,11 +48,6 @@ class YourQuestionController extends Controller
      */
     public function viewReply($question_id)
     {
-
-        if(request('notify_id')) {
-            DB::table('notifications')->where('id', request('notify_id'))->where('read_at', null)->update(['read_at' => now()]);
-        }
-
        $your_question = BuyerQuestion::where('question_id', $question_id)
                                         ->where('asked_by', Auth::user()->id)
                                         ->whereHas('product', function ($query) {
@@ -61,8 +55,6 @@ class YourQuestionController extends Controller
                                                     ->where('status', 1)
                                                     ->where('expiry_period', '>', Carbon::now());
                                         })->firstOrFail();
-
-        $this->seoViewReply($your_question);
 
         $your_question->update([
             'is_read' => 1
