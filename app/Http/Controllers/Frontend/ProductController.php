@@ -132,7 +132,9 @@ class ProductController extends Controller
     {
         session()->push('products.recently_viewed', $product->getKey());
 
-        views($product)->record();  
+        views($product)
+            ->cooldown(now()->addMinutes(10))
+            ->record();  
 
         if($product->sub_category_id != 0) {
             $related_products = Product::where('id', '!=', $product->id)->where('sub_category_id', $product->sub_category_id)->take(10)->get();
