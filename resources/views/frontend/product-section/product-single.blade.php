@@ -59,7 +59,7 @@
 						</div>
 					@endif
 
-					@if($product->created_by == Auth::user()->id)
+					@if(Auth::user() && Auth::user()->id == $product->created_by)
 						<div class="cart-a">
 							<h4>
 								<span class="badge bg-primary">This is Your Product</span>
