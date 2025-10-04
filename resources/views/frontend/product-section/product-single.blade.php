@@ -52,11 +52,25 @@
 				</div>
 
 				<div class="col-md-8 col-sm-6 col-12 product-info">
+
 					@if($product->is_sold == 1)
 						<div class="product-general-sold">
 							<h3>Sorry!!! This product has already been sold.</h3>
 						</div>
 					@endif
+					
+					@if($product->created_by == Auth::user()->id)
+						<div class="cart-a">
+							<h4>
+								<a href="{{ route('product-section.edit', $product->slug) }}">
+									<span class="badge bg-primary">Edit</span>
+								</a>
+							</h4>
+
+							<div class="clearfix"></div>
+						</div>
+					@endif
+
 					<div class="cart-a">
 						<div class="product-name">{{ $product->title }}</div>
 						<h5 class="now-get get-cart-in">
