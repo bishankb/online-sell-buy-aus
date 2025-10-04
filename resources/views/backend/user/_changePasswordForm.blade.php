@@ -29,7 +29,7 @@
         <div class="form-group required {{ $errors->has('password_confirmation') ? ' has-error' : '' }} clearfix ">
             <label for="password_confirmation" class="form-label">Confirm Password</label>
 
-            <input type="password" name="password_confirmation" class="form-control" required="required">
+            <input type="password" name="password_confirmation" class="form-control" required>
 
             @if ($errors->has('password_confirmation'))
                 <span class="help-block">

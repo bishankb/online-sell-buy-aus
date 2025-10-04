@@ -1162,6 +1162,10 @@ ul.cute li i {
 /*Product Create page*/
 
 /*User Dashboard*/
+.box-profile {
+	padding: 0;
+}
+
 .user-dashboard-section {
 	margin-top: 32px;
 }

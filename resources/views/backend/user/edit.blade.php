@@ -51,6 +51,7 @@
                             <div id="change-password" class="container tab-pane fade">
                                 <form method="POST" action="{{ route('users.changePassword', $user->id) }}">
                                 @csrf
+                                @method('PATCH')
                                      @include('backend.user._changePasswordForm')
                                </form>
                             </div>

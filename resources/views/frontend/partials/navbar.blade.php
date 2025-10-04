@@ -55,7 +55,7 @@
 										    <a class="dropdown-item" href="{{ route('backend.dashboard') }}" target="_blank">Dashboard</a>
 										</li>
 									@endcan
-						        	<li><a class="dropdown-item" href="#">My Account</a></li>
+							        <li><a class="dropdown-item" href="{{ route('my-account.index') }}">My Account</a></li>
 						          	<li>
 										<a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
 										<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -137,7 +137,7 @@
 									    <a class="dropdown-item" href="{{ route('backend.dashboard') }}" target="_blank">Dashboard</a>
 									</li>
 								@endcan
-					        	<li><a class="dropdown-item" href="#">My Account</a></li>
+							    <li><a class="dropdown-item" href="{{ route('my-account.index') }}">My Account</a></li>
 					          	<li>
 									<a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
 									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

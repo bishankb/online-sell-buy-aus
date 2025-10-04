@@ -11,7 +11,7 @@ Route::group([
 ], function(){
     Route::resource('/users', 'App\Http\Controllers\Backend\UserController');
     Route::post('/users/edit-profile/{id}', 'App\Http\Controllers\Backend\UserController@editProfile')->name('users.editProfile');
-    Route::post('/users/change-password/{id}', 'App\Http\Controllers\Backend\UserController@changePassword')->name('users.changePassword');
+    Route::patch('/users/change-password/{id}', 'App\Http\Controllers\Backend\UserController@changePassword')->name('users.changePassword');
     Route::post('/users/change-status/{id}', 'App\Http\Controllers\Backend\UserController@changeStatus')->name('users.changeStatus');
     Route::post('/users/restore/{id}', 'App\Http\Controllers\Backend\UserController@restore')->name('users.restore');
     Route::delete('/users/force-delete/{id}', 'App\Http\Controllers\Backend\UserController@forceDestroy')->name('users.forceDestroy');
@@ -92,6 +92,29 @@ Route::group([
     Route::get('/product-section/{productSlug}/images', 'App\Http\Controllers\Frontend\ProductSectionController@addImages')->name('product-section.addImages');
     Route::post('/product-section/{productId}/images/add', 'App\Http\Controllers\Frontend\ProductSectionController@saveImages')->name('product-section.saveImages');
     Route::post('/product-section/{productId}/images/destory/{imageId}', 'App\Http\Controllers\Frontend\ProductSectionController@destoryImages')->name('product-section.destroyImages');
+
+    Route::group([
+        'prefix' => 'my-account/dashboard'
+    ], function () {
+        Route::get('/', 'App\Http\Controllers\Frontend\UserAccount\AccountController@index')->name('my-account.index');
+        Route::get('/profile', 'App\Http\Controllers\Frontend\UserAccount\AccountController@showProfile')->name('my-account.showProfile');
+        Route::patch('/profile/update', 'App\Http\Controllers\Frontend\UserAccount\AccountController@updateProfile')->name('my-account.updateProfile');
+        Route::post('/profile/delete-image/{id}', 'App\Http\Controllers\Frontend\UserAccount\AccountController@destroyImage')->name('my-account.destroyImage');
+        Route::get('/change-password', 'App\Http\Controllers\Frontend\UserAccount\AccountController@changePassword')->name('my-account.changePassword');
+        Route::patch('/update-password', 'App\Http\Controllers\Frontend\UserAccount\AccountController@updatePassword')->name('my-account.updatePassword');
+        
+        Route::resource('/product-section', 'App\Http\Controllers\Frontend\UserAccount\ProductSectionController')->except('create', 'store', 'show');
+        Route::patch('/product-section/mark-sold/{product}', 'App\Http\Controllers\Frontend\UserAccount\ProductSectionController@markSold')->name('product-section.markSold');
+        Route::patch('/product-section/renew/{id}', 'App\Http\Controllers\Frontend\UserAccount\ProductSectionController@renew')->name('product-section.renew');
+
+        Route::resource('/buyer-question', 'App\Http\Controllers\Frontend\UserAccount\BuyerQuestionController')->except('create', 'store', 'destroy');
+        Route::get('/buyer-question/{buyer_question}/reply', 'App\Http\Controllers\Frontend\UserAccount\BuyerQuestionController@reply')->name('buyer-question.reply');
+        Route::patch('/buyer-question/{buyer_question}/send-reply', 'App\Http\Controllers\Frontend\UserAccount\BuyerQuestionController@sendReply')->name('buyer-question.sendReply');
+
+        Route::resource('/your-question', 'App\Http\Controllers\Frontend\UserAccount\YourQuestionController')->except('create', 'store', 'show', 'destroy');
+        Route::get('/your-question/{buyer_question}/view-reply', 'App\Http\Controllers\Frontend\UserAccount\YourQuestionController@viewReply')->name('your-question.view-reply');
+
+    });
 });
 
 
