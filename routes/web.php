@@ -79,11 +79,19 @@ Route::get('/filter/product', 'App\Http\Controllers\Frontend\ProductController@f
 Route::get('/search/product', 'App\Http\Controllers\Frontend\ProductController@search')->name('product.search');
 
 Route::group([
-    'prefix' => 'admin',
     'middleware' => ['auth']
 ], function(){    
     Route::get('/buyer-question/{productSlug}/read-more', 'App\Http\Controllers\Frontend\BuyerQuestionController@readMore')->name('buyer-question.readMore');
     Route::post('/buyer-question/store', 'App\Http\Controllers\Frontend\BuyerQuestionController@store')->name('buyer-question.store');
+
+    Route::get('/product-section/categories', 'App\Http\Controllers\Frontend\ProductSectionController@addCategories')->name('product-section.addCategories');
+    Route::get('/product-section/get-sub-categories/{categoryId}', 'App\Http\Controllers\Frontend\ProductSectionController@getSubCategories')->name('product-section.getSubCategories');
+    Route::post('/product-section/categories/add', 'App\Http\Controllers\Frontend\ProductSectionController@redirectProductForm')->name('product-section.redirectProductForm');
+    Route::get('/product-section/{subCategorySlug}/create', 'App\Http\Controllers\Frontend\ProductSectionController@create')->name('product-section.create');
+    Route::post('/product-section/store', 'App\Http\Controllers\Frontend\ProductSectionController@store')->name('product-section.store');
+    Route::get('/product-section/{productSlug}/images', 'App\Http\Controllers\Frontend\ProductSectionController@addImages')->name('product-section.addImages');
+    Route::post('/product-section/{productId}/images/add', 'App\Http\Controllers\Frontend\ProductSectionController@saveImages')->name('product-section.saveImages');
+    Route::post('/product-section/{productId}/images/destory/{imageId}', 'App\Http\Controllers\Frontend\ProductSectionController@destoryImages')->name('product-section.destroyImages');
 });
 
 

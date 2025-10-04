@@ -3,7 +3,7 @@
 @section('content')
 	<div class="card term-panel mb-3">
 		<div class="card-header text-center">
-        	<h1 class="text-center">Posting Rules</h1>
+        	<h1>Posting Rules</h1>
 
     	</div>
 		<div class="card-body">

@@ -82,7 +82,7 @@
                 var categoryId = event.target.value;
                 var subCategoryId = $('#sub_category_id');
                 $.ajax({
-                    url: `get-sub-categories/${categoryId}`,
+                    url: `/admin/products/get-sub-categories/${categoryId}`,
                     success: function (response) {
                         subCategoryId.empty();
                         if (response.sub_categories.length > 0) {

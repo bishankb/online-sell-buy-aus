@@ -154,7 +154,7 @@
 					</ul>
 				@endif
 				<div class="account">
-					<a href="#">
+					<a href="{{ route('product-section.addCategories') }}">
 						<span> <i class="fa fa-shopping-cart"></i></span>
 						Sell Your Product
 					</a>

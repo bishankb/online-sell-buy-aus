@@ -3,11 +3,11 @@
 @section('content')
 	<div class="card term-panel mb-3">
 		<div class="card-header text-center">
-        	<h1 class="text-center">Frequently Asked Questions</h1>
+        	<h1>Frequently Asked Questions</h1>
     	</div>
     	
 		<div class="card-body">
-	        <h4>Please contact us if you have any queries !!!</h4><br>
+	        <h5>Please contact us if you have any queries !!!</h5><br>
 
 	        @if(count($faqs) > 0)
 	            @foreach($faqs as $faq)
