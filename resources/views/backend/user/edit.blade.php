@@ -44,6 +44,7 @@
                         <div id="profile" class="container tab-pane fade">
                             <form method="POST" action="{{ route('users.editProfile', $user->id) }}" enctype="multipart/form-data">
                             @csrf
+                            @method('PATCH')
                                  @include('backend.user._editProfileForm')
                             </form>
                         </div>
@@ -84,8 +85,6 @@
                 $('.image-margin').hide();
             }
         }
-        
-        
 
         function deleteImage(userId)
         {
@@ -109,7 +108,7 @@
                             }
                         },
                         error: function(data){
-                            alert("There was some internal error while updating the status.");
+                            alert("There was some internal error while deleting the image.");
                         },
                     });                    
                 } else {

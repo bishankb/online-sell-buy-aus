@@ -10,7 +10,7 @@ Route::group([
     'middleware' => ['auth']
 ], function(){
     Route::resource('/users', 'App\Http\Controllers\Backend\UserController');
-    Route::post('/users/edit-profile/{id}', 'App\Http\Controllers\Backend\UserController@editProfile')->name('users.editProfile');
+    Route::patch('/users/edit-profile/{id}', 'App\Http\Controllers\Backend\UserController@editProfile')->name('users.editProfile');
     Route::patch('/users/change-password/{id}', 'App\Http\Controllers\Backend\UserController@changePassword')->name('users.changePassword');
     Route::post('/users/change-status/{id}', 'App\Http\Controllers\Backend\UserController@changeStatus')->name('users.changeStatus');
     Route::post('/users/restore/{id}', 'App\Http\Controllers\Backend\UserController@restore')->name('users.restore');

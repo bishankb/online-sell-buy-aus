@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group required {{ $errors->has('name') ? ' has-error' : '' }} clearfix ">
-            <label for="name" class="form-label">Name</label>
+            <label for="name" class="form-label">Full Name</label>
 
              <input type="text" required name="name" value="{{ old('name', $user->name ?? '') }}" class="form-control">
 

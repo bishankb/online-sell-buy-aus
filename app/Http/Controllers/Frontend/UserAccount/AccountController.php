@@ -51,11 +51,12 @@ class AccountController extends Controller
 
     public function showProfile()
     {
+        $user = Auth::user();
         $userProfile = Auth::user()->profile;
         $cities = City::get();
         $countries = Country::get();
 
-        return view('frontend.user-dashboard.account.profile', compact('userProfile', 'cities', 'countries'));
+        return view('frontend.user-dashboard.account.profile', compact('user', 'userProfile', 'cities', 'countries'));
     }
 
     public function updateProfile(Request $request)
