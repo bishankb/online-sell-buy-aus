@@ -28,7 +28,7 @@ class SignupVerificationNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -56,10 +56,10 @@ class SignupVerificationNotification extends Notification
      *
      * @return array<string, mixed>
      */
-    public function toArray(object $notifiable): array
+    public function toDatabase(object $notifiable): array
     {
         return [
-            'message'=>'Welcome '.$this->user['name'].' to '.env('APP_NAME'),
+            'message'=>'Welcome '.$notifiable['name'].' to '.env('APP_NAME'),
             'url'=>''
         ];
     }
