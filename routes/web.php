@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 //Backend Routes
 Route::group([
@@ -78,8 +78,11 @@ Route::get('/view-product/{product}', 'App\Http\Controllers\Frontend\ProductCont
 Route::get('/filter/product', 'App\Http\Controllers\Frontend\ProductController@filter')->name('product.filter');
 Route::get('/search/product', 'App\Http\Controllers\Frontend\ProductController@search')->name('product.search');
 
+Route::get('/contact-us', 'App\Http\Controllers\Frontend\ContactUsController@index')->name('contact-us.index');
+Route::post('/contact-us/send', 'App\Http\Controllers\Frontend\ContactUsController@send')->name('contact-us.send');
+
 Route::group([
-    'middleware' => ['auth']
+    'middleware' => ['auth', 'verified']
 ], function(){    
     Route::get('/buyer-question/{productSlug}/read-more', 'App\Http\Controllers\Frontend\BuyerQuestionController@readMore')->name('buyer-question.readMore');
     Route::post('/buyer-question/store', 'App\Http\Controllers\Frontend\BuyerQuestionController@store')->name('buyer-question.store');
@@ -115,12 +118,7 @@ Route::group([
         Route::get('/your-question/{buyer_question}/view-reply', 'App\Http\Controllers\Frontend\UserAccount\YourQuestionController@viewReply')->name('your-question.view-reply');
 
     });
-
-    Route::get('/contact-us', 'App\Http\Controllers\Frontend\ContactUsController@index')->name('contact-us.index');
-    Route::post('/contact-us/send', 'App\Http\Controllers\Frontend\ContactUsController@send')->name('contact-us.send');
 });
-
-
 
 
 

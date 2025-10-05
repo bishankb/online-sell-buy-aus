@@ -1,30 +1,28 @@
-@extends('layouts.app')
+@extends('layouts.frontend')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Confirm Password') }}</div>
-
-                <div class="card-body">
+    <div class="account_grid">
+        <div class="row">
+            <div class="card panel-login">
+                <div class=" login-right">
+                    <h3>
+                       {{ __('Confirm Password') }}
+                    </h3>
                     {{ __('Please confirm your password before continuing.') }}
 
                     <form method="POST" action="{{ route('password.confirm') }}">
                         @csrf
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                        <div class="form-group required {{ $errors->has('email') ? ' has-error' : '' }} clearfix ">
+                            <span class="login-field control-label">{{ __('Password') }}</span>
+                            
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="row mb-0">
@@ -41,9 +39,9 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div>   
+                <div class="clearfix"> </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

@@ -136,20 +136,24 @@
 								<li>
 									<i class="fa fa-envelope"></i>										
 									<span class="detail-title">Email:</span>
-										@if (Auth::user())
-											{{ $product->createdBy->email }}
-										@else
-											***** <a style="color: #E74C3C;" href="{{ route('login') }}">Login</a> to View
-										@endif
+									@if(Auth::check() && Auth::user()->hasVerifiedEmail())
+									    {{ $product->createdBy->email }}
+									@elseif(Auth::check())
+									   	***** <a style="color: #E74C3C;" href="{{ route('verification.notice') }}">Verify Now</a> to View
+									@else
+									    ***** <a style="color: #E74C3C;" href="{{ route('login') }}">Login</a> to View
+									@endif
 								</li>
 								@isset($product->createdBy->profile->phone1)
 									<li>
 										<i class="fa fa-phone"></i>										
 										<span class="detail-title">Phone:</span> 
-										@if (Auth::user())
-											{{ $product->createdBy->profile->phone1 }}
+										@if(Auth::check() && Auth::user()->hasVerifiedEmail())
+										    {{ $product->createdBy->profile->phone1 }}
+										@elseif(Auth::check())
+										   	***** <a style="color: #E74C3C;" href="{{ route('verification.notice') }}">Verify Now</a> to View
 										@else
-											***** <a style="color: #E74C3C;" href="{{ route('login') }}">Login</a> to View
+										    ***** <a style="color: #E74C3C;" href="{{ route('login') }}">Login</a> to View
 										@endif
 									</li>
 								@endisset
@@ -157,10 +161,12 @@
 									<li>
 										<i class="fa fa-phone"></i>										
 										<span class="detail-title">Secondary Phone:</span> 
-										@if (Auth::user())
-											{{ $product->createdBy->profile->phone2 }}
+										@if(Auth::check() && Auth::user()->hasVerifiedEmail())
+										    {{ $product->createdBy->profile->phone2 }}
+										@elseif(Auth::check())
+										   	***** <a style="color: #E74C3C;" href="{{ route('verification.notice') }}">Verify Now</a> to View
 										@else
-											***** <a style="color: #E74C3C;" href="{{ route('login') }}">Login</a> to View
+										    ***** <a style="color: #E74C3C;" href="{{ route('login') }}">Login</a> to View
 										@endif
 									</li>
 								@endisset
@@ -453,9 +459,9 @@
 					    @empty
 					    	<h5 class="no-querries">No querries has been asked yet.</h5>
 						@endif
-						
-						@if (Auth::user())
-							@if($product->created_by != Auth::user()->id)
+
+						@if(Auth::check() && Auth::user()->hasVerifiedEmail())
+						    @if($product->created_by != Auth::user()->id)
 						     	<form class="question-form" method="POST" action="{{ route('buyer-question.store') }}">
 						     		@csrf
 						     		<input type="hidden" name="product_slug" value="{{ $product->slug }}">
@@ -482,6 +488,8 @@
 									<li>Only post comment regarding this ad. Do not advertise about other ads, product or website.</li>
 								</div>
 							@endif
+						@elseif(Auth::check())
+							Please <a style="color: #E74C3C;" href="{{ route('verification.notice') }}">Verify Now</a> To Post Your Query
 						@else
 							Please <a style="color: #E74C3C;" href="{{ route('login') }}">Login</a> To Post Your Query
 						@endif

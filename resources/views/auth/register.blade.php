@@ -123,7 +123,12 @@
                         </div>
                         <input type="submit" value="Submit">
                     </form>
-                    </div>   
+                </div>
+                <br>
+                <div class=" login-left">
+                    <h3>Already  Registered?</h3>
+                    <a class="acount-btn" href="/login">Login</a>
+                </div>
                 <div class="clearfix"> </div>
             </div>
         </div>

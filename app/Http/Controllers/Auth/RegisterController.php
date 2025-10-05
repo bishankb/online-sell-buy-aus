@@ -12,6 +12,7 @@ use App\Models\City;
 use App\Models\Country;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -100,6 +101,16 @@ class RegisterController extends Controller
         ]);
 
         return $user;
+    }
+
+    /**
+     * Redirect url to verification.
+     *
+     * @param  array  $user
+     */
+    protected function registered(Request $request, $user)
+    {
+        return redirect()->route('verification.notice');
     }
 
     /**
