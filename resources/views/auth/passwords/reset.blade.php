@@ -3,7 +3,7 @@
 @section('content')
     <div class="account_grid">
         <div class="row">
-            <div class="panel panel-primary panel-login">
+            <div class="card panel-login">
                 <div class=" login-right">
                     <h3>
                        {{ __('Reset Password') }}

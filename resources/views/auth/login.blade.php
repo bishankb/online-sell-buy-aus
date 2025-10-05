@@ -38,7 +38,7 @@
                 <div class=" login-left">
                     <h3>NEW USERS</h3>
                     <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
-                    <a class="acount-btn" href="/register">Create an Account</a>
+                    <a class="acount-btn btn-success" href="/register">Create an Account</a>
                 </div>
                 <div class="clearfix"> </div>
             </div>

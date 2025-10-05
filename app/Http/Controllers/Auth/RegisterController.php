@@ -13,6 +13,8 @@ use App\Models\Country;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use App\Notifications\SignupVerificationNotification;
 
 class RegisterController extends Controller
 {
@@ -99,7 +101,7 @@ class RegisterController extends Controller
             'city_id' => $data['city'],
             'country_id' => $data['country'],
         ]);
-
+        
         return $user;
     }
 

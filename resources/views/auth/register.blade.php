@@ -127,6 +127,7 @@
                 <br>
                 <div class=" login-left">
                     <h3>Already  Registered?</h3>
+                    <p>If you have already account in our system please login to continue.</p>
                     <a class="acount-btn" href="/login">Login</a>
                 </div>
                 <div class="clearfix"> </div>
