@@ -60,31 +60,37 @@
       <!--begin::User Menu Dropdown-->
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-          <img
-            src="{{ asset('adminlte/img/user2-160x160.jpg') }}"
-            class="user-image rounded-circle shadow d-md-inline"
-            alt="User Image"
-          />
-          <span class="d-none d-md-inline">Alexander Pierce</span>
+          <span class="d-none d-md-inline">
+            @if(isset( Auth::user()->profile->image->filename))
+               <img
+                  src="/storage/media/user/{{ Auth::user()->id }}/thumbnail/{{ Auth::user()->profile->image->filename }}"
+                  class="user-image rounded-circle shadow d-md-inline"
+                  alt="User Image"
+                />
+            @else
+              <i class="fa fa-user"></i>
+            @endif
+           
+            {{ Auth::user()->name }}
+          </span>
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
           <!--begin::User Image-->
           <li class="user-header text-bg-primary">
-            <img
-                src="{{ asset('adminlte/img/user2-160x160.jpg') }}"
-                class="rounded-circle shadow"
-                alt="User Image"
-                style="display:block; margin: 0 auto;"
-              />
+              @if(isset( Auth::user()->profile->image->filename))
+                <img src="/storage/media/user/{{ Auth::user()->id }}/thumbnail/{{ Auth::user()->profile->image->filename }}" alt="User Image"class="rounded-circle shadow" alt="User Image" style="display:block; margin: 0 auto;">
+              @else 
+                <img src="{{ asset('frontend-template/img/no-image.jpg') }}" alt="User Image"class="rounded-circle shadow" alt="User Image" style="display:block; margin: 0 auto;">
+              @endif
             <p>
-              Alexander Pierce - Web Developer
-              <small>Member since Nov. 2023</small>
+              {{ Auth::user()->name }} - {{ Auth::user()->email }}
+              <small>Member since {{ Auth::user()->created_at->format('M, Y') }}</small>
             </p>
           </li>
           <!--end::User Image-->
           <!--begin::Menu Footer-->
           <li class="user-footer">
-            <a href="#" class="btn btn-default btn-flat">Profile</a>
+            <a href="{{ route('users.edit', Auth::user()->id). '#profile' }}" class="btn btn-default btn-flat">Profile</a>
             <a href="#" class="btn btn-default btn-flat float-end" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sign out</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               @csrf
