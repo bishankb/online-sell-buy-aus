@@ -172,6 +172,7 @@ ul.support li label {
 
 ul.login li a span { 
 	background : none;
+	width: auto;
 }
 
 
@@ -189,7 +190,6 @@ ul.login li a span i {
 	font-size: 22px;
 	height: 22px;
 	color: #3e8be8;
-	margin-right: 12px;
 }
 
 @media (max-width: 640px) {
@@ -1629,6 +1629,7 @@ ul.cute li i {
 .dropdown-menu.notify-drop .notify-drop-title {
     border-bottom: 1px solid #e2e2e2;
     padding-top: 5px;
+    padding-bottom: 5px;
 }
 .dropdown-menu.notify-drop .drop-content {
     max-height: 280px;
@@ -1652,7 +1653,7 @@ ul.cute li i {
 }
 .dropdown-menu.notify-drop .drop-content > li {
     border-bottom: 1px solid #e2e2e2;
-    padding: 10px 0px 5px 0px;
+    padding: 10px;
     width: 100%;
     text-align: left;
 }
