@@ -16,6 +16,10 @@
             <a href="{{ route('your-question.index') }}"><i class="fa fa-question"></i>Your Questions</a>
         </li>
 
+        <li class="{{ Request::is('my-account/dashboard/notification*') ? 'active' : '' }}">
+            <a href="{{ route('notification.view-notification') }}"><i class="fa fa-bell"></i>Notifications</a>
+        </li>
+
         <li class="{{ Request::is('my-account/dashboard/profile*') ? 'active' : '' }}">
             <a href="{{ route('my-account.showProfile') }}"><i class="fa fa-user"></i>Profile</a>
         </li>

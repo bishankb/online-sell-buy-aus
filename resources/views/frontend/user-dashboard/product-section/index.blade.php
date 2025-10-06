@@ -249,7 +249,7 @@
 		        </tbody>
 	        </table>
 	    </div>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center" style="margin-top: 20px;">
         	{{ $products->links('vendor.pagination.bootstrap-4') }}
         </div>
 

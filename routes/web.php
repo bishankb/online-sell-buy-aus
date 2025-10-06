@@ -117,6 +117,14 @@ Route::group([
         Route::resource('/your-question', 'App\Http\Controllers\Frontend\UserAccount\YourQuestionController')->except('create', 'store', 'show', 'destroy');
         Route::get('/your-question/{buyer_question}/view-reply', 'App\Http\Controllers\Frontend\UserAccount\YourQuestionController@viewReply')->name('your-question.view-reply');
 
+        Route::get('notification', 'App\Http\Controllers\Frontend\UserAccount\NotificationController@viewNotification')->name('notification.view-notification');
+        Route::get('mark-read', 'App\Http\Controllers\Frontend\UserAccount\NotificationController@markRead')->name('notification.mark-read');
+        Route::delete('notification/delete/{id}', 'App\Http\Controllers\Frontend\UserAccount\NotificationController@destroy')->name('notification.destroy');
+
+        Route::get('notification/read/{id}', 'App\Http\Controllers\Frontend\UserAccount\NotificationController@read')->name('notification.read');
+
+
+
     });
 });
 

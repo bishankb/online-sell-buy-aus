@@ -228,7 +228,7 @@ class ProductSectionController extends Controller
         try {
             $product->delete();
             $notification = array(
-                'success'    => 'Product deleted successfully.',
+                'error'    => 'Product deleted successfully.',
             );
         } catch (\Exception $exception) {
             logger()->error($exception->getMessage());
