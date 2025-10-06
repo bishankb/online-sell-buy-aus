@@ -16,27 +16,36 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-bs-toggle="dropdown" href="#">
           <i class="bi bi-bell-fill"></i>
-          <span class="navbar-badge badge text-bg-warning">15</span>
+          @if(Auth::user()->unreadNotifications()->count())
+            <span class="navbar-badge badge text-bg-warning">
+                {{ Auth::user()->unreadNotifications()->count() }}
+            </span>
+          @endif
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <span class="dropdown-item dropdown-header">
+            {{ Auth::user()->unreadNotifications()->count() }} Notifications
+            @if(Auth::user()->unreadNotifications->count() >0)
+                <a style="float: right;" href="{{ route('notification.mark-read') }}"title="Mark All Notification as Read">
+                    <span class="badge bg-danger">Clear All</span>
+                </a>
+            @endif
+          </span>
+          @foreach(Auth::user()->unreadNotifications->take(10) as $unreadNotification) 
+            @if(isset($unreadNotification->data['message']))
+              <div class="dropdown-divider"></div>
+              @if(isset($unreadNotification->data['url']))
+                <a href="{{ route('notification.read', $unreadNotification->id) }}" class="dropdown-item">
+                  {{ $unreadNotification->data['message'] }}
+                </a>
+              @endif
+            @endif
+          @endforeach
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="bi bi-envelope me-2"></i> 4 new messages
-            <span class="float-end text-secondary fs-7">3 mins</span>
+
+          <a href="{{ route('notification.view-notification') }}" class="dropdown-item dropdown-footer">
+            <i class="fa fa-eye"></i> See All Notifications
           </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="bi bi-people-fill me-2"></i> 8 friend requests
-            <span class="float-end text-secondary fs-7">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="bi bi-file-earmark-fill me-2"></i> 3 new reports
-            <span class="float-end text-secondary fs-7">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer"> See All Notifications </a>
         </div>
       </li>
       <!--end::Notifications Dropdown Menu-->

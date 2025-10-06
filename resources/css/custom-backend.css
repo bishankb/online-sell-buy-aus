@@ -257,6 +257,38 @@ table .btn-link:focus{
 
 /*Notification*/
 
+/* Make notification anchors tall and responsive */
+.dropdown-menu .dropdown-item {
+    flex-direction: row;       /* Default row layout */
+    align-items: flex-start;   /* Align icon at top for multi-line text */
+    min-height: 60px;          /* Minimum height for readability */
+    padding: 12px 15px;        /* Vertical and horizontal padding */
+    line-height: 1.4;          /* Spacing for wrapped lines */
+    white-space: normal;       /* Allow text to wrap */
+    word-wrap: break-word;     /* Break long words */
+}
+
+/* Make icon and text spacing consistent */
+.dropdown-menu .dropdown-item i {
+    font-size: 18px;           /* Icon size */
+    margin-right: 10px;        /* Space between icon and text */
+    flex-shrink: 0;            /* Prevent icon from shrinking */
+}
+
+/* Optional: responsive adjustment for small screens */
+@media (max-width: 575px) {
+    .dropdown-menu .dropdown-item {
+        flex-direction: column;   /* Stack icon above text on very small screens */
+        align-items: flex-start;  /* Align items to start */
+        min-height: auto;         /* Let height adjust naturally */
+        padding: 10px 12px;       /* Slightly smaller padding */
+    }
+
+    .dropdown-menu .dropdown-item i {
+        margin-bottom: 5px;       /* Space below icon when stacked */
+    }
+}
+
 .dropdown-menu.notify-drop {
     min-width: 330px;
     background-color: #fff;
