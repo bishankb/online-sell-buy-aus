@@ -45,7 +45,7 @@ class SignupVerificationNotification extends Notification
         return (new MailMessage())
                     ->greeting('Dear ' . $notifiable->name.',')
                     ->line('We are glad for your registration in our site.')
-                    ->subject('Confirmation Mail from '.env('APP_NAME'))        
+                    ->subject('Confirmation Mail from '.env('APP_NAME').' '.env('APP_URL'))        
                     ->line('This email is sent to verify your account.')
                     ->action('Click here to Activate', $verificationUrl)
                     ->line('Thank you for being our partner.');
