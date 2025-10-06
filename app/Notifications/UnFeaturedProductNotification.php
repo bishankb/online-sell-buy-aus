@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class FeaturedProductNotification extends Notification
+class UnFeaturedProductNotification extends Notification
 {
     use Queueable;
 
@@ -40,9 +40,10 @@ class FeaturedProductNotification extends Notification
     {
         return (new MailMessage)
             ->greeting('Dear ' . $this->productDetail['seller_name'].',')
-            ->subject(' Your product '.$this->productDetail['product_title'].' has been marked as featured. '.env('APP_URL'))
+            ->subject(' Your product '.$this->productDetail['product_title'].' has been marked as unfeatured. '.env('APP_URL'))
             ->line('Greetings from '.env('APP_URL').'!')
-            ->line('Your Product '.$this->productDetail['product_title'].'  has been marked as featured. ')
+            ->line('Your Product '.$this->productDetail['product_title'].'  has been marked as unfeatured. ')
+            ->line('Please contact us to mark your product as featured again. ')
             ->action('Click this link to view your product', route('product.show', $this->productDetail['product_slug']))
             ->line('Thank you for being our partner.');
     }

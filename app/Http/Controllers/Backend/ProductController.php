@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Image;
 use Illuminate\Support\Str;
 use App\Notifications\FeaturedProductNotification;
+use App\Notifications\UnFeaturedProductNotification;
 
 class ProductController extends Controller
 {
@@ -627,18 +628,21 @@ class ProductController extends Controller
                 'is_featured' => request('is_featured')
             ]);
 
+            $productDdtail = [
+                'seller_name'   => $product->createdBy->name,
+                'product_title' => $product->title,
+                'product_slug' => $product->slug
+            ];
+
             if($product->is_featured == 1) {
-                $featuredProduct = [
-                    'seller_name'   => $product->createdBy->name,
-                    'product_title' => $product->title,
-                    'product_slug' => $product->slug
-                ];
-
-                $product->createdBy->notify(new FeaturedProductNotification($featuredProduct));
-
+                
+                $product->createdBy->notify(new FeaturedProductNotification($productDdtail));
 
                 flash('Product marked as featured and message has been sent to its seller.')->info();
             } else {
+
+                $product->createdBy->notify(new UnFeaturedProductNotification($productDdtail));
+
                 flash('Product marked as unfeatured.')->info();
             }
 

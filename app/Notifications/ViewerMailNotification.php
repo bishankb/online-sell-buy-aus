@@ -40,9 +40,9 @@ class ViewerMailNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->greeting('Dear '.$this->viewerData['name'])
-            ->subject('New Contact Us Message')
-            ->line('Greetings from '.env('APP_URL').'!')
+            ->greeting('Dear '.env('APP_NAME').',')
+            ->subject('New Contact Us Message from '. $this->viewerData['name'].' '.env('APP_URL'))
+            ->line('Your recieved new message from '.env('APP_URL'))
             ->line('**Name:** ' . $this->viewerData['name'])
             ->line('**Email:** ' . $this->viewerData['email'])
             ->line('**Phone:** ' . $this->viewerData['phone'])
