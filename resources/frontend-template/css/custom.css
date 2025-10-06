@@ -235,10 +235,8 @@ ul.login li a span i {
 	}
 }
 
-@media (max-width: 403px) {
-	ul.support {
-		padding: 0;
-	}
+ul.support {
+	padding: 0;
 }
 
 .logo{
@@ -317,25 +315,23 @@ ul.login li a span i {
 
 /*Footer*/
 .latter, .latter-mobile {
-	margin-top: 26px;
+	margin: 26px 0;
 	font-size: 17px;
-}
-
-.latter-mobile {
-	font-size: 16px;
 }
 
 .latter a {
 	margin-right: 30px;
 }
 
-@media(max-width: 580px) {
-	.rule-tip {
-		padding-top: 38px;
-		padding-bottom: 0px;
-		text-align: center;
-	}	
+.latter-mobile {
+	font-size: 16px;
 }
+
+.latter-mobile a{
+	margin-right: 20px;
+}
+
+
 
 .latter h6 {
 	font-size: 17px;
@@ -367,18 +363,15 @@ ul.login li a span i {
 
 @media (max-width: 580px) {
 	.latter-right {
-	    margin: 0 4em 0 4em;
+	    margin: 0;
 	    margin-top: 26px;
 	    margin-bottom: 26px;
-		float: none;
 	}
-}
 
-@media (max-width: 580px) {
-	.latter-right {
-	    margin: 0 2em 0 2em;
-	    margin-top: 26px;
-	    margin-bottom: 26px;
+	.latter-right p {
+	    font-size: 17px;
+	    margin: 0;
+	    margin-bottom: 15px;
 	}
 }
 

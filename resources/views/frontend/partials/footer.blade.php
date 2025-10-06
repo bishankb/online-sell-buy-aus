@@ -7,15 +7,9 @@
 				<a href="{{ route('frontend.rule-tip') }}">Rules & Tips</a>
 			</div>
 			<div class="latter-mobile d-block d-sm-none">
-				<div class="pull-left">
-					<a href="{{ route('frontend.term-condition') }}">Terms & Condition</a>
-				</div>
-				<div class="pull-right">
-					<a href="{{ route('frontend.privacy-policy') }}">Privacy Policy</a>
-				</div>
-				<div class="rule-tip">
-					<a href="{{ route('frontend.rule-tip') }}">Rules & Tips</a>
-				</div>
+				<a href="{{ route('frontend.term-condition') }}">Terms & Condition</a>
+				<a href="{{ route('frontend.privacy-policy') }}">Privacy Policy</a>
+				<a href="{{ route('frontend.rule-tip') }}">Rules & Tips</a>
 			</div>
 			<div class="latter-right">
 				<p>FOLLOW US</p>
