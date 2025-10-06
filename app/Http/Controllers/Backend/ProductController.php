@@ -10,9 +10,9 @@ use DB;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Carbon\Carbon;
-use App\Notifications\FeaturedProductNotification;
 use Image;
 use Illuminate\Support\Str;
+use App\Notifications\FeaturedProductNotification;
 
 class ProductController extends Controller
 {
@@ -633,6 +633,9 @@ class ProductController extends Controller
                     'product_title' => $product->title,
                     'product_slug' => $product->slug
                 ];
+
+                $product->createdBy->notify(new FeaturedProductNotification($featuredProduct));
+
 
                 flash('Product marked as featured and message has been sent to its seller.')->info();
             } else {
