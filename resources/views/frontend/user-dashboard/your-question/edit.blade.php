@@ -35,7 +35,7 @@
 
 				@isset($your_question->answer2)
 					<tr>
-						<td class="td-header">{{env('APP_NAME')}} Answer:</td>
+						<td class="td-header">{{env('APP_NAME')}} (Admin) Answer:</td>
 						<td class="small-height">{{ $your_question->answer2 }}</td>
 					</tr>
 				@endisset

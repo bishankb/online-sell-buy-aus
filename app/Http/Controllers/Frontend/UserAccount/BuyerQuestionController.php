@@ -11,6 +11,7 @@ use App\Models\BuyerQuestion;
 use Auth;
 use Carbon\Carbon;
 use DB;
+use App\Notifications\SellerAnswerNotification;
 
 class BuyerQuestionController extends Controller
 {
@@ -85,6 +86,20 @@ class BuyerQuestionController extends Controller
             	'answer' => request('answer'),
               'is_read' => 0
           	]);
+
+            $buyerData = [
+                'seller_name'   => $buyer_question->product->createdBy->name,
+                'buyer_name'    => $buyer_question->askedBy->name,
+                'buyer_id'      => $buyer_question->askedBy->id,
+                'product_title' => $buyer_question->product->title,
+                'question'      => $buyer_question->question,
+                'answer'        => request('answer'),
+                'question_id'   => $question_id,
+                'seller_type'   => 'seller',
+                'product_slug'  => $buyer_question->product->slug 
+            ];
+            
+            $buyer_question->askedBy->notify(new SellerAnswerNotification($buyerData));
 
           	$notification = array(
             	'success'    => 'Your answer has been submitted. Please wait for the buyer response.',

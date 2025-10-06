@@ -11,6 +11,7 @@ use App\Models\BuyerQuestion;
 use App\Models\User;
 use Auth;
 use Carbon\Carbon;
+use App\Notifications\SellerAnswerNotification;
 
 class BuyerQuestionController extends Controller
 {
@@ -81,6 +82,22 @@ class BuyerQuestionController extends Controller
                 'answer2' => request('answer2'),
                 'is_read' => 0
             ]);
+
+            $admin = User::where('email', env('APP_EMAIL'))->first();
+
+            $buyerData = [
+                'seller_name'   => $admin->name,
+                'buyer_name'    => $buyer_question->askedBy->name,
+                'buyer_id'      => $buyer_question->askedBy->id,
+                'product_title' => $buyer_question->product->title,
+                'question'      => $buyer_question->question,
+                'answer'        => request('answer'),
+                'question_id'   => $question_id,
+                'seller_type'   => 'admin',
+                'product_slug'  => $buyer_question->product->slug 
+            ];
+            
+            $buyer_question->askedBy->notify(new SellerAnswerNotification($buyerData));
 
            flash('Your answer has been submitted to the buyer.')->success();
         } catch (\Exception $exception) {

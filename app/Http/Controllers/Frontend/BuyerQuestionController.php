@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\BuyerQuestion;
 use App\Models\User;
 use Auth;
+use App\Notifications\BuyerQuestionNotification;
 
 class BuyerQuestionController extends Controller
 {
@@ -49,6 +50,35 @@ class BuyerQuestionController extends Controller
                 'question'    => request('question'),
                 'asked_by'    => Auth::user()->id
             ]);
+
+            $sellerData = [
+                'buyer_name'    => Auth::user()->name,
+                'seller_name'   => $product->createdBy->name,
+                'seller_id'     => $product->createdBy->id,
+                'product_title' => $product->title,
+                'question'      => $buyer_question->question,
+                'url'           => route('buyer-question.reply', $buyer_question->question_id),
+                'question_id'   => $buyer_question->question_id,
+                'seller_type'   => 'seller',
+                'product_slug'  => $product->slug 
+            ];
+
+            $sellerDataForAdmin = [
+                'buyer_name'    => Auth::user()->name,
+                'seller_name'   => $product->createdBy->name,
+                'seller_id'     => $product->createdBy->id,
+                'product_title' => $product->title,
+                'question'      => $buyer_question->question,
+                'url'           => route('buyer-questions.reply', $buyer_question->question_id),
+                'question_id'   => $buyer_question->question_id,
+                'seller_type'   => 'admin',
+                'product_slug'  => $product->slug 
+            ];
+
+            $product->createdBy->notify(new BuyerQuestionNotification($sellerData));
+
+            $admin = User::where('email', env('APP_EMAIL'))->first();
+            $admin->notify(new BuyerQuestionNotification($sellerDataForAdmin));
 
             $notification = array(
                 'success'    => 'Your query has been submitted. You will be notified by the seller later.',
