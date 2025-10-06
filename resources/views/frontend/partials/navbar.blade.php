@@ -102,7 +102,7 @@
 						</ul>
 					@endif
 					<div class="account">
-						<a href="#">
+						<a href="{{ route('product-section.addCategories') }}">
 							<span> <i class="fa fa-shopping-cart"></i></span>
 						</a>
 					</div>
@@ -157,7 +157,7 @@
                                     @endforeach
                                 </div>
                                 <div class="notify-drop-footer text-center" style="clear: both;">
-		                            <a href="#">
+		                            <a href="{{ route('notification.view-notification') }}">
                                         <i class="fa fa-eye"></i> See All Notification
                                     </a>
                                 </div>
