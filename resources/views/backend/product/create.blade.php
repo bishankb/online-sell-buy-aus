@@ -44,3 +44,42 @@
         </div>
     </div>
 @endsection
+
+@section('backend-script')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if(!empty(old('has_home_delivery')) && old('has_home_delivery') == true)
+                showHomeDeliveryField();
+            @else
+                hideHomeDeliveryField();
+            @endif
+
+            $('#has_home_delivery').on('change', function () {
+                if($(this).prop("checked") == true){
+                    showHomeDeliveryField();
+                }
+                else if($(this).prop("checked") == false){
+                    hideHomeDeliveryField();
+                    clearDeliveryField();
+                }
+            });
+
+        });
+
+        function showHomeDeliveryField() {
+            $('#deliveryArea_div').show();
+            $('#deliveryCharge_div').show();
+        }
+
+        function hideHomeDeliveryField() {
+            $('#deliveryArea_div').hide();
+            $('#deliveryCharge_div').hide();
+        }
+
+        function clearDeliveryField() {
+            $('#delivery_area').val('').trigger('change');
+            $('#delivery_charge').val('');
+        }
+    </script>
+@endsection
+

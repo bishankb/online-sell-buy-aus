@@ -47,3 +47,46 @@
         </div>
     </div>
 @endsection
+
+@section('backend-script')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            var hasHomeDelivery = {{ old('has_home_delivery', $product->has_home_delivery ?? 0) ? 'true' : 'false' }};
+            if(hasHomeDelivery) {
+                showHomeDeliveryField();
+            } else {
+                hideHomeDeliveryField();
+            }
+
+            $('#has_home_delivery').on('change', function () {
+                if($(this).prop("checked") == true){
+                    showHomeDeliveryField();
+                    console.log(2323);
+                }
+                else if($(this).prop("checked") == false){
+                    hideHomeDeliveryField();
+                    clearDeliveryField();
+                }
+            });
+
+        });
+
+        function showHomeDeliveryField() {
+            $('#deliveryArea_div').show();
+            $('#deliveryCharge_div').show();
+        }
+
+        function hideHomeDeliveryField() {
+            $('#deliveryArea_div').hide();
+            $('#deliveryCharge_div').hide();
+        }
+
+        function clearDeliveryField() {
+            $('#delivery_area').val('').trigger('change');
+            $('#delivery_charge').val('');
+        }
+    </script>
+@endsection
+
+

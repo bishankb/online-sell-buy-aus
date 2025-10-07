@@ -19,19 +19,16 @@
                     <select name = "category_id[]" class="form-control form-select" id="category_id">
                         <option value="">Select the category</option>
                         @foreach($categories as $category)
-                            @if(isset($sub_category->category_id))
-                                <option value = "{{ $category->id }}" @if($sub_category->category_id == $category->id) selected @endif>
-                                    {{$category->title}}
-                                </option>
-                            @elseif(old('category_id') != null)
-                                <option value = "{{ $category->id }}" @if($category->id == old('category_id')) selected @endif>
-                                    {{$category->title}}
-                                </option>
-                            @else
-                                <option value = "{{ $category->id }}">
-                                    {{$category->title}}
-                                </option>
-                            @endif
+                            <option value="{{ $category->id }}"
+                                @if(old('category_id') !== null)
+                                    {{ old('category_id') == $category ? 'selected' : '' }}
+                                @elseif(isset($sub_category) && $sub_category->category_id == $category->id)
+                                    selected
+                                @endif
+                            >
+                                {{ $category->title }}
+                        </option>
+                            
                         @endforeach
                     </select>
 

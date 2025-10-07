@@ -63,19 +63,15 @@
             <select name = "city" class="form-control form-select">
                 <option disabled selected>Please select an option</option>
                 @foreach($cities as $city)
-                    @if(isset($userProfile->city_id))
-                        <option value = "{{ $city->id }}" @if($userProfile->city_id == $city->id) selected @endif>
-                            {{$city->name}}
-                        </option>
-                    @elseif(old('city') != null)
-                        <option value = "{{ $city->id }}" @if($city->id == old('city')) selected @endif>
-                            {{$city->name}}
-                        </option>
-                    @else
-                        <option value = "{{ $city->id }}">
-                            {{$city->name}}
-                        </option>
-                    @endif
+                    <option value="{{ $city->id }}"
+                        @if(old('city') !== null)
+                            {{ old('city') == $city->id ? 'selected' : '' }}
+                        @elseif(isset($userProfile) && $userProfile->city_id == $city->id)
+                            selected
+                        @endif
+                    >
+                        {{ $city->name }}
+                    </option>
                 @endforeach
             </select>
 
@@ -94,19 +90,15 @@
             <select name = "country" class="form-control form-select">
                 <option disabled selected>Please select an option</option>
                 @foreach($countries as $country)
-                    @if(isset($userProfile->country_id))
-                        <option value = "{{ $country->id }}" @if($userProfile->country_id == $country->id) selected @endif>
-                            {{$country->name}}
-                        </option>
-                    @elseif(old('country') != null)
-                        <option value = "{{ $country->id }}" @if($country->id == old('country')) selected @endif>
-                            {{$country->name}}
-                        </option>
-                    @else
-                        <option value = "{{ $country->id }}">
-                            {{$country->name}}
-                        </option>
-                    @endif
+                    <option value="{{ $country->id }}"
+                        @if(old('country') !== null)
+                            {{ old('country') == $country->id ? 'selected' : '' }}
+                        @elseif(isset($userProfile) && $userProfile->country_id == $country->id)
+                            selected
+                        @endif
+                    >
+                        {{ $country->name }}
+                    </option>
                 @endforeach
             </select>
 

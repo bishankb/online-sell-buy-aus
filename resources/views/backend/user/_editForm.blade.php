@@ -54,19 +54,15 @@
                     <select name = "role" class="form-control form-select">
                         <option disabled selected>Please select an option</option>
                         @foreach($roles as $role)
-                            @if(isset($user->role_id))
-                                <option value = "{{ $role->id }}" @if($user->role_id == $role->id) selected @endif>
-                                    {{$role->display_name}}
-                                </option>
-                            @elseif(old('role') != null)
-                                <option value = "{{ $role->id }}" @if($role->id == old('role')) selected @endif>
-                                    {{$role->display_name}}
-                                </option>
-                            @else
-                                <option value = "{{ $role->id }}">
-                                    {{$role->display_name}}
-                                </option>
-                            @endif
+                            <option value="{{ $role->id }}"
+                                @if(old('role') !== null)
+                                    {{ old('role') == $role->id ? 'selected' : '' }}
+                                @elseif(isset($user) && $user->role_id == $role->id)
+                                    selected
+                                @endif
+                            >
+                                {{ $role->display_name }}
+                            </option>
                         @endforeach
                     </select>
 
