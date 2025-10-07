@@ -32,6 +32,11 @@
     </div>
 @endsection
 
+@php
+    $selectedWarrantyKey = old('warranty_type', $product->warranty_type ?? '');
+    $selectedWarrantyName = $selectedWarrantyKey ? ($warranty_types[$selectedWarrantyKey] ?? '') : '';
+@endphp
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
 
@@ -40,17 +45,34 @@
             showHomeDeliveryField();
         } else {
             hideHomeDeliveryField();
-            clearDeliveryField();   
+            clearHomeDeliveryField();
         }
 
         $('#has_home_delivery').on('change', function () {
             if($(this).prop("checked") == true){
                 showHomeDeliveryField();
-                $('#delivery_area').val('').trigger('change');
             }
             else if($(this).prop("checked") == false){
                 hideHomeDeliveryField();
-                clearDeliveryField();
+                clearHomeDeliveryField();
+            }
+        });
+
+        var initialWarrantyName = "{{ $selectedWarrantyName }}".trim();
+        if(initialWarrantyName != 'No Warranty') {
+            showWarrantyField();
+        } else {
+            hideWarrantyField();
+            clearWarrantyField();
+        }
+        
+        $('#warranty_type').on('change', function() {
+            var warranty_type = $('#warranty_type option:selected').text().trim();
+            if (warranty_type == 'No Warranty') {
+                hideWarrantyField();
+                clearWarrantyField();
+            } else {
+                showWarrantyField();
             }
         });
 
@@ -66,8 +88,24 @@
         $('#deliveryCharge_div').hide();
     }
 
-    function clearDeliveryField() {
-        $('#delivery_area').prop('selectedIndex', 0).trigger('change');
+    function clearHomeDeliveryField() {
+        $('#delivery_area').val('').trigger('change');
         $('#delivery_charge').val('');
     }
+
+    function showWarrantyField() {
+        $('#warrantyPeriod_div').show();
+        $('#warrantyPeriodType_div').show();
+    }
+
+    function hideWarrantyField() {
+        $('#warrantyPeriod_div').hide();
+        $('#warrantyPeriodType_div').hide();
+    }
+
+    function clearWarrantyField() {
+        $('#warranty_period').val('');
+        $('#warranty_period_type').val('').trigger('change');
+    }
 </script>
+

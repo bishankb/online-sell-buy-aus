@@ -297,11 +297,11 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4" id="warrantyPeriod_div">
             <div class="form-group {{ $errors->has('warranty_period') ? ' has-error' : '' }} clearfix ">
                 <label for="warranty_period" class="form-label">Warranty Period</label>
 
-                <input type="number" name="warranty_period" value="{{ old('warranty_period', $product->warranty_period ?? '') }}" class="form-control">
+                <input type="number" name="warranty_period" id="warranty_period" value="{{ old('warranty_period', $product->warranty_period ?? '') }}" class="form-control">
 
                 @if ($errors->has('warranty_period'))
                     <span class="help-block">
@@ -311,7 +311,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4" id="warrantyPeriodType_div">
             <div class="form-group {{ $errors->has('warranty_period_type') ? ' has-error' : '' }} clearfix">
                 <label for="warranty_period_type" class="form-label">Time Period</label>
 
