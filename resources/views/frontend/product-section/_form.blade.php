@@ -56,11 +56,15 @@
 
             <div>
                 <label class="switch">
-                    @if(isset($product->is_negotiable))
-                        <input type="checkbox" name="is_negotiable" @if($product->is_negotiable == 1) checked @endif>
-                    @else
-                        <input type="checkbox" name="is_negotiable">
-                    @endif
+                    <input type="hidden" name="is_negotiable" value="0">
+
+                    <input type="checkbox" name="is_negotiable" id="is_negotiable" value="1"
+                           @if(old('is_negotiable') !== null)
+                               {{ old('is_negotiable') ? 'checked' : '' }}
+                           @elseif(isset($product))
+                               {{ $product->is_negotiable ? 'checked' : '' }}
+                           @endif
+                    >
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -80,19 +84,16 @@
     <select name = "condition_type" id="condition_type" class="form-control form-select" required>
         <option disabled selected>Select the condition type</option>
         @foreach($condition_types as $key => $condition_type)
-            @if(isset($product->condition_type))
-                <option value = "{{ $key }}" @if($product->condition_type == $key) selected @endif>
-                    {{$condition_type}}
-                </option>
-            @elseif(old('condition_type') != null)
-                <option value = "{{ $key }}" @if($key == old('condition_type')) selected @endif>
-                    {{$condition_type}}
-                </option>
-            @else
-                <option value = "{{ $key }}">
-                    {{$condition_type}}
-                </option>
-            @endif
+
+            <option value="{{ $key }}"
+                @if(old('condition_type') !== null)
+                    {{ old('condition_type') == $key ? 'selected' : '' }}
+                @elseif(isset($product) && $product->condition_type == $key)
+                    selected
+                @endif
+            >
+                {{ $condition_type }}
+            </option>
         @endforeach
     </select>
 
@@ -110,19 +111,15 @@
     <select name = "expiry_period" id="expiry_period" class="form-control form-select" required>
         <option disabled selected>Select the expiry period</option>
         @foreach($expiry_periods as $key => $expiry_period)
-            @if(isset($product->expiry_period_type))
-                <option value = "{{ $key }}" @if($product->expiry_period_type == $key) selected @endif>
-                    {{$expiry_period}}
-                </option>
-            @elseif(old('expiry_period') != null)
-                <option value = "{{ $key }}" @if($key == old('expiry_period')) selected @endif>
-                    {{$expiry_period}}
-                </option>
-            @else
-                <option value = "{{ $key }}">
-                    {{$expiry_period}}
-                </option>
-            @endif
+            <option value="{{ $key }}"
+                @if(old('expiry_period') !== null)
+                    {{ old('expiry_period') == $key ? 'selected' : '' }}
+                @elseif(isset($product) && $product->expiry_period_type == $key)
+                    selected
+                @endif
+            >
+                {{ $expiry_period }}
+            </option>
         @endforeach
     </select>
 
@@ -251,19 +248,15 @@
                 <select name = "usedFor_period_type" id="usedFor_period_type" class="form-control form-select">
                     <option disabled selected>Select the period</option>
                     @foreach($time_periods as $key => $time_period)
-                        @if(isset($product->usedFor_period_type))
-                            <option value = "{{ $key }}" @if($product->usedFor_period_type == $key) selected @endif>
-                                {{$time_period}}
-                            </option>
-                        @elseif(old('time_period') != null)
-                            <option value = "{{ $key }}" @if($key == old('time_period')) selected @endif>
-                                {{$time_period}}
-                            </option>
-                        @else
-                            <option value = "{{ $key }}">
-                                {{$time_period}}
-                            </option>
-                        @endif
+                        <option value="{{ $key }}"
+                            @if(old('usedFor_period_type') !== null)
+                                {{ old('usedFor_period_type') == $key ? 'selected' : '' }}
+                            @elseif(isset($product) && $product->usedFor_period_type == $key)
+                                selected
+                            @endif
+                        >
+                            {{ $time_period }}
+                        </option>
                     @endforeach
                 </select>
 
@@ -284,19 +277,15 @@
                 <select name = "warranty_type" id="warranty_type" class="form-control form-select">
                     <option disabled selected>Select the warranty type</option>
                     @foreach($warranty_types as $key => $warranty_type)
-                        @if(isset($product->warranty_type))
-                            <option value = "{{ $key }}" @if($product->warranty_type == $key) selected @endif>
-                                {{$warranty_type}}
-                            </option>
-                        @elseif(old('time_period') != null)
-                            <option value = "{{ $key }}" @if($key == old('warranty_type')) selected @endif>
-                                {{$warranty_type}}
-                            </option>
-                        @else
-                            <option value = "{{ $key }}">
-                                {{$warranty_type}}
-                            </option>
-                        @endif
+                        <option value="{{ $key }}"
+                            @if(old('warranty_type') !== null)
+                                {{ old('warranty_type') == $key ? 'selected' : '' }}
+                            @elseif(isset($product) && $product->warranty_type == $key)
+                                selected
+                            @endif
+                        >
+                            {{ $warranty_type }}
+                        </option>
                     @endforeach
                 </select>
 
@@ -329,19 +318,15 @@
                 <select name = "warranty_period_type" id="warranty_period_type" class="form-control form-select">
                     <option disabled selected>Select the period</option>
                     @foreach($time_periods as $key => $time_period)
-                        @if(isset($product->warranty_period_type))
-                            <option value = "{{ $key }}" @if($product->warranty_period_type == $key) selected @endif>
-                                {{$time_period}}
-                            </option>
-                        @elseif(old('time_period') != null)
-                            <option value = "{{ $key }}" @if($key == old('time_period')) selected @endif>
-                                {{$time_period}}
-                            </option>
-                        @else
-                            <option value = "{{ $key }}">
-                                {{$time_period}}
-                            </option>
-                        @endif
+                        <option value="{{ $key }}"
+                            @if(old('warranty_period_type') !== null)
+                                {{ old('warranty_period_type') == $key ? 'selected' : '' }}
+                            @elseif(isset($product) && $product->warranty_period_type == $key)
+                                selected
+                            @endif
+                        >
+                            {{ $time_period }}
+                        </option>
                     @endforeach
                 </select>
 
@@ -361,11 +346,15 @@
 
                 <div>
                     <label class="switch">
-                        @if(isset($product->has_home_delivery))
-                            <input type="checkbox" name="has_home_delivery" @if($product->has_home_delivery == 1) checked @endif>
-                        @else
-                            <input type="checkbox" name="has_home_delivery">
-                        @endif
+                        <input type="hidden" name="has_home_delivery" value="0">
+
+                        <input type="checkbox" name="has_home_delivery" id="has_home_delivery" value="1"
+                               @if(old('has_home_delivery') !== null)
+                                   {{ old('has_home_delivery') ? 'checked' : '' }}
+                               @elseif(isset($product))
+                                   {{ $product->has_home_delivery ? 'checked' : '' }}
+                               @endif
+                        >
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -378,26 +367,22 @@
             </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-5" id="deliveryArea_div">
             <div class="form-group {{ $errors->has('delivery_area') ? ' has-error' : '' }} clearfix">
                 <label for="delivery_area" class="form-label">Delivery Area</label>
 
                 <select name = "delivery_area" id="delivery_area" class="form-control form-select">
-                    <option disabled selected>Select the delivery Area</option>
+                    <option value="">Select the delivery Area</option>
                     @foreach($delivery_areas as $key => $delivery_area)
-                        @if(isset($product->delivery_area))
-                            <option value = "{{ $key }}" @if($product->delivery_area == $key) selected @endif>
-                                {{$delivery_area}}
-                            </option>
-                        @elseif(old('delivery_area') != null)
-                            <option value = "{{ $key }}" @if($key == old('delivery_area')) selected @endif>
-                                {{$delivery_area}}
-                            </option>
-                        @else
-                            <option value = "{{ $key }}">
-                                {{$delivery_area}}
-                            </option>
-                        @endif
+                        <option value="{{ $key }}"
+                            @if(old('delivery_area') !== null)
+                                {{ old('delivery_area') == $key ? 'selected' : '' }}
+                            @elseif(isset($product) && $product->delivery_area == $key)
+                                selected
+                            @endif
+                        >
+                            {{ $delivery_area }}
+                        </option>
                     @endforeach
                 </select>
 
@@ -409,11 +394,11 @@
             </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-5" id="deliveryCharge_div">
             <div class="form-group {{ $errors->has('delivery_charge') ? ' has-error' : '' }} clearfix ">
                 <label for="delivery_charge" class="form-label">Delivery Charge ($)</label>
 
-                <input type="number" name="delivery_charge" value="{{ old('delivery_charge', $product->delivery_charge ?? '') }}" class="form-control">
+                <input type="number" name="delivery_charge" id="delivery_charge" value="{{ old('delivery_charge', $product->delivery_charge ?? '') }}" class="form-control">
 
                 @if ($errors->has('delivery_charge'))
                     <span class="help-block">
@@ -453,11 +438,15 @@
 
                 <div>
                     <label class="switch">
-                        @if(isset($product->has_home_delivery))
-                            <input type="checkbox" name="has_home_delivery" @if($product->has_home_delivery == 1) checked @endif>
-                        @else
-                            <input type="checkbox" name="has_home_delivery">
-                        @endif
+                        <input type="hidden" name="has_home_delivery" value="0">
+
+                        <input type="checkbox" name="has_home_delivery" id="has_home_delivery" value="1"
+                               @if(old('has_home_delivery') !== null)
+                                   {{ old('has_home_delivery') ? 'checked' : '' }}
+                               @elseif(isset($product))
+                                   {{ $product->has_home_delivery ? 'checked' : '' }}
+                               @endif
+                        >
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -470,26 +459,22 @@
             </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-5" id="deliveryArea_div">
             <div class="form-group {{ $errors->has('delivery_area') ? ' has-error' : '' }} clearfix">
                 <label for="delivery_area" class="form-label">Delivery Area</label>
 
                 <select name = "delivery_area" id="delivery_area" class="form-control form-select">
-                    <option disabled selected>Select the delivery Area</option>
+                    <option value=""Select the delivery Area</option>
                     @foreach($delivery_areas as $key => $delivery_area)
-                        @if(isset($product->delivery_area))
-                            <option value = "{{ $key }}" @if($product->delivery_area == $key) selected @endif>
-                                {{$delivery_area}}
-                            </option>
-                        @elseif(old('delivery_area') != null)
-                            <option value = "{{ $key }}" @if($key == old('delivery_area')) selected @endif>
-                                {{$delivery_area}}
-                            </option>
-                        @else
-                            <option value = "{{ $key }}">
-                                {{$delivery_area}}
-                            </option>
-                        @endif
+                        <option value="{{ $key }}"
+                            @if(old('delivery_area') !== null)
+                                {{ old('delivery_area') == $key ? 'selected' : '' }}
+                            @elseif(isset($product) && $product->delivery_area == $key)
+                                selected
+                            @endif
+                        >
+                            {{ $delivery_area }}
+                        </option>
                     @endforeach
                 </select>
 
@@ -501,11 +486,11 @@
             </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-5" id="deliveryCharge_div">
             <div class="form-group {{ $errors->has('delivery_charge') ? ' has-error' : '' }} clearfix ">
                 <label for="delivery_charge" class="form-label">Delivery Charge ($)</label>
 
-                <input type="number" name="delivery_charge" value="{{ old('delivery_charge', $product->delivery_charge ?? '') }}" class="form-control">
+                <input type="number" name="delivery_charge" id="delivery_charge" value="{{ old('delivery_charge', $product->delivery_charge ?? '') }}" class="form-control">
 
                 @if ($errors->has('delivery_charge'))
                     <span class="help-block">
@@ -563,11 +548,17 @@
     <label for="status" class="form-label">Status</label>
     <div>
         <label class="switch">
-            @if(isset($product->status))
-                <input type="checkbox" name="status" @if($product->status == 1) checked @endif>
-            @else
-                <input type="checkbox" name="status" checked>
-            @endif
+            <input type="hidden" name="status" value="0">
+
+            <input type="checkbox" name="status" value="1"
+                   @if(old('status') !== null)
+                       {{ old('status') ? 'checked' : '' }}
+                   @elseif(isset($product))
+                       {{ $product->status ? 'checked' : '' }}
+                   @else
+                       checked
+                   @endif
+            >
             <span class="slider round"></span>
         </label>
     </div>
