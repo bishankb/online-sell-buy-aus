@@ -31,3 +31,43 @@
         </form>
     </div>
 @endsection
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        var hasHomeDelivery = '{{ old('has_home_delivery', $product->has_home_delivery ?? 0) }}' === '1';
+        if(hasHomeDelivery) {
+            showHomeDeliveryField();
+        } else {
+            hideHomeDeliveryField();
+            clearDeliveryField();   
+        }
+
+        $('#has_home_delivery').on('change', function () {
+            if($(this).prop("checked") == true){
+                showHomeDeliveryField();
+                $('#delivery_area').val('').trigger('change');
+            }
+            else if($(this).prop("checked") == false){
+                hideHomeDeliveryField();
+                clearDeliveryField();
+            }
+        });
+
+    });
+
+    function showHomeDeliveryField() {
+        $('#deliveryArea_div').show();
+        $('#deliveryCharge_div').show();
+    }
+
+    function hideHomeDeliveryField() {
+        $('#deliveryArea_div').hide();
+        $('#deliveryCharge_div').hide();
+    }
+
+    function clearDeliveryField() {
+        $('#delivery_area').prop('selectedIndex', 0).trigger('change');
+        $('#delivery_charge').val('');
+    }
+</script>

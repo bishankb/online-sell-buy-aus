@@ -52,17 +52,17 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
-            var hasHomeDelivery = {{ old('has_home_delivery', $product->has_home_delivery ?? 0) ? 'true' : 'false' }};
+            var hasHomeDelivery = '{{ old('has_home_delivery', $product->has_home_delivery ?? 0) }}' === '1';
             if(hasHomeDelivery) {
                 showHomeDeliveryField();
             } else {
                 hideHomeDeliveryField();
+                clearDeliveryField();
             }
 
             $('#has_home_delivery').on('change', function () {
                 if($(this).prop("checked") == true){
                     showHomeDeliveryField();
-                    console.log(2323);
                 }
                 else if($(this).prop("checked") == false){
                     hideHomeDeliveryField();
@@ -83,7 +83,7 @@
         }
 
         function clearDeliveryField() {
-            $('#delivery_area').val('').trigger('change');
+            $('#delivery_area').prop('selectedIndex', 0).trigger('change');
             $('#delivery_charge').val('');
         }
     </script>
