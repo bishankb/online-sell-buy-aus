@@ -420,6 +420,11 @@ table .btn-link:focus{
     color: #333;
 }
 
+.dropdown-menu .notification-scroll {
+    max-height: 280px;
+    overflow-y: scroll;
+}
+
 .notification_area .unread {
     background-color: #000;
 }

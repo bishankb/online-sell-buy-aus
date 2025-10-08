@@ -31,16 +31,18 @@
                 </a>
             @endif
           </span>
-          @foreach(Auth::user()->unreadNotifications->take(10) as $unreadNotification) 
-            @if(isset($unreadNotification->data['message']))
-              <div class="dropdown-divider"></div>
-              @if(isset($unreadNotification->data['url']))
-                <a href="{{ route('notification.read', $unreadNotification->id) }}" class="dropdown-item">
-                  {{ $unreadNotification->data['message'] }}
-                </a>
+          <div class="notification-scroll">
+            @foreach(Auth::user()->unreadNotifications->take(10) as $unreadNotification) 
+              @if(isset($unreadNotification->data['message']))
+                <div class="dropdown-divider"></div>
+                @if(isset($unreadNotification->data['url']))
+                  <a href="{{ route('notification.read', $unreadNotification->id) }}" class="dropdown-item">
+                    {{ $unreadNotification->data['message'] }}
+                  </a>
+                @endif
               @endif
-            @endif
-          @endforeach
+            @endforeach
+          </div>
           <div class="dropdown-divider"></div>
 
           <a href="{{ route('notification.view-notification') }}" class="dropdown-item dropdown-footer">
