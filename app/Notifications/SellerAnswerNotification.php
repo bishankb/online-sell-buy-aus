@@ -45,7 +45,7 @@ class SellerAnswerNotification extends Notification
             ->line($this->buyerData['seller_name'].' has replied  your query for the product ' .
                 $this->buyerData['product_title'])
             ->line('Your Question : ' . $this->buyerData['question'])
-            ->action('Click this view the answer', route('your-question.view-reply', $this->buyerData['question_id']))
+            ->action('Click this view the answer', route('buyer-question.reply', $this->buyerData['question_id']))
             ->line('Thank you for your Interest.');
     }
 
