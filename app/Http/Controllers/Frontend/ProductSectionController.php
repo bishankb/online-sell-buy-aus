@@ -11,6 +11,8 @@ use Auth;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use SEOMeta;
+use OpenGraph;
 
 class ProductSectionController extends Controller
 {
@@ -21,6 +23,8 @@ class ProductSectionController extends Controller
      */
     public function addCategories()
     {
+        $this->seoAddCategory();
+
         $categories = Category::where('status', 1)->get()->pluck('title', 'id');
         $sub_categories = SubCategory::where('status', 1)->get()->pluck('title', 'id');
 
@@ -70,6 +74,8 @@ class ProductSectionController extends Controller
      */
     public function create($subCategorySlug)
     {
+        $this->seoAddProduct($subCategorySlug);
+
         $sub_category = SubCategory::where('slug', $subCategorySlug)->first();
         $expiry_periods = Product::ExpiryPeriod;
         $condition_types = Product::ConditionType;
@@ -259,6 +265,8 @@ class ProductSectionController extends Controller
      */
     public function addImages($productSlug)
     {
+        $this->seoAddImages($productSlug);
+
         $product = Product::where('slug', $productSlug)->where('created_by', Auth::user()->id)->firstOrFail();
         $productImages = $product->images;
         $productId = $product->id;
@@ -336,5 +344,41 @@ class ProductSectionController extends Controller
             $number = (int) end($pieces);
             return $slug .= '-' . ($number + 1);
         }
+    }
+
+    private function seoAddCategory()
+    {
+        SEOMeta::setTitle('Choose Category -'.env('APP_NAME'));
+        SEOMeta::setDescription(env('APP_NAME').' - Choose the category before adding the products.');
+        SEOMeta::setCanonical(route('product-section.addCategories'));
+        SEOMeta::addKeyword(['osbaustralia', 'category', 'subCategory', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+
+        OpenGraph::setTitle('Choose Category -'.env('APP_NAME'));
+        OpenGraph::setDescription(env('APP_NAME').' - Choose the category before adding the products.');
+        OpenGraph::setUrl(route('product-section.addCategories'));
+    }
+
+    private function seoAddProduct($subCategorySlug)
+    {
+        SEOMeta::setTitle('Post New Product -'.env('APP_NAME'));
+        SEOMeta::setDescription(env('APP_NAME').' - Input product title, description, features, price and other necessary details.');
+        SEOMeta::setCanonical(route('product-section.create', $subCategorySlug));
+        SEOMeta::addKeyword(['osbaustralia', 'productform','title', 'description', 'features', 'price', 'otherDetails', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+
+        OpenGraph::setTitle('Post New Product -'.env('APP_NAME'));
+        OpenGraph::setDescription(env('APP_NAME').' - Input product title, description, features, price and other necessary details.');
+        OpenGraph::setUrl(route('product-section.create', $subCategorySlug));
+    }
+
+    private function seoAddImages($productSlug)
+    {
+        SEOMeta::setTitle('Manage Images -'.env('APP_NAME'));
+        SEOMeta::setDescription(env('APP_NAME').' - Add the images of your product if any. Delete the existing image.');
+        SEOMeta::setCanonical(route('product-section.addImages', $productSlug));
+        SEOMeta::addKeyword(['osbaustralia', 'images', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+
+        OpenGraph::setTitle('Manage Images -'.env('APP_NAME'));
+        OpenGraph::setDescription(env('APP_NAME').' - Add the images of your product if any. Delete the existing image.');
+        OpenGraph::setUrl(route('product-section.addImages', $productSlug));
     }
 }

@@ -12,6 +12,8 @@ use App\Models\City;
 use Carbon\Carbon;
 use CyrildeWit\EloquentViewable\Support\Period;
 use App\Models\ProductView;
+use SEOMeta;
+use OpenGraph;
 
 class ProductController extends Controller
 {
@@ -22,6 +24,8 @@ class ProductController extends Controller
      */
     public function index($productViewType)
     {
+        $this->seoIndex($productViewType);
+
         $categories = Category::get();
         $cities = City::get();
         $condition_types = Product::ConditionType;
@@ -131,6 +135,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $this->seoShow($product);
+
         session()->push('products.recently_viewed', $product->getKey());
 
         $userId = auth()->id();
@@ -169,6 +175,8 @@ class ProductController extends Controller
      */
     public function filter(Request $request)
     {
+        $this->seoFilter();
+
         $filter_products = Product::sort(request('status'))
                             ->where('status', 1)
                             ->with('createdBy')
@@ -255,6 +263,8 @@ class ProductController extends Controller
      */
     public function search(Request $request)
     {
+        $this->seoSearch($request->search_product);
+
         $categories = Category::get();
         $cities = City::get();
         $condition_types = Product::ConditionType;
@@ -267,5 +277,71 @@ class ProductController extends Controller
                             ->paginate(config('product.product_paginate'));
         
         return view('frontend.product-section.product-list', compact('products', 'categories', 'cities', 'condition_types'));
+    }
+
+    private function seoIndex($productViewType)
+    {
+        SEOMeta::setTitle('Buy and Sell Your Products in Australia -'.env('APP_NAME'));
+        SEOMeta::setDescription(env('APP_NAME').' - Buy and Sell your products in australia. Sell the used or brand new products, contact the buyer yourself and look for the products of your desire.');
+        SEOMeta::setCanonical(route('product.index', $productViewType));
+        SEOMeta::addKeyword(['osbaustralia', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+        
+        OpenGraph::setTitle('Buy and Sell Your Products in Australia -'.env('APP_NAME'));
+        OpenGraph::setDescription(env('APP_NAME').' - Buy and Sell your products in Australia. Sell the used or brand new products, contact the buyer yourself and look for the products of your desire.');
+        OpenGraph::setUrl(route('product.index', $productViewType));
+    }
+
+    private function seoShow($product)
+    {
+        SEOMeta::setTitle($product->title.' -'.env('APP_NAME'));
+        SEOMeta::setDescription($product->description. '. View the product price and other details. Contact the owner of the product if you find the product suitable.');
+        SEOMeta::setCanonical(route('product.show', $product->slug));
+        SEOMeta::addMeta('article:posted_on', $product->created_at->toW3CString(), 'posted_on');
+        SEOMeta::addKeyword(['osbaustralia', 'description', 'product', 'buy', 'sell', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand']);
+
+        OpenGraph::setTitle($product->title.' -'.env('APP_NAME'));
+        OpenGraph::setDescription($product->description. '. View the product price and other details. Contact the owner of the product if you find the product suitable.');
+        OpenGraph::setUrl(route('product.show', $product->slug));
+       
+        OpenGraph::addProperty('locale', 'ne_NP');
+        
+        if ($product->category) {
+            SEOMeta::addMeta('article:category', $product->category->title, 'category');
+            OpenGraph::addProperty('category', $product->category->title);
+        }
+        if ($product->subCategory) {
+            SEOMeta::addMeta('article:sub_category', $product->subCategory->title, 'sub_category');
+            OpenGraph::addProperty('sub_category', $product->subCategory->title);
+        }
+
+        if(count($product->images) > 0) {
+            OpenGraph::addImage(env('APP_URL').'/storage/media/product/'.$product->id.'/'.$product->images->first()->filename);
+        } else {
+           OpenGraph::addImage(env('APP_URL').'/images/no-image.jpg'); 
+        }
+    }
+
+    private function seoFilter()
+    {
+        SEOMeta::setTitle('Filter and search products by category, location,condition and price range -'.env('APP_NAME'));
+        SEOMeta::setDescription('Filter products by different criteria on '.env('APP_NAME').', find suitable products according to your need and consult the product owner yourself.');
+        SEOMeta::setCanonical(route('product.filter'));
+        SEOMeta::addKeyword(['osbaustralia', 'filter', 'search', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'price-range', 'categogry', 'sold_product']);
+        
+        OpenGraph::setTitle('Filter, Search products by category, location,condition and price range -'.env('APP_NAME'));
+        OpenGraph::setDescription('Filter products by different criteria on '.env('APP_NAME').', find suitable products according to your need and consult the product owner yourself.');
+        OpenGraph::setUrl(route('product.filter'));
+    }
+
+    private function seoSearch($search)
+    {
+        SEOMeta::setTitle('Searched by : '.$search.' -'.env('APP_NAME'));
+        SEOMeta::setDescription('Product searched by '. $search .' keyword on '.env('APP_NAME').'. Search your desired product from product title, category and subCategory');
+        SEOMeta::setCanonical(route('product.search'));
+        SEOMeta::addKeyword(['osbaustralia', 'search', 'category', 'subCategory', 'product', 'buy', 'sell', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand']);
+        
+        OpenGraph::setTitle('Searched by : '.$search.' -'.env('APP_NAME'));
+        OpenGraph::setDescription('Product searched by '. $search .' keyword on '.env('APP_NAME').'. Search your desired product from product title, category and subCategory');
+        OpenGraph::setUrl(route('product.search'));
     }
 }

@@ -7,11 +7,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use Carbon\Carbon;
+use SEOMeta;
+use OpenGraph;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $this->seoIndex();
+
     	$latest_products = Product::where('status', 1)
                                     ->where('is_sold', 0)
                                     ->where('expiry_period', '>', Carbon::now())
@@ -42,5 +46,17 @@ class HomeController extends Controller
     	$categories = Category::where('status', 1)->get();
 
         return view('frontend.home', compact('latest_products', 'popular_products', 'recentlyViewed_products', 'categories'));
+    }
+
+    private function seoIndex()
+    {
+        SEOMeta::setTitle('Sell and Buy Your Products in Australia -'.env('APP_NAME'));
+        SEOMeta::setDescription(env('APP_NAME').' - Sell and Buy your products in Australia. Sell the used or brand new products, contact the buyer yourself and look for the products of your desire.');
+        SEOMeta::setCanonical(route('frontend.home'));
+        SEOMeta::addKeyword(['osbaustralia', 'Australia', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+        
+        OpenGraph::setTitle('Sell and Buy Your Products in Australia -'.env('APP_NAME'));
+        OpenGraph::setDescription(env('APP_NAME').' - Sell and Buy your products in Australia. Sell the used or brand new products, contact the buyer yourself and look for the products of your desire.');
+        OpenGraph::setUrl(route('frontend.home'));
     }
 }

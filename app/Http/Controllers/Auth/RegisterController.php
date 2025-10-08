@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use App\Notifications\SignupVerificationNotification;
+use SEOMeta;
+use OpenGraph;
 
 class RegisterController extends Controller
 {
@@ -55,6 +57,8 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
+        $this->seoRegister();
+
         $cities = City::orderBy('order', 'asc')->select('name', 'id')->get();
         $countries = Country::orderBy('order', 'asc')->select('name', 'id')->get();
 
@@ -132,5 +136,17 @@ class RegisterController extends Controller
             $number = (int) end($pieces);
             return $slug .= '-' . ($number + 1);
         }
+    }
+
+    private function seoRegister()
+    {
+        SEOMeta::setTitle('Register through email address -'.env('APP_NAME'));
+        SEOMeta::setDescription('Register through email address on '.env('APP_NAME').'. It is very easy to buy and sell your products');
+        SEOMeta::setCanonical(route('login'));
+        SEOMeta::addKeyword(['register', 'product', 'buy', 'sell', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand']);
+        
+        OpenGraph::setTitle('Register through email address -'.env('APP_NAME'));
+        OpenGraph::setDescription('Register through email address on '.env('APP_NAME').'. It is very easy to buy and sell your products');
+        OpenGraph::setUrl(route('login'));
     }
 }

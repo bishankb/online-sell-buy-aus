@@ -12,6 +12,8 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 use App\Notifications\SellerAnswerNotification;
+use SEOMeta;
+use OpenGraph;
 
 class BuyerQuestionController extends Controller
 {
@@ -23,6 +25,8 @@ class BuyerQuestionController extends Controller
 
     public function index()
     {
+        $this->seoIndex();
+
       	$buyer_questions = BuyerQuestion::categoryFilter(request('category'))
                                           ->subCategoryFilter(request('sub_category'))
                                           ->where('asked_by', '!=', Auth::user()->id)
@@ -56,7 +60,8 @@ class BuyerQuestionController extends Controller
                                   ->where('status', 1)
                                   ->where('expiry_period', '>', Carbon::now());
                       })->firstOrFail();
-      
+      $this->seoReply($buyer_question);
+
     	return view('frontend.user-dashboard.buyer-question.reply', compact('buyer_question'));
     }
 
@@ -178,5 +183,29 @@ class BuyerQuestionController extends Controller
 
           return redirect()->route('buyer-question.index')->with($notification);
         }
+    }
+
+    private function seoIndex()
+    {
+      SEOMeta::setTitle(Auth::user()->name."'s Buyer Questions -".env("APP_NAME"));
+      SEOMeta::setDescription(env('APP_NAME').' - View the list of question asked by the buyers on your products and reply them.');
+      SEOMeta::setCanonical(route('buyer-question.index'));
+      SEOMeta::addKeyword(['osbaustralia', 'buyer-question', 'reply', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+      
+      OpenGraph::setTitle(Auth::user()->name."'s Buyer Questions -".env("APP_NAME"));
+      OpenGraph::setDescription(env('APP_NAME').' - View the list of question asked by the buyers on your products and reply them.');
+      OpenGraph::setUrl(route('buyer-question.index'));
+    }
+
+    private function seoReply($question)
+    {
+      SEOMeta::setTitle("Buyer's Question Reply of The product-".env("APP_NAME"));
+      SEOMeta::setDescription(env('APP_NAME').' - Question reply for the product asked by Buyer');
+      SEOMeta::setCanonical(route('buyer-question.reply', $question->question_id));
+      SEOMeta::addKeyword(['osbaustralia', 'buyer-question', 'reply', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+      
+      OpenGraph::setTitle("Buyer's Question Reply of The product-".env("APP_NAME"));
+      OpenGraph::setDescription(env('APP_NAME').' - Question reply for the product asked by Buyer');
+      OpenGraph::setUrl(route('buyer-question.reply', $question->question_id));
     }
 }

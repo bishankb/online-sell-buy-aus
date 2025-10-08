@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use Auth;
 use DB;
 use Illuminate\Support\Str;
+use SEOMeta;
+use OpenGraph;
 
 class ProductSectionController extends Controller
 {
@@ -21,6 +23,8 @@ class ProductSectionController extends Controller
      */
     public function index()
     {
+        $this->seoIndex();
+
         $products = Product::categoryFilter(request('category'))
                             ->subCategoryFilter(request('sub_category'))
                             ->soldItemFilter(request('sold-items'))
@@ -47,6 +51,9 @@ class ProductSectionController extends Controller
     public function edit($slug)
     {
         $product = Product::where('slug', $slug)->where('created_by', Auth::user()->id)->firstOrFail();
+        
+        $this->seoEdit($product);
+
         $expiry_periods = Product::ExpiryPeriod;
         $condition_types = Product::ConditionType;
         $time_periods = Product::TimePeriod;
@@ -331,5 +338,29 @@ class ProductSectionController extends Controller
             $number = (int) end($pieces);
             return $slug .= '-' . ($number + 1);
         }
+    }
+
+    private function seoIndex()
+    {
+        SEOMeta::setTitle(Auth::user()->name."'s Products -".env("APP_NAME"));
+        SEOMeta::setDescription(env('APP_NAME').' - View the list of your products. Manage the images, mark them as sold, edit or delete them.');
+        SEOMeta::setCanonical(route('product-section.index'));
+        SEOMeta::addKeyword(['osbaustralia', 'products-list', 'images', 'is_sold', 'edit', 'delete', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+        
+        OpenGraph::setTitle(Auth::user()->name."'s Products -".env("APP_NAME"));
+        OpenGraph::setDescription(env('APP_NAME').' - View the list of your products. Manage the images, mark the product as sold as well as edit and delete them.');
+        OpenGraph::setUrl(route('product-section.index'));
+    }
+
+    private function seoEdit($productSection)
+    {
+        SEOMeta::setTitle($productSection->title."'s Edit Form -".env("APP_NAME"));
+        SEOMeta::setDescription(env('APP_NAME').' - Edit product title, description, features, price and other necessary details.');
+        SEOMeta::setCanonical(route('product-section.edit', $productSection->slug));
+        SEOMeta::addKeyword(['osbaustralia', 'update', 'title', 'description', 'features', 'price', 'otherDetails', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+        
+        OpenGraph::setTitle($productSection->title."'s Edit -".env("APP_NAME"));
+        OpenGraph::setDescription(env('APP_NAME').' - Edit product title, description, features, price and other necessary details.');
+        OpenGraph::setUrl(route('product-section.edit', $productSection->slug));
     }
 }

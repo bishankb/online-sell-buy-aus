@@ -22,7 +22,7 @@
 	    	<table class="table1 table-bordered table-striped">
 	            <thead>
 	            	<div class="filter">
-		                <label>Filters: </label>
+                  		<label>&nbsp Filters: </label>
 		                <div class="dropdown inline">
 		                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
 		                      @if(request('category') != null)

@@ -12,12 +12,15 @@ use App\Models\BuyerQuestion;
 use Carbon\Carbon;
 use Auth;
 use Illuminate\Support\Facades\Hash;
-
+use SEOMeta;
+use OpenGraph;
 
 class AccountController extends Controller
 {
     public function index()
     {
+        $this->seoIndex();
+
         $totalProduct = Product::where('created_by', Auth::user()->id)->count();
         $activeProduct = Product::where('created_by', Auth::user()->id)->where('expiry_period', '>', Carbon::now())->where('is_sold', 0)->count();
         $soldProduct = Product::where('created_by', Auth::user()->id)->where('is_sold', 1)->count();
@@ -51,6 +54,8 @@ class AccountController extends Controller
 
     public function showProfile()
     {
+        $this->seoShowProfile();
+
         $user = Auth::user();
         $userProfile = Auth::user()->profile;
         $cities = City::get();
@@ -141,7 +146,9 @@ class AccountController extends Controller
 
     public function changePassword()
     {
-       return view('frontend.user-dashboard.account.change-password');
+        $this->seoChangePassword();
+
+        return view('frontend.user-dashboard.account.change-password');
     }
 
     public function updatePassword(Request $request)
@@ -174,5 +181,41 @@ class AccountController extends Controller
         }        
 
         return redirect()->route('my-account.changePassword')->with($notification);
+    }
+
+    private function seoIndex()
+    {
+        SEOMeta::setTitle(Auth::user()->name."'s Dashboard -".env("APP_NAME"));
+        SEOMeta::setDescription(env('APP_NAME').' - View the number of your total products for sell, your sold products, new message from buyer, new reply from sellers as well as your membership date.');
+        SEOMeta::setCanonical(route('my-account.index'));
+        SEOMeta::addKeyword(['osbaustralia', 'userDashboard', 'total-product-quantity', 'sold-product-quantity', 'buyer-message', 'seller-reply', 'membership-date', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+        
+        OpenGraph::setTitle(Auth::user()->name."'s Dashboard -".env("APP_NAME"));
+        OpenGraph::setDescription(env('APP_NAME').' - View the number of your total products for sell, your sold products, new message from buyer, new reply from sellers as well as your membership date.');
+        OpenGraph::setUrl(route('my-account.index'));
+    }
+
+    private function seoShowProfile()
+    {
+        SEOMeta::setTitle(Auth::user()->name."'s Profile -".env("APP_NAME"));
+        SEOMeta::setDescription(env('APP_NAME').' - Update your profile. Edit name, phone number, address, city, country and insert your profile picture.');
+        SEOMeta::setCanonical(route('my-account.showProfile'));
+        SEOMeta::addKeyword(['osbaustralia', 'profile', 'name', 'phone-number', 'address', 'city', 'country', 'profile-picture', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+        
+        OpenGraph::setTitle(Auth::user()->name."'s Profile -".env("APP_NAME"));
+        OpenGraph::setDescription(env('APP_NAME').' - Update your profile. Edit name, phone number, address, city, country and insert your profile picture.');
+        OpenGraph::setUrl(route('my-account.showProfile'));
+    }
+
+    private function seoChangePassword()
+    {
+        SEOMeta::setTitle(Auth::user()->name."'s Password -".env("APP_NAME"));
+        SEOMeta::setDescription(env('APP_NAME').' - Update your old password. Choose the strong password for making your account secure.');
+        SEOMeta::setCanonical(route('my-account.changePassword'));
+        SEOMeta::addKeyword(['osbaustralia', 'password', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+        
+        OpenGraph::setTitle(Auth::user()->name."'s Password -".env("APP_NAME"));
+        OpenGraph::setDescription(env('APP_NAME').' - Update your old password. Choose the strong password for making your account secure.');
+        OpenGraph::setUrl(route('my-account.changePassword'));
     }
 }

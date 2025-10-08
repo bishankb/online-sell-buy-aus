@@ -8,11 +8,15 @@ use App\Models\User;
 use App\Models\ContactUs;
 use App\Notifications\ViewerMailNotification;
 use Illuminate\Support\Facades\Notification;
+use SEOMeta;
+use OpenGraph;
 
 class ContactUsController extends Controller
 {
     public function index()
     {
+        $this->seoContact();
+
         $contact_us = ContactUs::first();
 
         return view('frontend.contact-us.index', compact('contact_us'));
@@ -54,5 +58,17 @@ class ContactUsController extends Controller
         }
 
         return redirect()->route('contact-us.index')->with($notification);
+    }
+
+    private function seoContact()
+    {
+        SEOMeta::setTitle('Contact Us -'.env('APP_NAME'));
+        SEOMeta::setDescription('Contact us if you have any querries on '.env('APP_NAME').'. You can call us, mail us and submit your feedback or meesages through the form');
+        SEOMeta::setCanonical(route('contact-us.index'));
+        SEOMeta::addKeyword(['osbaustralia', 'contact', 'number', 'mail', 'form', 'australia', 'brisbane', 'sydney', 'melbourne', 'secondhand']);
+        
+        OpenGraph::setTitle('Contact us if you have any querries. -'.env('APP_NAME'));
+        OpenGraph::setDescription('Contact us if you have any querries on '.env('APP_NAME').'. You can call us, mail us and submit your feedback or meesages through the form');
+        OpenGraph::setUrl(route('contact-us.index'));
     }
 }

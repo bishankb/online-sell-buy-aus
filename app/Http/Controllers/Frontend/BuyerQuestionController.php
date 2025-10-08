@@ -9,6 +9,8 @@ use App\Models\BuyerQuestion;
 use App\Models\User;
 use Auth;
 use App\Notifications\BuyerQuestionNotification;
+use SEOMeta;
+use OpenGraph;
 
 class BuyerQuestionController extends Controller
 {
@@ -19,6 +21,8 @@ class BuyerQuestionController extends Controller
      */
     public function readMore($productSlug)
     {
+        $this->seoReadMoreDiscussion($productSlug);
+
         $product = Product::where('slug', $productSlug)->first();
         $buyer_questions = BuyerQuestion::where('product_id', $product->id)
                                         ->latest()
@@ -112,4 +116,19 @@ class BuyerQuestionController extends Controller
     private function randomNumberExists($number) {
         return BuyerQuestion::where('question_id', $number)->exists();
     }
+
+    private function seoReadMoreDiscussion($productSlug)
+    {
+        SEOMeta::setTitle('Buyer and Seller Discussion -'.env('APP_NAME'));
+        SEOMeta::setDescription(env('APP_NAME').' - View the buyer and seller discussion. Post your query if you are interested in the product.');
+        SEOMeta::setCanonical(route('buyer-question.readMore', $productSlug));
+        SEOMeta::addKeyword(['osbaustralia', 'Australia', 'buy', 'sell', 'brand', 'new', 'used', 'australia', 'sydney', 'brisbane', 'melbourne', 'secondhand', 'cheap', 'popular', 'product']);
+
+        OpenGraph::setTitle('Buyer and Seller Discussion -'.env('APP_NAME'));
+        OpenGraph::setDescription(env('APP_NAME').' - View the buyer and seller discussion. Post your query if you are interested in the product.');
+        OpenGraph::setUrl(route('buyer-question.readMore', $productSlug));
+    }
 }
+
+
+

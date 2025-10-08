@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="shortcut icon" href="{{ asset('favicon1.png') }}">
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css">
-  <!-- Linking style and js -->
-  @vite(['resources/css/app.css', 'resources/js/frontend-app.js'])
+    {!! SEOMeta::generate() !!}
+    {!! OpenGraph::generate() !!}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="{{ asset('favicon1.png') }}">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css">
+    <!-- Linking style and js -->
+    @vite(['resources/css/app.css', 'resources/js/frontend-app.js'])
 
-  @yield('frontend-style')
+    @yield('frontend-style')
   
 </head>
 
