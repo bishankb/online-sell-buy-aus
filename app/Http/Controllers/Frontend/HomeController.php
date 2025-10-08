@@ -22,7 +22,7 @@ class HomeController extends Controller
     	$popular_products = Product::where('status', 1)
                                     ->where('is_sold', 0)
                                     ->where('expiry_period', '>', Carbon::now())
-                                    ->withViewsCount()
+                                    ->withCount('views')
                                     ->orderBy('views_count', 'desc')
                                     ->get();
 

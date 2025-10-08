@@ -4,14 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use CyrildeWit\EloquentViewable\Contracts\Viewable;
-use CyrildeWit\EloquentViewable\InteractsWithViews;
-use CyrildeWit\EloquentViewable\Support\Period;
 
-class Product extends BaseModel implements Viewable
-{
-    use InteractsWithViews;
-    
+class Product extends BaseModel
+{    
     /**
      * The attributes that are mass assignable.
      *
@@ -279,6 +274,11 @@ class Product extends BaseModel implements Viewable
     public function buyerQuestions()
     {
         return $this->hasMany(BuyerQuestion::class);
+    }
+
+    public function views()
+    {
+        return $this->hasMany(ProductView::class);
     }
 
     /**

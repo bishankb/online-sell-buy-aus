@@ -11,6 +11,7 @@ use App\Models\BuyerQuestion;
 use App\Models\City;
 use Carbon\Carbon;
 use CyrildeWit\EloquentViewable\Support\Period;
+use App\Models\ProductView;
 
 class ProductController extends Controller
 {
@@ -132,15 +133,22 @@ class ProductController extends Controller
     {
         session()->push('products.recently_viewed', $product->getKey());
 
-        views($product)
-            ->cooldown(now()->addDay())
-            ->record();
+        $userId = auth()->id();
+        $ip = request()->ip();
+        $today = Carbon::today();
 
-        $todayPeriod = Period::create(Carbon::today()->startOfDay(), Carbon::today()->endOfDay());
+        // Only record view if it doesn't exist for today
+        ProductView::firstOrCreate(
+            [
+                'product_id' => $product->id,
+                'user_id' => $userId,
+                'ip' => $userId ? null : $ip,
+                'view_date' => $today,
+            ]
+        );
 
-        $todayUniqueViews = views($product)
-            ->period($todayPeriod)
-            ->count();
+        $totalViews = $product->views()->count();
+
 
         if($product->sub_category_id != 0) {
             $related_products = Product::where('id', '!=', $product->id)->where('sub_category_id', $product->sub_category_id)->take(10)->get();
@@ -150,7 +158,7 @@ class ProductController extends Controller
 
         $buyer_questions = BuyerQuestion::where('product_id', $product->id)->take(5)->latest()->get();
 
-        return view('frontend.product-section.product-single', compact('product', 'related_products', 'buyer_questions', 'todayUniqueViews'));
+        return view('frontend.product-section.product-single', compact('product', 'related_products', 'buyer_questions', 'totalViews'));
     }
 
     /**
