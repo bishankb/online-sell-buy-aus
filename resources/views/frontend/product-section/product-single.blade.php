@@ -72,7 +72,7 @@
 					<div class="cart-a">
 						<div class="product-name">{{ $product->title }}</div>
 						<h5 class="now-get get-cart-in">
-							<span class="badge bg-danger">Total Views: {{ views($product)->count() }}</span>
+							<span class="badge bg-danger">Total Views: {{ $todayUniqueViews }}</span>
 						</h5>
 
 						<div class="clearfix"></div>

@@ -133,8 +133,14 @@ class ProductController extends Controller
         session()->push('products.recently_viewed', $product->getKey());
 
         views($product)
-            ->cooldown(now()->addMinutes(10))
-            ->record();  
+            ->cooldown(now()->addDay())
+            ->record();
+
+        $todayPeriod = Period::create(Carbon::today()->startOfDay(), Carbon::today()->endOfDay());
+
+        $todayUniqueViews = views($product)
+            ->period($todayPeriod)
+            ->count();
 
         if($product->sub_category_id != 0) {
             $related_products = Product::where('id', '!=', $product->id)->where('sub_category_id', $product->sub_category_id)->take(10)->get();
@@ -144,7 +150,7 @@ class ProductController extends Controller
 
         $buyer_questions = BuyerQuestion::where('product_id', $product->id)->take(5)->latest()->get();
 
-        return view('frontend.product-section.product-single', compact('product', 'related_products', 'buyer_questions'));
+        return view('frontend.product-section.product-single', compact('product', 'related_products', 'buyer_questions', 'todayUniqueViews'));
     }
 
     /**
