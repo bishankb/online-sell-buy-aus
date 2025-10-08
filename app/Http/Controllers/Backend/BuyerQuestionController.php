@@ -12,6 +12,7 @@ use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use App\Notifications\SellerAnswerNotification;
+use DB;
 
 class BuyerQuestionController extends Controller
 {
@@ -56,7 +57,7 @@ class BuyerQuestionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function reply($question_id)
-    {        
+    {     
         $buyer_question = BuyerQuestion::where('question_id', $question_id)->firstOrFail();
 
         return view('backend.buyer-question.reply', compact('buyer_question'));
@@ -139,6 +140,22 @@ class BuyerQuestionController extends Controller
         ]);
 
         try {
+            if(empty($request->answer)) {
+                $this->deleteSellerNotification($question_id, 'seller');
+            }
+
+            if(empty($request->answer2)) {
+                $this->deleteSellerNotification($question_id, 'admin');
+            }
+
+            if(empty($request->answer)) {
+                $this->deleteSellerNotification($question_id, 'seller');
+            }
+
+            if(empty($request->answer2)) {
+                $this->deleteSellerNotification($question_id, 'admin');
+            }
+
             $buyer_question->update([
                 'question' => request('question'),
                 'answer'   => request('answer'),
@@ -193,6 +210,19 @@ class BuyerQuestionController extends Controller
         $buyer_question = BuyerQuestion::where('question_id', $question_id)->firstOrFail();
 
         try {
+            $notifications =  DB::table('notifications')->get();
+
+            $new_notificationsIds = [];
+
+            foreach ($notifications as $key => $notification) {
+                if(isset(json_decode($notification->data)->question_id)) {
+                    if(json_decode($notification->data)->question_id == $question_id) {
+                        array_push($new_notificationsIds, $notification->id);
+                    }
+                }
+            }
+
+            DB::table('notifications')->whereIn('id', $new_notificationsIds)->delete();
             $buyer_question->delete();
            
             flash('Buyer question deleted successfully.')->error();
