@@ -17,22 +17,64 @@ class CityTableSeeder extends Seeder
     {
         City::create(
             [
-                'name'  => 'Pokhara',
+                'name'  => 'Brisbane',
                 'order' => 1, 
             ]
         );
 
         City::create(
             [
-                'name'  => 'Kathmandu',
+                'name'  => 'Sydney',
                 'order' => 2, 
             ]
         );
 
         City::create(
             [
-                'name'  => 'Bara',
+                'name'  => 'Melbourne',
                 'order' => 3, 
+            ]
+        );
+
+        City::create(
+            [
+                'name'  => 'Perth',
+                'order' => 4, 
+            ]
+        );
+
+        City::create(
+            [
+                'name'  => 'Adelaide',
+                'order' => 5, 
+            ]
+        );
+
+        City::create(
+            [
+                'name'  => 'Hobart',
+                'order' => 6, 
+            ]
+        );
+
+        City::create(
+            [
+                'name'  => 'Darwin',
+                'order' => 7, 
+            ]
+        );
+
+        City::create(
+            [
+                'name'  => 'Canberra',
+                'order' => 8, 
+            ]
+        );
+
+        City::create(
+            [
+                'name'  => 'Other',
+                'order' => 9, 
             ]
         );
     }

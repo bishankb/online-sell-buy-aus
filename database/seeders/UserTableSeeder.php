@@ -29,8 +29,8 @@ class UserTableSeeder extends Seeder
 
         User::create(
             [
-                'name'              => 'Bishad',
-                'slug'              => Str::slug('Admin'),
+                'name'              => 'Sushank',
+                'slug'              => Str::slug('Sushank'),
                 'email'             => 'admin@admin.com',
                 'email_verified_at' => '2025-09-14 14:33:40',                
                 'password'          => bcrypt('secret'),
