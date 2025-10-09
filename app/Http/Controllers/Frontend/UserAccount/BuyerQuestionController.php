@@ -53,6 +53,10 @@ class BuyerQuestionController extends Controller
      */
     public function reply($question_id)
     {
+      if(request('notify_id')) {
+        DB::table('notifications')->where('id', request('notify_id'))->where('read_at', null)->update(['read_at' => now()]);
+      }
+      
       $buyer_question = BuyerQuestion::where('question_id', $question_id)
                       ->where('asked_by', '!=', Auth::user()->id)
                       ->whereHas('product', function ($query) {

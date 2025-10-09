@@ -137,6 +137,10 @@ class ProductController extends Controller
     {
         $this->seoShow($product);
 
+        if(request('notify_id')) {
+            DB::table('notifications')->where('id', request('notify_id'))->where('read_at', null)->update(['read_at' => now()]);
+        }
+
         session()->push('products.recently_viewed', $product->getKey());
 
         $userId = auth()->id();

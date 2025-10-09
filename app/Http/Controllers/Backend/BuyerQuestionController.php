@@ -57,7 +57,11 @@ class BuyerQuestionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function reply($question_id)
-    {     
+    {
+        if(request('notify_id')) {
+            DB::table('notifications')->where('id', request('notify_id'))->where('read_at', null)->update(['read_at' => now()]);
+        } 
+            
         $buyer_question = BuyerQuestion::where('question_id', $question_id)->firstOrFail();
 
         return view('backend.buyer-question.reply', compact('buyer_question'));
