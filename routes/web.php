@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
+use App\Http\Controllers\Auth\GoogleController;
 
 //Backend Routes
 Route::group([
@@ -123,10 +124,11 @@ Route::group([
 
         Route::get('notification/read/{id}', 'App\Http\Controllers\Frontend\UserAccount\NotificationController@read')->name('notification.read');
 
-
-
     });
 });
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 
 

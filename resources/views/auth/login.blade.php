@@ -33,6 +33,11 @@
                             <input type="submit" value="Login">
                         </div>
                     </form>
+                    <hr>
+                    <a href="{{ route('google.login') }}" class="btn btn-danger">
+                        <i class="fa fa-google"></i> Login with Google
+                    </a>
+                    <hr>
                 </div>
                 <br>
                 <div class=" login-left">
