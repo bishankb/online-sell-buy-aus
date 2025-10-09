@@ -16,6 +16,10 @@ import "../css/custom-backend.css";
 import "../js/custom-backend.js";
 import "../toggleSwitch/toggle-switch.css";
 
+import "../../node_modules/select2/dist/js/select2.js";
+import "../../node_modules/select2/dist/css/select2.css";
+import "../../node_modules/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css";
+
 //Frontend Template
 import "../frontend-template/js/jquery.flexisel.js";
 import "../frontend-template/js/jquery.etalage.min.js";
@@ -38,6 +42,12 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 console.error(error);
             });
+    });
+
+    $('.select2').select2({
+        width: '100%',
+        theme: 'bootstrap-5'
+
     });
 });
 

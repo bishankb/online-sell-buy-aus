@@ -27,7 +27,7 @@
                         
                             <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }} clearfix">
                                 <label for="category_id" class="form-label">Select Category</label>
-                                <select name = "category" id="category_id" class="form-control form-select">
+                                <select name = "category" id="category_id" class="form-control form-select select2">
                                     <option disabled selected>Select the category</option>
                                     @foreach($categories as $category)
                                         @if(old('category') != null)

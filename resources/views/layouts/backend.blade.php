@@ -17,11 +17,11 @@
     <meta name="author" content="ColorlibHQ" />
     <meta
       name="description"
-      content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS. Fully accessible with WCAG 2.1 AA compliance."
+      content="{{ env('APP_NAME')}} is a Sell and Buy Products in Australia. Sell the used or brand new products. Contact the buyer yourself. Look for the products of your desire."
     />
     <meta
       name="keywords"
-      content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard, accessible admin panel, WCAG compliant"
+      content="osbaustralia, Australia, buy, sell, brand, new, used, australia, sydney, brisbane, melbourne, secondhand, cheap, popular, product, admin dashboard"
     />
     <!--end::Primary Meta Tags-->
     <!--begin::Accessibility Features-->
@@ -72,12 +72,6 @@
     </div>
     <!--end::App Wrapper-->
    @yield('backend-script')
-   <script src="https://cdn.ckeditor.com/4.25.1/full/ckeditor.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.ckeditor').forEach(el => CKEDITOR.replace(el));
-    });
-    </script>
   </body>
   <!--end::Body-->
 </html>
