@@ -68,7 +68,8 @@ class ProductController extends Controller
                                     ->where('is_sold', 0)
                                     ->where('expiry_period', '>', Carbon::now())
                                     ->sort(request('status'))
-                                    ->withViewsCount()
+                                    ->withCount('views')
+                                    ->orderByDesc('views_count')
                                     ->latest()
                                     ->paginate(config('product.product_paginate'));
 

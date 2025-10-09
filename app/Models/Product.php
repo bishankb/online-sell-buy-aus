@@ -192,7 +192,7 @@ class Product extends BaseModel
     {
         if ($filter) {
             if ($filter == "popular") {
-                return $query->where('status', 1)->where('is_sold', 0)->withViewsCount()->orderBy('views_count', 'desc');
+                return $query->where('status', 1)->where('is_sold', 0)->withCount('views')->orderByDesc('views_count');
             } elseif($filter == "recent") {
                 return $query->where('status', 1)->where('is_sold', 0)->latest();
             } elseif($filter == "old") {

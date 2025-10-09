@@ -521,6 +521,10 @@
 						</li>
 					@endforeach
 				</ul>
+				<h5 class="text-center">
+					<a href="{{ route('product.index', $product->category->slug) }}">VIEW ALL</a>
+					<span class="pointer"></span>
+				</h5>
 			</div>
 		@endif
     </div>
