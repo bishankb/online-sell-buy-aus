@@ -16,6 +16,19 @@ class UserTableSeeder extends Seeder
     {
         User::create(
             [
+                'name'              => 'Admin',
+                'slug'              => Str::slug('Admin'),
+                'email'             => 'osbaustralia@gmail.com',
+                'email_verified_at' => '2025-09-14 14:33:40',                
+                'password'          => bcrypt('secret'),
+                'remember_token'    => Str::random(10),
+                'role_id'           => 1, 
+                'active'            => true,
+            ]
+        );
+
+        User::create(
+            [
                 'name'              => 'Bishank',
                 'slug'              => Str::slug('Bishank'),
                 'email'             => 'bishank1993@gmail.com',

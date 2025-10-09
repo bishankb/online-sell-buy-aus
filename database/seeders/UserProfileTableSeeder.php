@@ -16,8 +16,8 @@ class UserProfileTableSeeder extends Seeder
         UserProfile::create(
             [
                 'user_id'       => 1,
-                'phone1'        => '10/52 Daw Road',
-                'address'       => '',
+                'phone1'        => '0431046513',
+                'address'       => '10/52 Daw Road',
                 'city_id'       => 1,
                 'country_id'    => 1
             ]
@@ -26,6 +26,16 @@ class UserProfileTableSeeder extends Seeder
         UserProfile::create(
             [
                 'user_id'       => 2,
+                'phone1'        => '0431046513',
+                'address'       => '10/52 Daw Road',
+                'city_id'       => 1,
+                'country_id'    => 1
+            ]
+        );
+
+        UserProfile::create(
+            [
+                'user_id'       => 3,
                 'phone1'        => '0452432345',
                 'address'       => '2/5 Chester Road',
                 'city_id'       => 1,

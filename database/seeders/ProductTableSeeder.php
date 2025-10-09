@@ -96,8 +96,8 @@ class ProductTableSeeder extends Seeder
                 'warranty_type' => 1,
                 'warranty_period' => 2.5,
                 'warranty_period_type' => 1,
-                'created_by' => 1,
-                'updated_by' => 1
+                'created_by' => 2,
+                'updated_by' => 2
             ]
         );
 
@@ -123,8 +123,8 @@ class ProductTableSeeder extends Seeder
                 'warranty_type' => 1,
                 'warranty_period' => 2.5,
                 'warranty_period_type' => 1,
-                'created_by' => 1,
-                'updated_by' => 1
+                'created_by' => 3,
+                'updated_by' => 3
             ]
         );
     }
