@@ -127,8 +127,11 @@ Route::group([
     });
 });
 
-Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
-Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+Route::get('auth/google', 'App\Http\Controllers\Auth\SocialController@redirectToGoogle')->name('google.login');
+Route::get('auth/google/callback', 'App\Http\Controllers\Auth\SocialController@handleGoogleCallback')->name('google.callback');
+
+Route::get('auth/facebook', 'App\Http\Controllers\Auth\SocialController@redirectToFacebook')->name('facebook.login');
+Route::get('auth/facebook/callback', 'App\Http\Controllers\Auth\SocialController@handleFacebookCallback')->name('facebook.callback');
 
 
 

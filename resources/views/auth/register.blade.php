@@ -124,9 +124,13 @@
                         <input type="submit" value="Submit">
                     </form>
                     <hr>
-                    <a href="{{ route('google.login') }}" class="btn btn-danger">
-                        <i class="fa fa-google"></i> Login with Google
-                    </a>
+                        <a href="{{ route('google.login') }}" class="btn btn-danger">
+                            <i class="fa fa-google"></i> Login with Google
+                        </a>
+
+                        <a href="{{ route('facebook.login') }}" class="btn btn-primary">
+                            <i class="fa fa-facebook"></i> Login with Facebook
+                        </a>
                     <hr>
                 </div>
                 <br>

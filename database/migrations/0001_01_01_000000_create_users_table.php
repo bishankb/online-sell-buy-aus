@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('active')->default(0);
             $table->rememberToken();
             $table->string('google_id')->nullable()->unique();
+            $table->string('facebook_id')->nullable()->unique();
             $table->string('avatar')->nullable();
             $table->timestamps();
             $table->softDeletes();

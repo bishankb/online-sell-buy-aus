@@ -21,7 +21,7 @@
 			@endif
 
 	    	<div class="row">
-	    		<div class="col-md-12">
+	    		<div class="col-md-6">
 			        <div class="form-group required {{ $errors->has('name') ? ' has-error' : '' }} clearfix ">
             			<label for="name" class="form-label">Full Name</label>
 
@@ -30,6 +30,20 @@
 			            @if ($errors->has('name'))
 			                <span class="help-block">
 			                    <strong>{{ $errors->first('name') }}</strong>
+			                </span>
+			            @endif
+			        </div>
+			    </div>
+
+			    <div class="col-md-6">
+			        <div class="form-group required {{ $errors->has('email') ? ' has-error' : '' }} clearfix ">
+            			<label for="email" class="form-label">Email</label>
+
+                		<input type="email" required name="email" value="{{ old('email', $user->email ?? '') }}" class="form-control" disabled>
+
+			            @if ($errors->has('email'))
+			                <span class="help-block">
+			                    <strong>{{ $errors->first('email') }}</strong>
 			                </span>
 			            @endif
 			        </div>
