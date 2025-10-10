@@ -78,7 +78,7 @@
 
                         <div class="form-group {{ $errors->has('city') ? ' has-error' : '' }} clearfix ">
                             <span class="login-field control-label">City</span>
-                            <select name = "city" class="form-control form-select select2">
+                            <select name = "city" class="form-control form-select">
                                 <option value="">Please select an option</option>
                                 @foreach($cities as $city)
                                     @if(old('city') != null)
@@ -101,7 +101,7 @@
 
                          <div class="form-group {{ $errors->has('country') ? ' has-error' : '' }} clearfix ">
                             <span class="login-field control-label">Country</span>
-                            <select name = "country" class="form-control form-select select2">
+                            <select name = "country" class="form-control form-select">
                                 <option value="">Please select an option</option>
                                 @foreach($countries as $country)
                                     @if(old('country') != null)

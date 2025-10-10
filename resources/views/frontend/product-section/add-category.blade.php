@@ -15,7 +15,7 @@
                 <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }} clearfix">
                     <label for="category_id" class="form-label">Select Category</label>
 
-                    <select name="category" id="category_id" class="form-control select2" required>
+                    <select name="category" id="category_id" class="form-control" required>
                         <option value="">{{ __('Select the category') }}</option>
                         @foreach($categories as $key => $value)
                             <option value="{{ $key }}" {{ old('category') == $key ? 'selected' : '' }}>
@@ -33,7 +33,7 @@
                 <div class="form-group{{ $errors->has('sub_category') ? ' has-error' : '' }} clearfix">
                     <label for="sub_category" class="form-label">Select Sub-Category</label>
 
-                        <select name="sub_category" id="sub_category_id" class="form-control select2" placeholder="Select the category first">
+                        <select name="sub_category" id="sub_category_id" class="form-control" placeholder="Select the category first">
                             <option value>Select the category first</option>
                         </select>
 

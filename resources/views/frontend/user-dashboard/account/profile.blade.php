@@ -99,7 +99,7 @@
 			        <div class="form-group required {{ $errors->has('city') ? ' has-error' : '' }} clearfix">
             			<label for="city" class="form-label">City</label>
 
-            			<select name = "city" class="form-control form-select select2">
+            			<select name = "city" class="form-control form-select">
 			                <option disabled selected>Please select an option</option>
 			                @foreach($cities as $city)
 			                    <option value="{{ $city->id }}"
@@ -126,7 +126,7 @@
 			        <div class="form-group required {{ $errors->has('country') ? ' has-error' : '' }} clearfix">
             			<label for="country" class="form-label">Country</label>
 
-            			<select name = "country" class="form-control form-select select2">
+            			<select name = "country" class="form-control form-select">
 			                <option disabled selected>Please select an option</option>
 			                @foreach($countries as $country)
 			                    <option value="{{ $country->id }}"
