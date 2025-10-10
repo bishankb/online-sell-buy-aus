@@ -175,6 +175,7 @@ class User extends Authenticatable implements MustVerifyEmail
                 $user->profile()->delete();
                 $user->products()->delete();
                 $user->notifications()->delete();
+                $user->savedProducts()->detach(); 
            }
         });
 
