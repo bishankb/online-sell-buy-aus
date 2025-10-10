@@ -72,7 +72,7 @@
 					<div class="cart-a">
 						<div class="product-name">
 							{{ $product->title }}
-							@if($product->created_by != Auth::user()->id)
+							@if(Auth::user() && $product->created_by != Auth::user()->id)
 								<button class="save-btn" data-slug="{{ $product->slug }}" style="color: #d88d28;">
 								    <i class="fa {{ Auth::user() && Auth::user()->savedProducts->contains($product->id) ? 'fa-bookmark' : 'fa-bookmark-o' }}"></i>
 								</button>
