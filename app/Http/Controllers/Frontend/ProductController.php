@@ -12,6 +12,7 @@ use App\Models\City;
 use Carbon\Carbon;
 use CyrildeWit\EloquentViewable\Support\Period;
 use App\Models\ProductView;
+use DB;
 use SEOMeta;
 use OpenGraph;
 

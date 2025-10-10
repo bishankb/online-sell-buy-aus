@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use Carbon\Carbon;
+use DB;
 use SEOMeta;
 use OpenGraph;
 
@@ -14,6 +15,10 @@ class HomeController extends Controller
 {
     public function index()
     {
+        if(request('notify_id')) {
+            DB::table('notifications')->where('id', request('notify_id'))->where('read_at', null)->update(['read_at' => now()]);
+        }
+        
         $this->seoIndex();
 
     	$latest_products = Product::where('status', 1)
