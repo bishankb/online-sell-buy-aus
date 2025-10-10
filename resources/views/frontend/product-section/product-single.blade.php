@@ -70,7 +70,14 @@
 					@endif
 
 					<div class="cart-a">
-						<div class="product-name">{{ $product->title }}</div>
+						<div class="product-name">
+							{{ $product->title }}
+							@if($product->created_by != Auth::user()->id)
+								<button class="save-btn" data-slug="{{ $product->slug }}" style="color: #d88d28;">
+								    <i class="fa {{ Auth::user() && Auth::user()->savedProducts->contains($product->id) ? 'fa-bookmark' : 'fa-bookmark-o' }}"></i>
+								</button>
+							@endif
+						</div>
 						<h5 class="now-get get-cart-in">
 							<span class="badge bg-danger">Total Views: {{ $totalViews }}</span>
 						</h5>
@@ -561,6 +568,32 @@
                 }
             },
 	    });
+
+	    document.querySelectorAll('.save-btn').forEach(button => {
+		    button.addEventListener('click', function() {
+		        const slug = this.dataset.slug;
+		        fetch(`/product/${slug}/save`, {
+		            method: 'POST',
+		            headers: {
+		                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+		                'Accept': 'application/json'
+		            }
+		        })
+		        .then(res => res.json())
+		        .then(data => {
+		            if (data.status === 'saved') {
+		                this.querySelector('i').classList.replace('fa-bookmark-o', 'fa-bookmark');
+		                toastr.success('Product saved successfully!');
+		            } else {
+		                this.querySelector('i').classList.replace('fa-bookmark', 'fa-bookmark-o');
+		                toastr.error('Product removed from saved list.');
+		            }
+		        })
+		        .catch(() => toastr.error('Something went wrong.'));
+		    });
+		});
 	});
+
+
 </script>
 

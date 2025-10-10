@@ -281,6 +281,11 @@ class Product extends BaseModel
         return $this->hasMany(ProductView::class);
     }
 
+    public function savedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'product_user')->withTimestamps();
+    }
+
     /**
      * Delete the relation of user
     */
@@ -289,6 +294,7 @@ class Product extends BaseModel
         
         static::deleting(function($product) {
             $product->images()->delete();
+            $product->buyerQuestions()->delete();
         });
 
     }

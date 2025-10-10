@@ -104,6 +104,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Product::class, 'created_by');
     }
 
+    public function savedProducts()
+    {
+        return $this->belongsToMany(Product::class, 'product_user')->withTimestamps();
+    }
+
     /**
      *Filter by City.
      *

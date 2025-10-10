@@ -39,8 +39,8 @@ class ProductTableSeeder extends Seeder
                 'kilometer_run' => 15000,
                 'make_year' => 2015,
                 'color' => 'red',
-                'created_by' => 1,
-                'updated_by' => 1
+                'created_by' => 2,
+                'updated_by' => 2
             ]
         );
 
@@ -69,8 +69,8 @@ class ProductTableSeeder extends Seeder
                 'kilometer_run' => 100000,
                 'make_year' => 2015,
                 'color' => 'white',
-                'created_by' => 1,
-                'updated_by' => 1
+                'created_by' => 2,
+                'updated_by' => 2
             ]
         );
 

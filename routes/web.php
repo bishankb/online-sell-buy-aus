@@ -97,6 +97,8 @@ Route::group([
     Route::post('/product-section/{productId}/images/add', 'App\Http\Controllers\Frontend\ProductSectionController@saveImages')->name('product-section.saveImages');
     Route::post('/product-section/{productId}/images/destory/{imageId}', 'App\Http\Controllers\Frontend\ProductSectionController@destoryImages')->name('product-section.destroyImages');
 
+    Route::post('/product/{slug}/save', 'App\Http\Controllers\Frontend\ProductController@saveProduct')->name('product.save');
+
     Route::group([
         'prefix' => 'my-account/dashboard'
     ], function () {
@@ -123,6 +125,10 @@ Route::group([
         Route::delete('notification/delete/{id}', 'App\Http\Controllers\Frontend\UserAccount\NotificationController@destroy')->name('notification.destroy');
 
         Route::get('notification/read/{id}', 'App\Http\Controllers\Frontend\UserAccount\NotificationController@read')->name('notification.read');
+
+        Route::get('/saved-products', 'App\Http\Controllers\Frontend\UserAccount\SavedProductController@index')->name('saved-product.index');
+        Route::post('/unsave-product/{product}', 'App\Http\Controllers\Frontend\UserAccount\SavedProductController@unsaveProduct')->name('unsaved.product');
+
 
     });
 });

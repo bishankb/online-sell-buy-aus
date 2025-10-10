@@ -8,6 +8,10 @@
         	<a href="{{ route('product-section.index') }}"><i class="fa fa-shopping-cart"></i>My Products</a>
         </li>
 
+        <li class="{{ Request::is('my-account/dashboard/saved-products*') ? 'active' : '' }}">
+            <a href="{{ route('saved-product.index') }}"><i class="fa fa-bookmark"></i>Saved Products</a>
+        </li>
+
         <li class="{{ Request::is('my-account/dashboard/buyer-question*') ? 'active' : '' }}">
             <a href="{{ route('buyer-question.index') }}"><i class="fa fa-question-circle"></i>Buyer Questions</a>
         </li>

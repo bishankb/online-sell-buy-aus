@@ -22,6 +22,7 @@ class AccountController extends Controller
         $this->seoIndex();
 
         $totalProduct = Product::where('created_by', Auth::user()->id)->count();
+        $savedProduct = Auth::user()->savedProducts()->count();
         $activeProduct = Product::where('created_by', Auth::user()->id)->where('expiry_period', '>', Carbon::now())->where('is_sold', 0)->count();
         $soldProduct = Product::where('created_by', Auth::user()->id)->where('is_sold', 1)->count();
         $expiredProduct = Product::where('created_by', Auth::user()->id)->where('expiry_period', '<', Carbon::now())->count();
@@ -49,7 +50,7 @@ class AccountController extends Controller
                                                   ->where('expiry_period', '>', Carbon::now());
                                         })->count();
 
-        return view('frontend.user-dashboard.dashboard', compact('totalProduct','activeProduct', 'soldProduct', 'expiredProduct', 'newBuyerMessageCount', 'newSellerReplyCount', 'newAdminSellerReplyCount'));
+        return view('frontend.user-dashboard.dashboard', compact('totalProduct', 'savedProduct', 'activeProduct', 'soldProduct', 'expiredProduct', 'newBuyerMessageCount', 'newSellerReplyCount', 'newAdminSellerReplyCount'));
     }
 
     public function showProfile()

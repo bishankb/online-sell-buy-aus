@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use CyrildeWit\EloquentViewable\Support\Period;
 use App\Models\ProductView;
 use DB;
+use Auth;
 use SEOMeta;
 use OpenGraph;
 
@@ -171,6 +172,30 @@ class ProductController extends Controller
         $buyer_questions = BuyerQuestion::where('product_id', $product->id)->take(5)->latest()->get();
 
         return view('frontend.product-section.product-single', compact('product', 'related_products', 'buyer_questions', 'totalViews'));
+    }
+
+    /**
+     * Save or unsave the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function saveProduct(Request $request, $slug)
+    {
+        $product = Product::where('slug', $slug)->firstOrFail();
+        $user = Auth::user();
+
+        if ($user->savedProducts()->where('product_id', $product->id)->exists()) {
+            // Unsave
+            $user->savedProducts()->detach($product->id);
+            $status = 'unsaved';
+        } else {
+            // Save
+            $user->savedProducts()->attach($product->id);
+            $status = 'saved';
+        }
+
+        return response()->json(['status' => $status]);
     }
 
     /**

@@ -14,6 +14,10 @@
 					<td>{{ $totalProduct }}</td>
 				</tr>
 				<tr>
+					<td class="td-header">Total Saved Products:</td>
+					<td>{{ $savedProduct }}</td>
+				</tr>
+				<tr>
 					<td class="td-header">Total Products for sell:</td>
 					<td>{{ $activeProduct }}</td>
 				</tr>
