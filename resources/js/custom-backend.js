@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function () {
     $('div.alert').not('.alert-important').delay(3000).fadeOut(1000);
 
     if (location.hash) {
