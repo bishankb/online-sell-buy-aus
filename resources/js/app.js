@@ -1,23 +1,34 @@
-import '../../node_modules/jquery/dist/jquery.js';
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-import '../../node_modules/bootstrap/dist/js/bootstrap.bundle.js';
-import '../../node_modules/jquery-validation/dist/jquery.validate.js';
-import '../../node_modules/admin-lte/dist/css/adminlte.css';
-import '../../node_modules/admin-lte/dist/js/adminlte.js';
-import '../../node_modules/admin-lte/dist/js/adminlte.js';
-import '../../node_modules/@fortawesome/fontawesome-free/css/fontawesome.css';
-import '../../node_modules/font-awesome/css/font-awesome.css';
-import '../../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js';
-import '../../node_modules/bootstrap-icons/font/bootstrap-icons.css';
-import '../../node_modules/bootstrap-icons/font/bootstrap-icons.css';
-import '../../node_modules/bootstrap-fileinput/js/fileinput.js';
-import '../../node_modules/bootstrap-fileinput/css/fileinput.css';
+//Core dependencies (jQuery first)
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+
+//Bootstrap
+import 'bootstrap/dist/css/bootstrap.css';
+import * as bootstrap from 'bootstrap';
+
+//jQuery Validation
+import 'jquery-validation/dist/jquery.validate.min.js';
+
+//AdminLTE
+import 'admin-lte/dist/css/adminlte.css';
+import 'admin-lte/dist/js/adminlte.js';
+
+//FontAwesome
+import '@fortawesome/fontawesome-free/css/fontawesome.css';
+import 'font-awesome/css/font-awesome.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// CKEditor
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+//Bootstrap FileInput
+import 'bootstrap-fileinput/css/fileinput.css';
+import 'bootstrap-fileinput/js/fileinput.js';
+
+//Custom Backend Assets
 import "../css/custom-backend.css";
 import "../js/custom-backend.js";
 import "../toggleSwitch/toggle-switch.css";
-import "../../node_modules/select2/dist/js/select2.js";
-import "../../node_modules/select2/dist/css/select2.css";
-import "../../node_modules/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css";
 
 //CK Editor
 document.addEventListener('DOMContentLoaded', function () {
@@ -29,10 +40,23 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 
-    $('.select2').select2({
-        width: '100%',
-        theme: 'bootstrap-5'
+    const triggerTabList = [].slice.call(document.querySelectorAll('#myTab a'));
+    
+    // Activate tab from URL hash on page load
+    const hash = window.location.hash;
+    if (hash) {
+        const triggerEl = document.querySelector(`#myTab a[href="${hash}"]`);
+        if (triggerEl) {
+            const tab = new bootstrap.Tab(triggerEl);
+            tab.show();
+        }
+    }
 
+    // Update URL hash when tab is clicked
+    triggerTabList.forEach(triggerEl => {
+        triggerEl.addEventListener('shown.bs.tab', event => {
+            history.replaceState(null, null, event.target.getAttribute('href'));
+        });
     });
 });
 

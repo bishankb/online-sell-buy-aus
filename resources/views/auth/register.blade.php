@@ -124,11 +124,11 @@
                         <input type="submit" value="Submit">
                     </form>
                     <hr>
-                        <a href="{{ route('google.login') }}" class="btn btn-danger">
+                        <a href="{{ route('google.login') }}" class="btn btn-danger btn-gmail">
                             <i class="fa fa-google"></i> Login with Google
                         </a>
 
-                        <a href="{{ route('facebook.login') }}" class="btn btn-primary">
+                        <a href="{{ route('facebook.login') }}" class="btn btn-primary btn-facebook">
                             <i class="fa fa-facebook"></i> Login with Facebook
                         </a>
                     <hr>

@@ -119,15 +119,15 @@
                 </div>
                 <tr>
                   <th>#</th>
-                    <th>Category</th>
-                    <th>Title</th>
-                    <th>Created By</th>
-                    <th>Updated By</th>
-                    <th class="text-center">Home Visibilty</th>
-                    <th class="text-center">Status</th>
-                    @if(auth()->user()->can('edit_sub_categories') || auth()->user()->can('delete_sub_categories'))
-                      <th class="text-center">Actions</th>
-                    @endif
+                  <th>Category</th>
+                  <th>Title</th>
+                  <th>Created By</th>
+                  <th>Updated By</th>
+                  <th class="text-center">Home Visibilty</th>
+                  <th class="text-center">Status</th>
+                  @if(auth()->user()->can('edit_sub_categories') || auth()->user()->can('delete_sub_categories'))
+                    <th class="text-center">Actions</th>
+                  @endif
                 </tr>
               </thead>
               <tbody>
@@ -189,7 +189,7 @@
                     </tr>
                   @empty
                     <tr class="text-center">
-                      <td colspan="7">No data available in table</td>
+                      <td colspan="8">No data available in table</td>
                     </tr>
                   @endforelse
               </tbody>

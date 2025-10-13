@@ -251,6 +251,8 @@
                       @endif
                       @if(isset($product->subCategory->title))
                         <td>{{$product->subCategory->title}}</td>
+                      @else
+                        <td>No Subcategory</td>
                       @endif
                       @can('edit_products')
                         <td>

@@ -473,7 +473,7 @@
 						     		@csrf
 						     		<input type="hidden" name="product_slug" value="{{ $product->slug }}">
 								    <div class="form-group {{ $errors->has('question') ? ' has-error' : '' }}">
-								      	<label for="question">Ask Your Question:</label>
+								      	<label>Ask Your Question:</label>
 								      	<textarea name="question" id="comment" class="form-control" rows="5" minlength="2" maxlength="256" required>{{ old('question') }}</textarea>
 								      	 @if ($errors->has('question'))
 							                <span class="help-block">
@@ -509,8 +509,9 @@
 
 		@if(count($related_products) > 0)
 			<div class="p-3 mb-3 bg-light rounded border featured-products">
-				<h4 class="text-center">Related Products  </h4>
-			    <ul id="relatedProductSlider">
+			<h5 class="text-center">RELATED PRODUCTS  </h5>
+			<div id="featured-div">
+				<ul id="relatedProductSlider">
 					@foreach($related_products as $related_product)
 						<li>
 							<a href="{{ route('product.show', $related_product->slug) }}">
@@ -529,45 +530,17 @@
 					@endforeach
 				</ul>
 				<h5 class="text-center">
-					<a href="{{ route('product.index', $product->category->slug) }}">VIEW ALL</a>
+					<a href="{{ route('product.index', $product->subCategory->slug) }}">VIEW ALL</a>
 					<span class="pointer"></span>
 				</h5>
 			</div>
+		</div>
 		@endif
     </div>
 @endsection
 
 <script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function () {
-		$("#relatedProductSlider").flexisel({
-			visibleItems: 4,
-            itemsToScroll: {{ config('product.feature_item_scroll') }},
-            animationSpeed: 800,
-            infinite: true,
-            navigationTargetSelector: null,
-            autoPlay: {
-                enable: true,
-                interval: 3000,
-                pauseOnHover: true
-            },
-            responsiveBreakpoints: { 
-                portrait: { 
-                    changePoint:480,
-                    visibleItems: 1,
-                    itemsToScroll: 1
-                }, 
-                landscape: { 
-                    changePoint:640,
-                    visibleItems: 2,
-                    itemsToScroll: 2
-                },
-                tablet: { 
-                    changePoint:769,
-                    visibleItems: 3,
-                    itemsToScroll: 3
-                }
-            },
-	    });
 
 	    document.querySelectorAll('.save-btn').forEach(button => {
 		    button.addEventListener('click', function() {

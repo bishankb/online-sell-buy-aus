@@ -33,6 +33,7 @@ class HomeController extends Controller
                                     ->where('expiry_period', '>', Carbon::now())
                                     ->withCount('views')
                                     ->orderBy('views_count', 'desc')
+                                    ->take(config('product.home_product'))
                                     ->get();
 
     	if(session()->has('products.recently_viewed')) {

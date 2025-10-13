@@ -178,6 +178,7 @@
 		                <th>#</th>
 		                <th>Title</th>
 		                <th>Catgory</th>
+		                <th>SubCatgory</th>
 		                <th>Images</th>
 		                <th>Sold</th>
 		                <th>Featured</th>
@@ -200,6 +201,13 @@
 		                     @else
 		                        <td>Deleted</td>
 		                     @endif
+
+							@if(isset($product->subCategory->title))
+								<td>{{$product->subCategory->title}}</td>
+							@else
+								<td>No Subcategory</td>
+							@endif
+							
 							<td>
 								<a href="{{route('product-section.addImages', $product->slug)}}" class="red-color">Manage</a>
 							</td>

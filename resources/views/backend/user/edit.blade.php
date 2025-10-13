@@ -67,14 +67,10 @@
 @section('backend-script')
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
-            var tabLinks = document.querySelectorAll('.nav-link[data-bs-toggle="tab"]');
+            
 
-            tabLinks.forEach(function(link) {
-                link.addEventListener('click', function(event) {
-                    var tabId = this.getAttribute('href'); // e.g., "#home-tab-pane"
-                    window.location.hash = tabId; // Updates the URL with the tab's ID
-                });
-            });
+            
+            
             window.savedImage = $('.selected-img').attr('src');
         });
         

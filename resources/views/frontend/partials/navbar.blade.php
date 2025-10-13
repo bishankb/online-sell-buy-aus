@@ -116,7 +116,7 @@
 						@else 
 							<input type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" name="search_product" required placeholder="Search Product">
 						@endif
-						<input type="submit" value="SEARCH">
+						<input type="submit" value="Search">
 					</form>
 				</div>
 				<div class="clearfix"> </div>

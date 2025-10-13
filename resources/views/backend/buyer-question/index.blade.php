@@ -19,11 +19,6 @@
           <div class="card-body">
             <table class="table table-bordered table-striped">
               <thead>
-                @can('add_buyer_questions')
-                  <div class="add-item">
-                    <a class="btn btn-light add-button" href="{{route('buyer-questions.create')}}"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                  </div>
-                @endcan
                 <div class="filter">
                   <label>&nbsp Filters: </label>
                   <div class="dropdown inline">

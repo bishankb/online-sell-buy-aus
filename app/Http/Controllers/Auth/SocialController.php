@@ -62,6 +62,7 @@ class SocialController extends Controller
                 'avatar' => $socialUser->getAvatar(),
                 'slug' => Str::slug($socialUser->getName()) . '-' . Str::random(5),
                 'password' => bcrypt(Str::random(16)),
+                'active' => 1,
             ]);
             $isNewUser = true;
         }

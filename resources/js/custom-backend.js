@@ -1,18 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     $('div.alert').not('.alert-important').delay(3000).fadeOut(1000);
 
-    if (location.hash) {
-        $("a[href='" + location.hash + "']").tab("show");
-    }
-
-    $(document.body).on("click", "a[data-toggle]", function(event) {
-        location.hash = this.getAttribute("href");
-    });
-
-    $(window).on("popstate", function() {
-        var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
-        $("a[href='" + anchor + "']").tab("show");
-    });
+    
 
     $('.image-margin').hide();
 
@@ -31,11 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
         $('.image-margin').show();
         $('.show-image').show();
         readURL(this);
-    });
-
-    $('.custom-select').select2({
-        tags: true,
-        placeholder: "Select an option",
     });
 });
 

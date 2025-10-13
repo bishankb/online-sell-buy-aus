@@ -52,10 +52,6 @@
 /* Header */
 
 /* Bottom Header */
-/*.logo img {
-    height: 44px;
-    width: 150px;
-}*/
 
 ul.login {
 	float: right;
@@ -111,10 +107,13 @@ ul.login {
 	.search {
 		width: 56%;
 	    margin: 1.2em -2em 0em 0;
+	    float: left;
+	    margin-left: 20px;
 	}
 
 	.login-section {
 	    width: 45%;
+	    display: flex;
 	}
 }
 
@@ -144,7 +143,7 @@ ul.login {
 
  @media (max-width: 580px) {
 	.header-bottom-left {
-	    width: 93%;
+	    width: 90%;
 	}
 
 	.account {
@@ -195,6 +194,13 @@ ul.login li a span i {
 	color: #3e8be8;
 }
 
+@media (max-width: 768px) {
+	.top-header-right {
+	    float: left;
+	    margin-left: 22px;
+	}
+}
+
 @media (max-width: 640px) {
 	.top-header-right {
 	    width: 100%;
@@ -243,9 +249,11 @@ ul.support {
 }
 
 .logo{
-    margin-top:14px;
+    margin-top:25px;
     margin-bottom: 25px
 }
+
+
 
 @media (max-width: 320px) {
 	.top-header-right {
@@ -2199,4 +2207,12 @@ ul.cute li i {
     color: white !important;
 }
 /*Select2*/
+
+/* Gmmail and Facebook Login */
+@media (max-width: 568px) {
+	.btn-gmail {
+		margin-bottom: 15px;
+	}
+}
+/* Gmmail and Facebook Login */
 

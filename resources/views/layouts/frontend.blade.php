@@ -8,7 +8,16 @@
     <link rel="shortcut icon" href="{{ asset('favicon1.png') }}">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css">
-    <!-- Linking style and js -->
+    <!-- Linking jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <!-- Linking Flexisel -->
+    <script src="https://cdn.jsdelivr.net/gh/9bitStudios/flexisel/js/jquery.flexisel.js"></script>\
+
+    <!-- Bootstrap FileInput (Krajee) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-fileinput@5.5.3/css/fileinput.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-fileinput@5.5.3/js/fileinput.js"></script>
+
     @vite(['resources/css/app.css', 'resources/js/frontend-app.js'])
 
     @yield('frontend-style')

@@ -1,38 +1,43 @@
-import '../../node_modules/jquery/dist/jquery.js';
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-import '../../node_modules/bootstrap/dist/js/bootstrap.bundle.js';
-import '../../node_modules/jquery-validation/dist/jquery.validate.js';
-import '../../node_modules/admin-lte/dist/css/adminlte.css';
-import '../../node_modules/admin-lte/dist/js/adminlte.js';
-import '../../node_modules/admin-lte/dist/js/adminlte.js';
-import '../../node_modules/@fortawesome/fontawesome-free/css/fontawesome.css';
-import '../../node_modules/font-awesome/css/font-awesome.css';
-import '../../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js';
-import '../../node_modules/bootstrap-icons/font/bootstrap-icons.css';
-import '../../node_modules/bootstrap-icons/font/bootstrap-icons.css';
-import '../../node_modules/bootstrap-fileinput/js/fileinput.js';
-import '../../node_modules/bootstrap-fileinput/css/fileinput.css';
+//Bootstrap
+import 'bootstrap/dist/css/bootstrap.css';
+import * as bootstrap from 'bootstrap';
+
+//jQuery Validation
+import 'jquery-validation/dist/jquery.validate.min.js';
+
+//AdminLTE
+import 'admin-lte/dist/css/adminlte.css';
+import 'admin-lte/dist/js/adminlte.js';
+
+//FontAwesome
+import '@fortawesome/fontawesome-free/css/fontawesome.css';
+import 'font-awesome/css/font-awesome.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+//Toastr
+import 'toastr/build/toastr.min.css';
+import toastr from 'toastr';
+window.toastr = toastr;
+toastr.options = {
+    closeButton: true,
+    progressBar: true,
+    positionClass: 'toast-top-right',
+};
+
+// CKEditor
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+//Custom Backend Assets
 import "../css/custom-backend.css";
 import "../js/custom-backend.js";
+
+//Toggle Switch
 import "../toggleSwitch/toggle-switch.css";
 
-import "../../node_modules/select2/dist/js/select2.js";
-import "../../node_modules/select2/dist/css/select2.css";
-import "../../node_modules/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css";
-
-//Frontend Template
-import "../frontend-template/js/jquery.flexisel.js";
-import "../frontend-template/js/jquery.etalage.min.js";
-import "../frontend-template/js/jquery.wmuSlider.js";
-
+//Custom Frontend Assets
 import "../frontend-template/css/style.css";
 import "../frontend-template/css/custom.css";
 import "../frontend-template/js/custom.js";
-
-import "../../node_modules/toastr/toastr.js";
-import "../../node_modules/toastr/build/toastr.css";
-
-window.toastr = toastr;
 
 //CK Editor
 document.addEventListener('DOMContentLoaded', function () {
@@ -44,17 +49,68 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 
-    $('.select2').select2({
-        width: '100%',
-        theme: 'bootstrap-5'
-
+    //Featured Product Flexisel
+    $("#featuredProductSlider").flexisel({
+        visibleItems: 4,
+        itemsToScroll: 2,
+        animationSpeed: 800,
+        infinite: true,
+        navigationTargetSelector: null,
+        autoPlay: {
+            enable: true,
+            interval: 3000,
+            pauseOnHover: true
+        },
+        responsiveBreakpoints: { 
+            portrait: { 
+                changePoint:480,
+                visibleItems: 1,
+                itemsToScroll: 1
+            }, 
+            landscape: { 
+                changePoint:640,
+                visibleItems: 2,
+                itemsToScroll: 2
+            },
+            tablet: { 
+                changePoint:821,
+                visibleItems: 3,
+                itemsToScroll: 3
+            }
+        },
+    });
+    //Featured Product Flexisel
+    $("#relatedProductSlider").flexisel({
+        visibleItems: 4,
+        itemsToScroll: 2,
+        animationSpeed: 800,
+        infinite: true,
+        navigationTargetSelector: null,
+        autoPlay: {
+            enable: true,
+            interval: 3000,
+            pauseOnHover: true
+        },
+        responsiveBreakpoints: { 
+            portrait: { 
+                changePoint:480,
+                visibleItems: 1,
+                itemsToScroll: 1
+            }, 
+            landscape: { 
+                changePoint:640,
+                visibleItems: 2,
+                itemsToScroll: 2
+            },
+            tablet: { 
+                changePoint:821,
+                visibleItems: 3,
+                itemsToScroll: 3
+            }
+        },
     });
 });
 
-// Optional: Customize toastr default options
-toastr.options = {
-    "closeButton": true,
-    "progressBar": true,
-    "positionClass": "toast-top-right",
-};
+
+
 
