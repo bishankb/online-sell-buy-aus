@@ -86,9 +86,6 @@
 										{{ Str::limit($product->title, $limit = 20, $end = '...') }}
 									</a>
 								</h4>
-								<p>
-									{{ Str::limit($product->description, $limit = 100, $end = '...') }}
-								</p>
 								<li>
 									<span class="item-price">{{ Number::currency($product->price, 'AUD') }}</span>
 									<span class="item-type">({{ \App\Models\Product::ConditionType[$product->condition_type] }})</span>

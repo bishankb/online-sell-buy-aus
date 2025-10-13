@@ -425,6 +425,11 @@ ul.support {
 	height: auto;
 }
 
+p.m_text {
+    height: auto;
+    overflow: hidden;
+}
+
 .slide-grid {
 	padding: 20px;
 }

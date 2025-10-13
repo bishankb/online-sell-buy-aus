@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/frontend-app.js',
+                'resources/css/error.css',
             ],
             refresh: true,
         }),

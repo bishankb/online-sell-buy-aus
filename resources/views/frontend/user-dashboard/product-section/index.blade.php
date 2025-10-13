@@ -6,11 +6,12 @@
 			.table1 td:nth-of-type(1):before { content: "Id"; }
 			.table1 td:nth-of-type(2):before { content: "Title"; }
 			.table1 td:nth-of-type(3):before { content: "Catgory"; }
-			.table1 td:nth-of-type(4):before { content: "Images"; }
-			.table1 td:nth-of-type(5):before { content: "Sold"; }
-			.table1 td:nth-of-type(6):before { content: "Expired On"; }
-			.table1 td:nth-of-type(7):before { content: "Featured"; }
-			.table1 td:nth-of-type(8):before { content: "Actions"; }
+			.table1 td:nth-of-type(4):before { content: "SubCategory"; }
+			.table1 td:nth-of-type(5):before { content: "Images"; }
+			.table1 td:nth-of-type(6):before { content: "Sold"; }
+			.table1 td:nth-of-type(7):before { content: "Expired On"; }
+			.table1 td:nth-of-type(8):before { content: "Featured"; }
+			.table1 td:nth-of-type(9):before { content: "Actions"; }
 
 
 		}

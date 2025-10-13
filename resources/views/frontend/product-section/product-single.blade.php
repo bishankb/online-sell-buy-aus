@@ -190,7 +190,7 @@
 					<div class="product-general-description">
 						<h6>Share Product :</h6>
 					    <!-- Facebook -->
-					    <a href="https://www.facebook.com/sharer/sharer.php?u={{ (route('product.show', $product->slug)) }}" 
+						<a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('product.show', $product->slug)) }}&quote={{ urlencode($product->name) }}" 
 					       target="_blank" class="btn btn-primary mb-2">
 					        <i class="bi bi-facebook"></i>
 					    </a>

@@ -34,7 +34,7 @@
                 uploadAsync: true, // upload individually
                 uploadExtraData: {_token: "{{ csrf_token() }}"},
                 deleteExtraData: {_token: "{{ csrf_token() }}"},
-                allowedFileExtensions: ["jpg", "jpeg", "png", "gif"],
+                allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "heic"],
                 overwriteInitial: false,
                 showUpload: false,
                 showRemove: false,

@@ -18,6 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-fileinput@5.5.3/css/fileinput.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-fileinput@5.5.3/js/fileinput.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/heic2any/dist/heic2any.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/frontend-app.js'])
 
     @yield('frontend-style')

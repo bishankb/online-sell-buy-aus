@@ -11,6 +11,7 @@
 				<b>{{ env('APP_NAME') }}</b> ({{ env('APP_FULL_NAME') }}) is a online platform to buy, sell and exchange of goods and commodities all over the Australia. Users can post the ads of their products <b>completely free</b>. We directly connect our customers to genuine sellers.
 			</p>
 		</div>
+		
 		<div class="products">
 	     	<h5 class="latest-product">LATEST PRODUCTS</h5>	
 	     	<a class="view-all" href="{{ route('product.index', 'latest-products') }}">VIEW ALL<span> </span></a>
