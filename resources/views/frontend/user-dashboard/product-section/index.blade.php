@@ -249,7 +249,7 @@
 		                </tr>
 		            @empty
 						<tr>
-							<td colspan="8">
+							<td colspan="9">
 								<div class="text-center">No data available in table</div>
 							</td>
 						</tr>

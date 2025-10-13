@@ -11,27 +11,29 @@
 				<a href="{{ route('frontend.privacy-policy') }}">Privacy Policy</a>
 				<a href="{{ route('frontend.rule-tip') }}">Rules & Tips</a>
 			</div>
-			<div class="latter-right">
-				<p>FOLLOW US</p>
-				<ul class="face-in-to">
-                    @isset($contact_us->twitter)
-						<li>
-							<a href="{{ $contact_us->twitter}}" target="__blank">
-								<span></span>
-							</a>
-						</li>
-					@endisset
-					@isset($contact_us->facebook)
-						<li>
-							<a href="{{ $contact_us->facebook}}" target="__blank">
-								<span class="facebook-in"></span>
-							</a>
-						</li>
-					@endisset
+			@if(!empty($contact_us->facebook) || !empty($contact_us->twitter))
+				<div class="latter-right">
+					<p>FOLLOW US</p>
+					<ul class="face-in-to">
+						@isset($contact_us->facebook)
+							<li>
+								<a href="{{ $contact_us->facebook}}" target="__blank">
+									<span class="facebook-in"></span>
+								</a>
+							</li>
+						@endisset
+	                    @isset($contact_us->twitter)
+							<li>
+								<a href="{{ $contact_us->twitter}}" target="__blank">
+									<span></span>
+								</a>
+							</li>
+						@endisset
+						<div class="clearfix"> </div>
+					</ul>
 					<div class="clearfix"> </div>
-				</ul>
-				<div class="clearfix"> </div>
-			</div>
+				</div>
+			@endif
 			<div class="clearfix"> </div>
 		</div>
 	</div>
