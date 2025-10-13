@@ -37,9 +37,9 @@
 	                </div>
 	            @endforeach
 
-	            <div class="text-center mt-3">
-	                {{ $faqs->appends(request()->input())->links() }}
-	            </div>
+	            <div class="card-footer clearfix d-flex justify-content-center">
+	            	{{ $faqs->links('vendor.pagination.bootstrap-4') }}
+	          	</div>
 	        @else
 	            <div class="alert alert-info" role="alert">
 	                <a href="#" class="alert-link">FAQs will be uploaded soon!!!!</a>

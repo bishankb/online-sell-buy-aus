@@ -61,12 +61,12 @@ document.addEventListener('DOMContentLoaded', function () {
             interval: 3000,
             pauseOnHover: true
         },
-        responsiveBreakpoints: { 
+        responsiveBreakpoints: {
             portrait: { 
                 changePoint:480,
                 visibleItems: 1,
                 itemsToScroll: 1
-            }, 
+            },
             landscape: { 
                 changePoint:640,
                 visibleItems: 2,
@@ -79,7 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
     });
-    //Featured Product Flexisel
+
+    //Related Product Flexisel
     $("#relatedProductSlider").flexisel({
         visibleItems: 4,
         itemsToScroll: 2,

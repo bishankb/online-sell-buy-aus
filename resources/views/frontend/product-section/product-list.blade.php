@@ -99,9 +99,9 @@
 						</div>
 					@endforeach
 					<div class="clearfix"> </div>
-					<div class="text-center">
-						{{ $products->appends(request()->input())->links() }}
-					</div>
+					<div class="card-footer clearfix d-flex justify-content-center">
+		            	{{ $products->links('vendor.pagination.bootstrap-4') }}
+		          	</div>
 				@else
 					<div class="panel panel-default">
 						<div class="panel-body">
