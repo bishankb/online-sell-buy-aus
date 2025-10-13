@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend\UserAccount;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\UserProfile;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\City;
@@ -67,7 +69,8 @@ class AccountController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $userProfile = Auth::user()->profile;
+        $user = Auth::user();
+
         $this->validate(
             $request,
             [
@@ -82,28 +85,41 @@ class AccountController extends Controller
         );
 
         try {
-            if ($request->file('user_image')) {
+             if ($request->file('user_image')) {
                 $fileData = $request->file('user_image');
-                $user_image = saveFile($fileData, 'user', Auth::user()->id);
+                $user_image = saveFile($fileData, 'user', $user->id);
             }
 
-            if(isset($user_image->id) && !empty($userProfile->user_image_id)) {
-                removeFile($userProfile->user_image_id);
+            if(isset($user_image->id) && !empty($user->profile->user_image_id)) {
+                removeFile($user->profile->user_image_id);
             }
 
-            if (isset($user_image->id)) {
-                $userProfile->update(['user_image_id' => $user_image->id]);
+            if (!$user->profile) {
+                $userProfile = UserProfile::create(
+                    [
+                        'user_id'       => $user->id,
+                        'phone1'        => request('phone1'),
+                        'phone2'        => request('phone2'),
+                        'address'       => request('address'),
+                        'city_id'       => request('city'),
+                        'country_id'    => request('country'),
+                        'user_image_id' => isset($user_image->id) ? $user_image->id : null
+                    ]
+                );
+            } else {
+                if (isset($user_image->id)) {
+                    $user->profile->update(['user_image_id' => $user_image->id]);
+                }
+                $user->profile->update(
+                    [
+                        'phone1'        => request('phone1'),
+                        'phone2'        => request('phone2'),
+                        'address'       => request('address'),
+                        'city_id'       => request('city'),
+                        'country_id'    => request('country'),  
+                    ]
+                );
             }
-
-            $userProfile->update(
-                [
-                    'phone1'        => request('phone1'),
-                    'phone2'        => request('phone2'),
-                    'address'       => request('address'),
-                    'city_id'       => request('city'),
-                    'country_id'    => request('country'),  
-                ]
-            );
 
             Auth::user()->update([
                 'name' => request('name'),
