@@ -61,7 +61,7 @@
             <label for="city" class="form-label">City</label>
 
             <select name = "city" class="form-control form-select">
-                <option disabled selected>Please select an option</option>
+                <option value="">Please select an option</option>
                 @foreach($cities as $city)
                     <option value="{{ $city->id }}"
                         @if(old('city') !== null)
@@ -88,7 +88,7 @@
             <label for="country" class="form-label">Country</label>
 
             <select name = "country" class="form-control form-select">
-                <option disabled selected>Please select an option</option>
+                <option value="">Please select an option</option>
                 @foreach($countries as $country)
                     <option value="{{ $country->id }}"
                         @if(old('country') !== null)

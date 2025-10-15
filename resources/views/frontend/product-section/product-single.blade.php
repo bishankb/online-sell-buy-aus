@@ -134,12 +134,24 @@
 									<i class="fa fa-user"></i>										
 									<span class="detail-title">Seller Name: </span> {{ $product->createdBy->name }}
 								</li>
-								@if(isset($product->createdBy->profile->address) || isset($product->createdBy->profile->city) || isset($product->createdBy->profile->country))
-									<li>
-										<i class="fa fa-location-arrow"></i>										
-										<span class="detail-title">Location: </span>{{ $product->createdBy->profile->address }}, {{ $product->createdBy->profile->city->name }}, {{ $product->createdBy->profile->country->name }}
-									</li>
-								@endif
+								@php
+								    $profile = $product->createdBy->profile ?? null;
+								    $address = $profile->address ?? null;
+								    $city = $profile->city->name ?? null;
+								    $country = $profile->country->name ?? null;
+								@endphp
+								
+								<li>
+									<i class="fa fa-location-arrow"></i>										
+									<span class="detail-title">Location: </span>
+									@if(Auth::check() && Auth::user()->hasVerifiedEmail())
+								    	{{ collect([$address, $city, $country])->filter()->join(', ') }}
+									@elseif(Auth::check())
+									   	***** <a style="color: #E74C3C;" href="{{ route('verification.notice') }}">Verify Now</a> to View
+									@else
+									    ***** <a style="color: #E74C3C;" href="{{ route('login') }}">Login</a> to View
+									@endif
+								</li>
 								<li>
 									<i class="fa fa-envelope"></i>										
 									<span class="detail-title">Email:</span>

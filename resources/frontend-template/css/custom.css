@@ -657,6 +657,12 @@ ul.cute li i {
 
 }
 
+@media (max-width: 414px) {
+	.grid-view-left img {
+		float: none;
+	}
+}
+
 @media (max-width: 320px) {
 	.grid-view-left .brand-new {
 	    right: 15px;
