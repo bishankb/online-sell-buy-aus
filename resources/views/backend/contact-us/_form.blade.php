@@ -41,6 +41,22 @@
 </div>
 
 <div class="row">
+     <div class="col-md-12">
+        <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }} clearfix ">
+            <label for="address" class="form-label">Address</label>
+
+            <input type="text" name="address" value="{{ old('address', $contact_us->address ?? '') }}" class="form-control">
+
+            @if ($errors->has('address'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('address') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+</div>
+
+<div class="row">
      <div class="col-md-6">
         <div class="form-group {{ $errors->has('phone1') ? ' has-error' : '' }} clearfix ">
             <label for="phone1" class="form-label">Phone 1</label>

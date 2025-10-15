@@ -12,7 +12,7 @@ class ContactUs extends Model
      * @var array
      */
     protected $fillable = [
-        'name1', 'name2', 'phone1', 'phone2', 'address', 'fax', 'email', 'facebook', 'twitter', 'map_embedded_link',
+        'name1', 'name2', 'address', 'phone1', 'phone2', 'fax', 'email', 'facebook', 'twitter', 'map_embedded_link',
     ];
 
     protected $dates = ['created_at', 'updated_at'];

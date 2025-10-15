@@ -69,6 +69,7 @@ class ContactUsController extends Controller
                     [
                         'name1'             => request('name1'),
                         'name2'             => request('name2'),
+                        'address'           => request('address'),
                         'phone1'            => request('phone1'),
                         'phone2'            => request('phone2'),
                         'fax'               => request('fax'),
@@ -83,6 +84,7 @@ class ContactUsController extends Controller
                     [
                         'name1'             => request('name1'),
                         'name2'             => request('name2'),
+                        'address'           => request('address'),
                         'phone1'            => request('phone1'),
                         'phone2'            => request('phone2'),
                         'fax'               => request('fax'),

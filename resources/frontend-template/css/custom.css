@@ -325,6 +325,10 @@ ul.support {
 	.login-section {
 		display: none;
 	}
+
+	.mobile-login-section .dropdown-toggle:after {
+		vertical-align: 15px;
+	}
 }
 
 @media (min-width: 360px) { 

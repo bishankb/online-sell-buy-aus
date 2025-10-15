@@ -10,28 +10,38 @@
             <div class="cont-body">
                 <div class="contact-no">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="address">
-                                <i class="fa fa-map-marker"></i>
-                                {{ $contact_us->address }}
+                        @isset($contact_us->address)
+                            <div class="col-md-12">
+                                <div class="address">
+                                    <i class="fa fa-map-marker"></i>
+                                    {{ $contact_us->address }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 offset-md-3">
-                            <h4>{{ $contact_us->name1 }}</h4>
-                            <a href="tel:{{ $contact_us->phone1 }}">
-                                <h5>
-                                    <i class="fa fa-phone"></i>{{ $contact_us->phone1 }}
-                                </h5>
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <h4>{{ $contact_us->name2 }}</h4>
-                            <a href="tel:{{ $contact_us->phone2 }}">
-                                <h5>
-                                    <i class="fa fa-phone"></i>{{ $contact_us->phone2 }}
-                                </h5>
-                            </a>
-                        </div>
+                        @endisset
+                        @isset($contact_us->name1)
+                            <div class="col-md-3 offset-md-3">
+                                <h4>{{ $contact_us->name1 }}</h4>
+                                @isset($contact_us->phone1)
+                                    <a href="tel:{{ $contact_us->phone1 }}">
+                                        <h5>
+                                            <i class="fa fa-phone"></i>{{ $contact_us->phone1 }}
+                                        </h5>
+                                    </a>
+                                @endisset
+                            </div>
+                        @endisset
+                        @isset($contact_us->name2)
+                            <div class="col-md-3">
+                                <h4>{{ $contact_us->name2 }}</h4>
+                                @isset($contact_us->phone2)
+                                    <a href="tel:{{ $contact_us->phone2 }}">
+                                        <h5>
+                                            <i class="fa fa-phone"></i>{{ $contact_us->phone2 }}
+                                        </h5>
+                                    </a>
+                                @endisset
+                            </div>
+                        @endisset
                     </div>
                 </div>
             </div>
