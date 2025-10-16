@@ -161,25 +161,27 @@
 @endsection
 
 
-<script>
-	document.addEventListener("DOMContentLoaded", function() {
-	    document.querySelectorAll(".menu .item1 > a").forEach(function(anchor) {
-		    anchor.addEventListener("click", function(e) {
-		        e.preventDefault();
-		        let parent = anchor.parentElement;
-		        let submenu = parent.querySelector(".cute");
-		        if (!submenu) return;
+@section('frontend-script')
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+		    document.querySelectorAll(".menu .item1 > a").forEach(function(anchor) {
+			    anchor.addEventListener("click", function(e) {
+			        e.preventDefault();
+			        let parent = anchor.parentElement;
+			        let submenu = parent.querySelector(".cute");
+			        if (!submenu) return;
 
-		        // close all others
-		        document.querySelectorAll(".menu .item1").forEach(function(item) {
-		            if (item !== parent) {
-		                item.classList.remove("open");
-		            }
-		        });
+			        // close all others
+			        document.querySelectorAll(".menu .item1").forEach(function(item) {
+			            if (item !== parent) {
+			                item.classList.remove("open");
+			            }
+			        });
 
-		        // toggle current
-		        parent.classList.toggle("open");
-		    });
+			        // toggle current
+			        parent.classList.toggle("open");
+			    });
+			});
 		});
-	});
-</script>
+	</script>
+@endsection

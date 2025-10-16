@@ -102,9 +102,17 @@
 					Mail us at <a href="mailto{{ $contact_us->email }}">{{ $contact_us->email }}</a>
 				</p>
 
-				<p>
-					Or. Directly call us at <a href="tel:{{ $contact_us->phone1 }}">{{ $contact_us->phone1 }}</a>, <a href="tel:{{ $contact_us->phone1 }}">{{ $contact_us->phone2 }}</a>
-				</p>
+				@if(!empty($contact_us->phone1) || !empty($contact_us->phone2))
+					<p>
+						Or. Directly call us at 
+						@isset($contact_us->phone1)
+							<a href="tel:{{ $contact_us->phone1 }}">{{ $contact_us->phone1 }}</a>
+						@endisset
+						@isset($contact_us->phone2)
+						 	<a href="tel:{{ $contact_us->phone2 }}">{{ $contact_us->phone2 }}</a>
+						@endisset
+					</p>
+				@endif
 
 				<p>
 					{{ env('APP_NAME') }}
