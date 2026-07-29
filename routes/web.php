@@ -70,6 +70,8 @@ Route::get('/', 'App\Http\Controllers\Frontend\HomeController@index')->name('fro
 
 Route::get('/faq', 'App\Http\Controllers\Frontend\FaqController@index')->name('frontend.faq');
 
+Route::match(['get', 'post'], '/tax-calculator', 'App\Http\Controllers\Frontend\TaxCalculatorController@index')->name('frontend.tax-calculator');
+
 Route::get('/term-condition', 'App\Http\Controllers\Frontend\TermConditionController@index')->name('frontend.term-condition');
 Route::get('/privacy-policy', 'App\Http\Controllers\Frontend\PrivacyPolicyController@index')->name('frontend.privacy-policy');
 Route::get('/rules-tips', 'App\Http\Controllers\Frontend\RuleTipController@index')->name('frontend.rule-tip');

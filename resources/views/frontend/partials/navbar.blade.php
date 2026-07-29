@@ -8,7 +8,11 @@
 				</ul>
 			</div>
 			<div class="top-header-right">
-			 	<ul class="support">
+				<ul class="support">
+					<li><a href="#"><label> </label></a></li>
+					<li><a href="{{ route('frontend.tax-calculator') }}"><i class="fa fa-money"></i>Tax Calculator</span></a></li>
+				</ul>
+			 	<ul class="support" style="margin-left: 25px;">
 					<li><a href="#"><label> </label></a></li>
 					<li><a href="{{ route('frontend.faq') }}"><i class="fa fa-question-circle"></i>FAQ</span></a></li>
 				</ul>
